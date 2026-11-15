@@ -3,365 +3,110 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NexByel | Soluções Digitais & Desenvolvimento Web</title>
+  <title>Byel Santos | Dev Web</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
     body {
-      background-color: #0e0e11;
-      color: #f4f4f5;
-      font-family: 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.6;
-    }
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background-color: rgba(14, 14, 17, 0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(130, 87, 229, 0.25);
-      padding: 14px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .marca {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      font-size: 20px;
-      letter-spacing: 0.5px;
-    }
-    .marca img {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      object-fit: cover;
-    }
-    .marca span {
-      color: #00b37e;
-    }
-    nav {
-      display: flex;
-      gap: 14px;
-    }
-    nav a {
-      color: #a8a8b3;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-    }
-    nav a:hover {
+      background: linear-gradient(135deg, #121214 0%, #2e1d59 50%, #8257e5 100%);
       color: #ffffff;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
     }
-    .hero {
-      text-align: center;
-      padding: 60px 20px 50px;
-      background: radial-gradient(circle at top, rgba(130, 87, 229, 0.25), transparent 70%);
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .hero-logo {
-      width: 90px;
-      height: 90px;
+    .cartao {
+      background-color: rgba(32, 32, 36, 0.92);
+      color: #ffffff;
+      padding: 32px 24px;
       border-radius: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 30px rgba(0, 179, 126, 0.35);
-      border: 1px solid rgba(130, 87, 229, 0.5);
+      text-align: center;
+      max-width: 360px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(130, 87, 229, 0.4);
+      transition: all 0.3s ease;
     }
-    .tag {
+    .cartao.claro {
+      background-color: rgba(255, 255, 255, 0.95);
+      color: #121214;
+    }
+    img {
+      width: 105px;
+      height: 105px;
+      border-radius: 50%;
+      border: 3px solid #8257e5;
+      padding: 3px;
+      background-color: #121214;
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin: 8px 0 4px;
+      font-size: 24px;
+    }
+    .badge {
       display: inline-block;
-      background-color: rgba(0, 179, 126, 0.15);
-      color: #00b37e;
-      padding: 5px 14px;
+      background-color: rgba(130, 87, 229, 0.2);
+      color: #a883ff;
+      padding: 4px 12px;
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
-      margin-bottom: 16px;
-      border: 1px solid rgba(0, 179, 126, 0.3);
+      margin-bottom: 12px;
     }
-    .hero h1 {
-      font-size: 32px;
-      line-height: 1.2;
-      margin-bottom: 16px;
+    p {
+      font-size: 14px;
+      line-height: 1.5;
+      opacity: 0.85;
+      margin-bottom: 20px;
     }
-    .hero h1 strong {
-      background: linear-gradient(90deg, #8257e5, #00b37e);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .hero p {
-      color: #a8a8b3;
-      font-size: 15px;
-      margin-bottom: 28px;
-      max-width: 520px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .botoes-hero {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .btn-primario {
+    .link-botao, button {
+      display: block;
+      width: 100%;
       background: linear-gradient(90deg, #8257e5, #6833e4);
       color: white;
       text-decoration: none;
-      padding: 13px 24px;
-      border-radius: 10px;
-      font-weight: bold;
-      font-size: 14px;
+      padding: 13px;
       border: none;
-      cursor: pointer;
-    }
-    .btn-secundario {
-      background-color: #1c1c22;
-      color: white;
-      text-decoration: none;
-      padding: 13px 24px;
       border-radius: 10px;
+      margin-top: 12px;
+      font-size: 15px;
       font-weight: bold;
-      font-size: 14px;
-      border: 1px solid #2e2e38;
-      cursor: pointer;
+      box-sizing: border-box;
     }
-    section {
-      padding: 45px 20px;
-      max-width: 800px;
-      margin: 0 auto;
+    .botao-empresa {
+      background: linear-gradient(90deg, #00b37e, #00875f);
     }
-    .titulo-secao {
-      font-size: 22px;
-      margin-bottom: 8px;
-      text-align: center;
-    }
-    .subtitulo-secao {
-      color: #a8a8b3;
-      font-size: 14px;
-      text-align: center;
-      margin-bottom: 28px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-    }
-    .card {
-      background-color: #18181d;
-      border: 1px solid #26262e;
-      padding: 22px;
-      border-radius: 16px;
-    }
-    .card h3 {
-      font-size: 17px;
-      margin-bottom: 8px;
-      color: #ffffff;
-    }
-    .card p {
-      font-size: 13px;
-      color: #a8a8b3;
-      margin-bottom: 16px;
-    }
-    .card .btn-card {
-      display: inline-block;
-      background-color: rgba(130, 87, 229, 0.15);
+    .botao-tema {
+      background: transparent;
+      border: 2px solid #8257e5;
       color: #a883ff;
-      text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.85);
-      z-index: 200;
-      justify-content: center;
-      align-items: center;
-      padding: 16px;
-    }
-    .modal-conteudo {
-      background-color: #18181d;
-      border: 1px solid #8257e5;
-      border-radius: 18px;
-      width: 100%;
-      max-width: 380px;
-      padding: 18px;
-      text-align: center;
-    }
-    .modal-topo {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .fechar {
-      background-color: #e55757;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    iframe {
-      width: 100%;
-      height: 430px;
-      border: none;
-      border-radius: 12px;
-      background-color: #121214;
-    }
-    .form-box {
-      background-color: #18181d;
-      border: 1px solid #26262e;
-      padding: 24px;
-      border-radius: 16px;
-    }
-    input, textarea {
-      width: 100%;
-      background-color: #0e0e11;
-      border: 1px solid #2e2e38;
-      color: white;
-      padding: 12px;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      font-family: inherit;
-      font-size: 14px;
-    }
-    #avisoEnvio {
-      color: #00b37e;
-      font-size: 14px;
-      font-weight: bold;
-      margin-top: 10px;
-      display: none;
-    }
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      border-top: 1px solid #1f1f26;
-      color: #71717a;
-      font-size: 13px;
-      margin-top: 30px;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <a href="#" class="marca">
-      <img src="logo.png" alt="Logo NexByel">
-      Nex<span>Byel</span>
-    </a>
-    <nav>
-      <a href="#servicos">Soluções</a>
-      <a href="#projetos">Sistemas</a>
-      <a href="#contato">Contato</a>
-    </nav>
-  </header>
+  <div class="cartao" id="meuCartao">
+    <img src="logo.png" alt="Logo NexByel">
+    <h1>Byel Santos</h1>
+    <span class="badge">FUNDADOR • NEXBYEL</span>
+    <p>Criando projetos reais direto do Android com HTML, CSS e JavaScript 🚀</p>
 
-  <div class="hero">
-    <img src="logo.png" alt="Logo NexByel" class="hero-logo">
-    <div class="tag">TECNOLOGIA & INOVAÇÃO DIGITAL</div>
-    <h1>Transformando ideias em <strong>produtos digitais</strong> reais.</h1>
-    <p>A NexByel desenvolve sites modernos, ferramentas web interativas e interfaces rápidas pensadas para o futuro.</p>
-    <div class="botoes-hero">
-      <a href="#projetos" class="btn-primario">Explorar Sistemas</a>
-      <a href="#contato" class="btn-secundario">Falar com a Equipe</a>
-    </div>
-  </div>
-
-  <section id="servicos">
-    <h2 class="titulo-secao">O que a NexByel faz</h2>
-    <p class="subtitulo-secao">Desenvolvimento focado em velocidade, design e experiência do usuário.</p>
+    <a href="nexbyel.html" class="link-botao botao-empresa">🏢 Acessar Site NexByel</a>
+    <a href="https://github.com" target="_blank" class="link-botao">💻 Meu GitHub</a>
+    <a href="https://youtube.com" target="_blank" class="link-botao">▶️ Meu Canal Favorito</a>
     
-    <div class="grid">
-      <div class="card">
-        <h3>🌐 Sites Profissionais</h3>
-        <p>Páginas modernas, responsivas e otimizadas para funcionar perfeitamente em celulares e computadores.</p>
-      </div>
-      <div class="card">
-        <h3>⚡ Aplicações Web</h3>
-        <p>Ferramentas interativas e sistemas inteligentes desenvolvidos com JavaScript puro e arquitetura limpa.</p>
-      </div>
-      <div class="card">
-        <h3>🎨 Design de Interface</h3>
-        <p>Identidade visual moderna com foco em usabilidade, contraste e navegação intuitiva.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="projetos">
-    <h2 class="titulo-secao">Sistemas NexByel</h2>
-    <p class="subtitulo-secao">Teste nossas ferramentas diretamente dentro da plataforma.</p>
-
-    <div class="grid">
-      <div class="card">
-        <h3>🧮 NexCalc v1.0</h3>
-        <p>Calculadora web de alta precisão com interface escura e resposta instantânea.</p>
-        <button class="btn-card" onclick="abrirSistema('calculadora.html', 'NexCalc v1.0')">Executar Sistema →</button>
-      </div>
-
-      <div class="card">
-        <h3>🔐 Em Breve: NexPass</h3>
-        <p>Gerador inteligente de senhas seguras em desenvolvimento pelo laboratório NexByel.</p>
-        <button class="btn-card" onclick="alert('Sistema em fase de desenvolvimento pela equipe NexByel!')">Em Desenvolvimento</button>
-      </div>
-    </div>
-  </section>
-
-  <section id="contato">
-    <h2 class="titulo-secao">Contato & Parcerias</h2>
-    <p class="subtitulo-secao">Fundada por Byel Santos • Envie uma mensagem direta para a NexByel.</p>
-
-    <div class="form-box">
-      <input type="text" id="nomeCliente" placeholder="Seu nome">
-      <textarea id="msgCliente" rows="3" placeholder="Como a NexByel pode ajudar no seu projeto?"></textarea>
-      <button class="btn-primario" style="width: 100%;" onclick="enviarMensagem()">Enviar Mensagem</button>
-      <p id="avisoEnvio">✅ Mensagem recebida pela equipe NexByel! Entraremos em contato em breve.</p>
-    </div>
-  </section>
-
-  <div class="modal" id="janelaSistema">
-    <div class="modal-conteudo">
-      <div class="modal-topo">
-        <strong id="tituloSistema">Sistema</strong>
-        <button class="fechar" onclick="fecharSistema()">Fechar ✕</button>
-      </div>
-      <iframe id="frameSistema" src=""></iframe>
-    </div>
+    <button class="botao-tema" onclick="mudarTema()">Trocar Tema 🎨</button>
   </div>
-
-  <footer>
-    © 2026 NexByel Tecnologia. Todos os direitos reservados.<br>
-    Desenvolvido por Byel Santos.
-  </footer>
 
   <script>
-    function abrirSistema(arquivo, nome) {
-      document.getElementById("tituloSistema").innerText = nome;
-      document.getElementById("frameSistema").src = arquivo;
-      document.getElementById("janelaSistema").style.display = "flex";
+    function mudarTema() {
+      let cartao = document.getElementById("meuCartao");
+      cartao.classList.toggle("claro");
     }
+  </script>
 
-    function fecharSistema() {
-      document.getElementById("janelaSistema").style.display = "none";
-      document.getElementById("frameSistema").src = "";
-    }
-
-    function enviarMensagem() {
-      let nome = document.getElementById("nomeCliente").value;
+</body>
+</html>
