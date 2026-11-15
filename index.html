@@ -19,11 +19,17 @@
     }
     .cartao {
       background-color: #202024;
+      color: #ffffff;
       padding: 30px;
       border-radius: 15px;
       text-align: center;
       max-width: 350px;
       width: 100%;
+    }
+    /* Estilo que o JavaScript vai ativar e desativar */
+    .cartao.claro {
+      background-color: #ffffff;
+      color: #121214;
     }
     img {
       width: 100px;
@@ -31,30 +37,48 @@
       border-radius: 50%;
       border: 3px solid #8257e5;
       margin-bottom: 10px;
-      background-color: #ffffff;
     }
-    .link-botao {
+    .link-botao, button {
       display: block;
+      width: 100%;
       background-color: #8257e5;
       color: white;
       text-decoration: none;
       padding: 12px;
+      border: none;
       border-radius: 8px;
       margin-top: 12px;
+      font-size: 16px;
       font-weight: bold;
+      box-sizing: border-box;
+    }
+    .botao-tema {
+      background-color: #00b37e;
     }
   </style>
 </head>
 <body>
 
-  <div class="cartao">
+  <div class="cartao" id="meuCartao">
+    
     <img src="https://avatars.githubusercontent.com/byelsantos731-netizen" alt="Minha foto">
     <h1>Byel Santos</h1>
     <p>Tenho 13 anos e sou Desenvolvedor Web em treinamento 🚀</p>
 
     <a href="https://youtube.com" target="_blank" class="link-botao">Meu Canal Favorito</a>
     <a href="https://github.com" target="_blank" class="link-botao">Meu GitHub</a>
+    
+    <!-- Botão que chama o JavaScript -->
+    <button class="botao-tema" onclick="mudarTema()">Trocar Tema 🎨</button>
   </div>
+
+  <!-- Aqui começa o JavaScript -->
+  <script>
+    function mudarTema() {
+      let cartao = document.getElementById("meuCartao");
+      cartao.classList.toggle("claro");
+    }
+  </script>
 
 </body>
 </html>
