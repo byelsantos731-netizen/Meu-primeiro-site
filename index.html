@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Primeiro Site</title>
+  <title>Byel Santos | Dev Web</title>
   <style>
     body {
-      background-color: #8257e5;
+      /* Fundo em degradê moderno */
+      background: linear-gradient(135deg, #121214 0%, #2e1d59 50%, #8257e5 100%);
       color: #ffffff;
-      font-family: sans-serif;
+      font-family: 'Segoe UI', Roboto, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -18,42 +19,89 @@
       box-sizing: border-box;
     }
     .cartao {
-      background-color: #202024;
+      background-color: rgba(32, 32, 36, 0.92);
       color: #ffffff;
-      padding: 30px;
-      border-radius: 15px;
+      padding: 32px 24px;
+      border-radius: 20px;
       text-align: center;
-      max-width: 350px;
+      max-width: 360px;
       width: 100%;
+      /* Sombra profunda e borda sutil */
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(130, 87, 229, 0.4);
+      transition: all 0.3s ease;
     }
-    /* Estilo que o JavaScript vai ativar e desativar */
     .cartao.claro {
-      background-color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.95);
       color: #121214;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
     }
     img {
-      width: 100px;
-      height: 100px;
+      width: 105px;
+      height: 105px;
       border-radius: 50%;
       border: 3px solid #8257e5;
-      margin-bottom: 10px;
+      padding: 3px;
+      background-color: #121214;
+      margin-bottom: 12px;
+      box-shadow: 0 0 20px rgba(130, 87, 229, 0.5);
+    }
+    h1 {
+      margin: 8px 0 4px;
+      font-size: 24px;
+      letter-spacing: 0.5px;
+    }
+    .badge {
+      display: inline-block;
+      background-color: rgba(130, 87, 229, 0.2);
+      color: #a883ff;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+    .cartao.claro .badge {
+      background-color: #ede4ff;
+      color: #6833e4;
+    }
+    p {
+      font-size: 14px;
+      line-height: 1.5;
+      opacity: 0.85;
+      margin-bottom: 20px;
     }
     .link-botao, button {
       display: block;
       width: 100%;
-      background-color: #8257e5;
+      background: linear-gradient(90deg, #8257e5, #6833e4);
       color: white;
       text-decoration: none;
-      padding: 12px;
+      padding: 13px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       margin-top: 12px;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: bold;
       box-sizing: border-box;
+      box-shadow: 0 4px 12px rgba(130, 87, 229, 0.3);
+      transition: transform 0.15s ease;
+    }
+    .link-botao:active, button:active {
+      transform: scale(0.97);
+    }
+    .botao-projeto {
+      background: linear-gradient(90deg, #00b37e, #00875f);
+      box-shadow: 0 4px 12px rgba(0, 179, 126, 0.3);
     }
     .botao-tema {
-      background-color: #00b37e;
+      background: transparent;
+      border: 2px solid #8257e5;
+      color: #a883ff;
+      box-shadow: none;
+    }
+    .cartao.claro .botao-tema {
+      color: #6833e4;
     }
   </style>
 </head>
@@ -63,16 +111,16 @@
     
     <img src="https://avatars.githubusercontent.com/byelsantos731-netizen" alt="Minha foto">
     <h1>Byel Santos</h1>
-    <p>Tenho 13 anos e sou Desenvolvedor Web em treinamento 🚀</p>
+    <span class="badge">DEV WEB • 13 ANOS</span>
+    <p>Criando projetos reais direto do Android com HTML, CSS e JavaScript 🚀</p>
 
-    <a href="https://youtube.com" target="_blank" class="link-botao">Meu Canal Favorito</a>
-    <a href="https://github.com" target="_blank" class="link-botao">Meu GitHub</a>
+    <a href="calculadora.html" class="link-botao botao-projeto">🧮 Abrir Minha Calculadora</a>
+    <a href="https://github.com" target="_blank" class="link-botao">💻 Meu GitHub</a>
+    <a href="https://youtube.com" target="_blank" class="link-botao">▶️ Meu Canal Favorito</a>
     
-    <!-- Botão que chama o JavaScript -->
     <button class="botao-tema" onclick="mudarTema()">Trocar Tema 🎨</button>
   </div>
 
-  <!-- Aqui começa o JavaScript -->
   <script>
     function mudarTema() {
       let cartao = document.getElementById("meuCartao");
@@ -82,3 +130,5 @@
 
 </body>
 </html>
+
+
