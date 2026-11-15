@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Byel Santos | Dev Web</title>
+  <title>Byel Santos | Fundador NexByel</title>
+  
+  <!-- Faz a logo aparecer na prévia do Instagram e WhatsApp -->
+  <meta property="og:title" content="Byel Santos | NexByel Tecnologia">
+  <meta property="og:description" content="Desenvolvimento Web & Soluções Digitais">
+  <meta property="og:image" content="https://github.io">
+
   <style>
     body {
       background: linear-gradient(135deg, #121214 0%, #2e1d59 50%, #8257e5 100%);
@@ -18,20 +24,38 @@
       box-sizing: border-box;
     }
     .cartao {
-      background-color: rgba(32, 32, 36, 0.92);
+      position: relative;
+      background-color: rgba(32, 32, 36, 0.94);
       color: #ffffff;
-      padding: 32px 24px;
-      border-radius: 20px;
+      padding: 42px 24px 32px;
+      border-radius: 22px;
       text-align: center;
-      max-width: 360px;
+      max-width: 350px;
       width: 100%;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
       border: 1px solid rgba(130, 87, 229, 0.4);
       transition: all 0.3s ease;
     }
     .cartao.claro {
-      background-color: rgba(255, 255, 255, 0.95);
+      background-color: rgba(255, 255, 255, 0.96);
       color: #121214;
+    }
+    /* Botão das duas luas no canto superior direito */
+    .botao-lua {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background-color: rgba(130, 87, 229, 0.15);
+      border: 1px solid rgba(130, 87, 229, 0.4);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
     }
     img {
       width: 105px;
@@ -41,6 +65,7 @@
       padding: 3px;
       background-color: #121214;
       margin-bottom: 12px;
+      object-fit: cover;
     }
     h1 {
       margin: 8px 0 4px;
@@ -54,51 +79,45 @@
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+    }
+    .cartao.claro .badge {
+      background-color: #ede4ff;
+      color: #6833e4;
     }
     p {
       font-size: 14px;
       line-height: 1.5;
       opacity: 0.85;
-      margin-bottom: 20px;
-    }
-    .link-botao, button {
-      display: block;
-      width: 100%;
-      background: linear-gradient(90deg, #8257e5, #6833e4);
-      color: white;
-      text-decoration: none;
-      padding: 13px;
-      border: none;
-      border-radius: 10px;
-      margin-top: 12px;
-      font-size: 15px;
-      font-weight: bold;
-      box-sizing: border-box;
+      margin-bottom: 24px;
     }
     .botao-empresa {
+      display: block;
+      width: 100%;
       background: linear-gradient(90deg, #00b37e, #00875f);
-    }
-    .botao-tema {
-      background: transparent;
-      border: 2px solid #8257e5;
-      color: #a883ff;
+      color: white;
+      text-decoration: none;
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      box-sizing: border-box;
+      box-shadow: 0 6px 18px rgba(0, 179, 126, 0.35);
     }
   </style>
 </head>
 <body>
 
   <div class="cartao" id="meuCartao">
+    <!-- Botão de duas luas (clara e escura) no canto superior direito -->
+    <button class="botao-lua" onclick="mudarTema()" title="Alternar tema">🌗</button>
+
     <img src="logo.png" alt="Logo NexByel">
     <h1>Byel Santos</h1>
     <span class="badge">FUNDADOR • NEXBYEL</span>
-    <p>Criando projetos reais direto do Android com HTML, CSS e JavaScript 🚀</p>
+    <p>Desenvolvendo soluções digitais, sites modernos e sistemas interativos 🚀</p>
 
-    <a href="nexbyel.html" class="link-botao botao-empresa">🏢 Acessar Site NexByel</a>
-    <a href="https://github.com" target="_blank" class="link-botao">💻 Meu GitHub</a>
-    <a href="https://youtube.com" target="_blank" class="link-botao">▶️ Meu Canal Favorito</a>
-    
-    <button class="botao-tema" onclick="mudarTema()">Trocar Tema 🎨</button>
+    <a href="nexbyel.html" class="botao-empresa">🏢 Acessar Site NexByel</a>
   </div>
 
   <script>
