@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NexByel | Soluções Digitais & Desenvolvimento Web</title>
+  <meta property="og:title" content="NexByel | Soluções Digitais">
+  <meta property="og:image" content="https://github.io">
   <style>
     * {
       margin: 0;
@@ -70,6 +72,7 @@
       margin-bottom: 18px;
       box-shadow: 0 0 30px rgba(0, 179, 126, 0.35);
       border: 2px solid #8257e5;
+      object-fit: cover;
     }
     .tag {
       display: inline-block;
@@ -167,55 +170,11 @@
       border-radius: 8px;
       font-size: 13px;
       font-weight: bold;
-      border: none;
-      cursor: pointer;
+      text-decoration: none;
     }
     .btn-card-roxo {
       background-color: rgba(130, 87, 229, 0.2);
       color: #a883ff;
-      text-decoration: none;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.88);
-      z-index: 200;
-      justify-content: center;
-      align-items: center;
-      padding: 16px;
-    }
-    .modal-conteudo {
-      background-color: #18181d;
-      border: 2px solid #8257e5;
-      border-radius: 18px;
-      width: 100%;
-      max-width: 380px;
-      padding: 16px;
-    }
-    .modal-topo {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .fechar {
-      background-color: #e55757;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-    iframe {
-      width: 100%;
-      height: 430px;
-      border: none;
-      border-radius: 12px;
-      background-color: #121214;
     }
     .form-box {
       background-color: #18181d;
@@ -312,7 +271,7 @@
       <div class="card">
         <h3>🧮 Calculadora NexByel</h3>
         <p>Calculadora web oficial com interface escura e resposta instantânea.</p>
-        <button class="btn-card" onclick="abrirSistema('calculadora.html', 'Calculadora NexByel')">🧮 Abrir Calculadora</button>
+        <a href="calculadora.html" class="btn-card">🧮 Abrir Calculadora</a>
       </div>
 
       <div class="card">
@@ -335,33 +294,24 @@
     </div>
   </section>
 
-  <div class="modal" id="janelaSistema">
-    <div class="modal-conteudo">
-      <div class="modal-topo">
-        <strong id="tituloSistema">Sistema</strong>
-        <button class="fechar" onclick="fecharSistema()">Fechar ✕</button>
-      </div>
-      <iframe id="frameSistema" src=""></iframe>
-    </div>
-  </div>
-
   <footer>
     © 2026 NexByel Tecnologia. Todos os direitos reservados.<br>
     <a href="index.html" class="voltar-perfil">← Voltar para o Cartão de Byel Santos</a>
   </footer>
 
   <script>
-    function abrirSistema(arquivo, nome) {
-      document.getElementById("tituloSistema").innerText = nome;
-      document.getElementById("frameSistema").src = arquivo;
-      document.getElementById("janelaSistema").style.display = "flex";
-    }
-
-    function fecharSistema() {
-      document.getElementById("janelaSistema").style.display = "none";
-      document.getElementById("frameSistema").src = "";
-    }
-
     function enviarMensagem() {
       let nome = document.getElementById("nomeCliente").value;
       let msg = document.getElementById("msgCliente").value;
+      if (nome === "" || msg === "") {
+        alert("Por favor, preencha seu nome e sua mensagem!");
+        return;
+      }
+      document.getElementById("avisoEnvio").style.display = "block";
+      document.getElementById("nomeCliente").value = "";
+      document.getElementById("msgCliente").value = "";
+    }
+  </script>
+
+</body>
+</html>
