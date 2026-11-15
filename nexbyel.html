@@ -4,15 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NexByel | Soluções Digitais & Desenvolvimento Web</title>
-  <meta property="og:title" content="NexByel | Soluções Digitais">
-  <meta property="og:image" content="https://github.io">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
     body {
       background-color: #0e0e11;
       color: #f4f4f5;
@@ -39,25 +32,10 @@
       font-weight: bold;
       font-size: 20px;
     }
-    .marca img {
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      object-fit: cover;
-    }
-    .marca span {
-      color: #00b37e;
-    }
-    nav {
-      display: flex;
-      gap: 14px;
-    }
-    nav a {
-      color: #a8a8b3;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-    }
+    .marca span { color: #00b37e; }
+    nav { display: flex; gap: 14px; }
+    nav a { color: #a8a8b3; text-decoration: none; font-size: 13px; font-weight: 600; cursor: pointer; }
+    
     .hero {
       text-align: center;
       padding: 50px 20px 40px;
@@ -65,14 +43,17 @@
       max-width: 800px;
       margin: 0 auto;
     }
-    .hero-logo {
+    .logo-destaque {
       width: 90px;
       height: 90px;
-      border-radius: 20px;
-      margin-bottom: 18px;
-      box-shadow: 0 0 30px rgba(0, 179, 126, 0.35);
+      margin: 0 auto 18px;
+      background-color: #16161d;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border: 2px solid #8257e5;
-      object-fit: cover;
+      box-shadow: 0 0 30px rgba(0, 179, 126, 0.35);
     }
     .tag {
       display: inline-block;
@@ -85,25 +66,11 @@
       margin-bottom: 16px;
       border: 1px solid rgba(0, 179, 126, 0.3);
     }
-    .hero h1 {
-      font-size: 30px;
-      line-height: 1.2;
-      margin-bottom: 16px;
-    }
-    .hero h1 strong {
-      color: #8257e5;
-    }
-    .hero p {
-      color: #a8a8b3;
-      font-size: 15px;
-      margin-bottom: 26px;
-    }
-    .botoes-hero {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+    .hero h1 { font-size: 30px; line-height: 1.2; margin-bottom: 16px; }
+    .hero h1 strong { color: #8257e5; }
+    .hero p { color: #a8a8b3; font-size: 15px; margin-bottom: 26px; }
+    .botoes-hero { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    
     .btn-primario {
       background: linear-gradient(90deg, #8257e5, #6833e4);
       color: white;
@@ -118,50 +85,28 @@
     .btn-secundario {
       background-color: #1c1c22;
       color: white;
-      text-decoration: none;
       padding: 13px 22px;
       border-radius: 10px;
       font-weight: bold;
       font-size: 14px;
       border: 1px solid #2e2e38;
+      cursor: pointer;
     }
-    section {
-      padding: 40px 20px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .titulo-secao {
-      font-size: 22px;
-      margin-bottom: 6px;
-      text-align: center;
-    }
-    .subtitulo-secao {
-      color: #a8a8b3;
-      font-size: 14px;
-      text-align: center;
-      margin-bottom: 24px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-    }
+
+    section { padding: 40px 20px; max-width: 800px; margin: 0 auto; }
+    .titulo-secao { font-size: 22px; margin-bottom: 6px; text-align: center; }
+    .subtitulo-secao { color: #a8a8b3; font-size: 14px; text-align: center; margin-bottom: 24px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    
     .card {
       background-color: #18181d;
       border: 1px solid #26262e;
       padding: 22px;
       border-radius: 16px;
     }
-    .card h3 {
-      font-size: 17px;
-      margin-bottom: 8px;
-      color: #ffffff;
-    }
-    .card p {
-      font-size: 13px;
-      color: #a8a8b3;
-      margin-bottom: 16px;
-    }
+    .card h3 { font-size: 17px; margin-bottom: 8px; color: #ffffff; }
+    .card p { font-size: 13px; color: #a8a8b3; margin-bottom: 16px; }
+    
     .btn-card {
       display: inline-block;
       background-color: #00b37e;
@@ -171,34 +116,77 @@
       font-size: 13px;
       font-weight: bold;
       text-decoration: none;
+      border: none;
+      cursor: pointer;
     }
-    .btn-card-roxo {
-      background-color: rgba(130, 87, 229, 0.2);
-      color: #a883ff;
+    .btn-card-roxo { background-color: rgba(130, 87, 229, 0.2); color: #a883ff; }
+
+    /* JANELA EM SEGUNDO PLANO (MODAL DE ORÇAMENTO) */
+    .modal-fundo {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(5px);
+      z-index: 300;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
     }
-    .form-box {
+    .modal-janela {
       background-color: #18181d;
-      border: 1px solid #26262e;
-      padding: 22px;
-      border-radius: 16px;
+      border: 1px solid #8257e5;
+      border-radius: 20px;
+      padding: 24px 20px;
+      width: 100%;
+      max-width: 390px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
     }
-    input, textarea {
+    .modal-topo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .modal-topo h3 { font-size: 18px; color: #ffffff; }
+    .modal-topo h3 span { color: #00b37e; }
+    .btn-fechar {
+      background-color: #29292e;
+      color: #a8a8b3;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 5px; color: #d4d4d8; }
+    input, select, textarea {
       width: 100%;
       background-color: #0e0e11;
       border: 1px solid #2e2e38;
       color: white;
-      padding: 12px;
+      padding: 11px 12px;
       border-radius: 10px;
       margin-bottom: 12px;
       font-family: inherit;
-    }
-    #avisoEnvio {
-      color: #00b37e;
       font-size: 14px;
-      font-weight: bold;
-      margin-top: 10px;
-      display: none;
     }
+    .btn-enviar {
+      width: 100%;
+      background: linear-gradient(90deg, #8257e5, #00b37e);
+      color: white;
+      border: none;
+      padding: 13px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
     footer {
       text-align: center;
       padding: 30px 20px;
@@ -219,53 +207,64 @@
 
   <header>
     <a href="#topo" class="marca">
-      <img src="logo.png" alt="Logo">
+      <svg width="32" height="32" viewBox="0 0 100 100" fill="none">
+        <rect width="100" height="100" rx="20" fill="#18181d"/>
+        <path d="M28 35L14 50L28 65" stroke="#8257e5" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M72 35L86 50L72 65" stroke="#00b37e" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="50" y="63" text-anchor="middle" fill="white" font-family="sans-serif" font-weight="bold" font-size="38">B</text>
+      </svg>
       Nex<span>Byel</span>
     </a>
     <nav>
       <a href="#servicos">Soluções</a>
       <a href="#projetos">Sistemas</a>
-      <a href="#contato">Contato</a>
+      <a onclick="abrirOrcamento('Outro Assunto')">Contato</a>
     </nav>
   </header>
 
   <div class="hero" id="topo">
-    <img src="logo.png" alt="Logo NexByel" class="hero-logo">
+    <div class="logo-destaque">
+      <svg width="64" height="64" viewBox="0 0 100 100" fill="none">
+        <path d="M28 35L14 50L28 65" stroke="#8257e5" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M72 35L86 50L72 65" stroke="#00b37e" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="50" y="64" text-anchor="middle" fill="white" font-family="sans-serif" font-weight="bold" font-size="42">B</text>
+      </svg>
+    </div>
     <div class="tag">TECNOLOGIA & INOVAÇÃO DIGITAL</div>
     <h1>Transformando ideias em <strong>produtos digitais</strong> reais.</h1>
     <p>A NexByel desenvolve sites modernos, ferramentas web interativas e interfaces rápidas pensadas para o futuro.</p>
     <div class="botoes-hero">
       <a href="#projetos" class="btn-primario">Explorar Sistemas</a>
-      <a href="#contato" class="btn-secundario">Falar com a Equipe</a>
+      <button class="btn-secundario" onclick="abrirOrcamento('Site Profissional')">Falar com a Equipe</button>
     </div>
   </div>
 
   <section id="servicos">
     <h2 class="titulo-secao">O que a NexByel faz</h2>
-    <p class="subtitulo-secao">Clique em cada solução para saber mais detalhes.</p>
+    <p class="subtitulo-secao">Escolha uma solução para solicitar um orçamento na hora.</p>
     
     <div class="grid">
       <div class="card">
         <h3>🌐 Sites Profissionais</h3>
         <p>Páginas modernas, responsivas e otimizadas para celulares e computadores.</p>
-        <a href="#contato" class="btn-card btn-card-roxo">Solicitar Site →</a>
+        <button class="btn-card btn-card-roxo" onclick="abrirOrcamento('Site Profissional')">Solicitar Site →</button>
       </div>
       <div class="card">
         <h3>⚡ Aplicações Web</h3>
         <p>Ferramentas interativas e sistemas inteligentes desenvolvidos com JavaScript.</p>
-        <a href="#projetos" class="btn-card btn-card-roxo">Ver Sistemas →</a>
+        <button class="btn-card btn-card-roxo" onclick="abrirOrcamento('Sistema / Aplicacao Web')">Pedir Sistema →</button>
       </div>
       <div class="card">
         <h3>🎨 Design de Interface</h3>
         <p>Identidade visual moderna com foco em usabilidade e navegação intuitiva.</p>
-        <a href="#contato" class="btn-card btn-card-roxo">Pedir Orçamento →</a>
+        <button class="btn-card btn-card-roxo" onclick="abrirOrcamento('Design de Interface')">Pedir Design / Orçamento →</button>
       </div>
     </div>
   </section>
 
   <section id="projetos">
     <h2 class="titulo-secao">Sistemas NexByel</h2>
-    <p class="subtitulo-secao">Ferramentas oficiais rodando dentro da plataforma.</p>
+    <p class="subtitulo-secao">Ferramentas oficiais desenvolvidas pela nossa equipe.</p>
 
     <div class="grid">
       <div class="card">
@@ -277,41 +276,21 @@
       <div class="card">
         <h3>🔐 NexPass (Em Breve)</h3>
         <p>Gerador inteligente de senhas seguras em desenvolvimento pelo laboratório NexByel.</p>
-        <a href="#contato" class="btn-card btn-card-roxo">Avisar quando lançar</a>
+        <button class="btn-card btn-card-roxo" onclick="abrirOrcamento('Avisar sobre NexPass')">Avisar quando lançar</button>
       </div>
     </div>
   </section>
 
-  <section id="contato">
-    <h2 class="titulo-secao">Contato & Parcerias</h2>
-    <p class="subtitulo-secao">Fundada por Byel Santos • Envie uma mensagem direta para a NexByel.</p>
+  <!-- JANELA FLUTUANTE EM SEGUNDO PLANO -->
+  <div class="modal-fundo" id="modalOrcamento">
+    <div class="modal-janela">
+      <div class="modal-topo">
+        <h3>Orçamento Nex<span>Byel</span></h3>
+        <button class="btn-fechar" onclick="fecharOrcamento()">✕</button>
+      </div>
 
-    <div class="form-box">
-      <input type="text" id="nomeCliente" placeholder="Seu nome">
-      <textarea id="msgCliente" rows="3" placeholder="Como a NexByel pode ajudar no seu projeto?"></textarea>
-      <button class="btn-primario" style="width: 100%;" onclick="enviarMensagem()">Enviar Mensagem</button>
-      <p id="avisoEnvio">✅ Mensagem recebida pela equipe NexByel! Entraremos em contato em breve.</p>
-    </div>
-  </section>
+      <form action="https://formsubmit.co" method="POST">
+        <input type="hidden" name="_subject" value="Novo Pedido de Orçamento - NexByel!">
+        <input type="hidden" name="_captcha" value="false">
 
-  <footer>
-    © 2026 NexByel Tecnologia. Todos os direitos reservados.<br>
-    <a href="index.html" class="voltar-perfil">← Voltar para o Cartão de Byel Santos</a>
-  </footer>
-
-  <script>
-    function enviarMensagem() {
-      let nome = document.getElementById("nomeCliente").value;
-      let msg = document.getElementById("msgCliente").value;
-      if (nome === "" || msg === "") {
-        alert("Por favor, preencha seu nome e sua mensagem!");
-        return;
-      }
-      document.getElementById("avisoEnvio").style.display = "block";
-      document.getElementById("nomeCliente").value = "";
-      document.getElementById("msgCliente").value = "";
-    }
-  </script>
-
-</body>
-</html>
+        <label>Seu Nome</label>
