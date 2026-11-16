@@ -200,11 +200,13 @@
       display: inline-block;
       background-color: #00b37e;
       color: #ffffff;
+      border: none;
       padding: 10px 18px;
       border-radius: 8px;
       font-size: 14px;
       font-weight: bold;
       text-decoration: none;
+      cursor: pointer;
     }
 
     /* Rodapé */
@@ -216,7 +218,7 @@
       font-size: 13px;
     }
 
-    /* JANELA INTERNA (MODAL) DE ATENDIMENTO */
+    /* JANELAS INTERNAS (MODAIS) */
     .modal-fundo {
       display: none;
       position: fixed;
@@ -331,11 +333,47 @@
       color: #00e699;
       margin-bottom: 8px;
     }
+
+    .resultado-link {
+      display: none;
+      margin-top: 16px;
+      background-color: #0d0d12;
+      border: 1px solid #00b37e;
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .resultado-link input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #00e699;
+      font-size: 13px;
+      margin-bottom: 10px;
+      outline: none;
+    }
+
+    .acoes-link {
+      display: flex;
+      gap: 8px;
+    }
+
+    .acoes-link button, .acoes-link a {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Definição da Logo SVG Oficial NexByel -->
+  <!-- Logo SVG Oficial NexByel -->
   <svg width="0" height="0" style="position:absolute">
     <defs>
       <linearGradient id="nexGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -420,22 +458,22 @@
     </div>
 
     <div class="card">
-      <h3>🧮 Calculadora NexByel</h3>
-      <p>Calculadora web oficial com interface escura e resposta instantânea.</p>
-      <a href="calculadora.html" class="btn-verde">🧮 Abrir Calculadora</a>
+      <h3>⚡ NexLink (Gerador de WhatsApp)</h3>
+      <p>Crie links diretos para iniciar conversas no WhatsApp com mensagem personalizada em segundos.</p>
+      <button class="btn-verde" onclick="abrirNexLink()">⚡ Abrir NexLink</button>
     </div>
 
     <div class="card">
-      <h3>🔐 NexPass (Em Breve)</h3>
-      <p>Gerador inteligente de senhas seguras em desenvolvimento pelo laboratório NexByel.</p>
-      <button class="btn-card" onclick="abrirJanela('Avisar lançamento: NexPass')">Avisar quando lançar</button>
+      <h3>🎨 NexPalette (Em Breve)</h3>
+      <p>Gerador inteligente de combinações de cores e degradês modernos para marcas e sites.</p>
+      <button class="btn-card" onclick="abrirJanela('Avisar lançamento: NexPalette')">Avisar quando lançar</button>
     </div>
   </section>
 
   <!-- Rodapé -->
   <footer>
     <p>© 2026 NexByel Tecnologia • Fundada por Byel Santos</p>
-    <p style="margin-top: 6px;">Contato oficial: nexbyel.ofical@gmail.com</p>
+    <p style="margin-top: 6px;">Contato oficial: nexbyel.oficial@gmail.com</p>
   </footer>
 
   <!-- JANELA INTERNA (MODAL) DE ORÇAMENTO E CONTATO -->
@@ -447,8 +485,7 @@
         <h2>Olá, como podemos te ajudar?</h2>
         <div class="modal-sub" id="assuntoSelecionado">Assunto: Pedir Orçamento</div>
 
-        <form id="formNexByel" action="https://formsubmit.co/nexbyel.ofical@gmail.com" method="POST">
-          <!-- Configurações ocultas de envio -->
+        <form id="formNexByel" action="https://formsubmit.co/nexbyel.oficial@gmail.com" method="POST">
           <input type="hidden" name="_subject" id="emailSubject" value="Novo contato no site NexByel!">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
@@ -482,7 +519,37 @@
     </div>
   </div>
 
+  <!-- JANELA INTERNA DO SISTEMA NEXLINK -->
+  <div class="modal-fundo" id="modalNexLink">
+    <div class="modal-janela">
+      <button class="fechar-modal" onclick="fecharNexLink()">✕</button>
+      <h2>⚡ NexLink</h2>
+      <div class="modal-sub">Gerador Oficial de Link WhatsApp</div>
+
+      <div class="campo">
+        <label>Número com DDD:</label>
+        <input type="tel" id="whatsNumero" placeholder="Ex: 71999999999">
+      </div>
+
+      <div class="campo">
+        <label>Mensagem inicial (opcional):</label>
+        <textarea id="whatsTexto" rows="3" placeholder="Olá! Vim pelo site da NexByel..."></textarea>
+      </div>
+
+      <button class="btn-enviar" onclick="gerarLinkWhats()">Gerar Link Agora</button>
+
+      <div class="resultado-link" id="boxResultado">
+        <input type="text" id="linkGerado" readonly>
+        <div class="acoes-link">
+          <button style="background-color: #8257e5; color: white;" onclick="copiarLinkWhats()" id="btnCopiar">Copiar Link</button>
+          <a id="btnTestarLink" href="#" target="_blank" style="background-color: #00b37e; color: white;">Testar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // Controle do Modal de Contato
     const modal = document.getElementById("modalContato");
     const assuntoTexto = document.getElementById("assuntoSelecionado");
     const emailSubject = document.getElementById("emailSubject");
@@ -503,20 +570,16 @@
       modal.classList.remove("ativo");
     }
 
-    // Fechar ao clicar fora da janela
     modal.addEventListener("click", function(e) {
-      if (e.target === modal) {
-        fecharJanela();
-      }
+      if (e.target === modal) fecharJanela();
     });
 
-    // Envio direto sem sair do site
     form.addEventListener("submit", function(e) {
       e.preventDefault();
       btnConfirmar.textContent = "Enviando...";
       btnConfirmar.disabled = true;
 
-      fetch("https://formsubmit.co/ajax/nexbyel.ofical@gmail.com", {
+      fetch("https://formsubmit.co/ajax/nexbyel.oficial@gmail.com", {
         method: "POST",
         body: new FormData(form)
       })
@@ -529,10 +592,56 @@
         btnConfirmar.disabled = false;
       })
       .catch(error => {
-        // Caso o navegador bloqueie AJAX, faz o envio tradicional
         form.submit();
       });
     });
+
+    // Controle do Sistema NexLink
+    const modalNexLink = document.getElementById("modalNexLink");
+
+    function abrirNexLink() {
+      modalNexLink.classList.add("ativo");
+    }
+
+    function fecharNexLink() {
+      modalNexLink.classList.remove("ativo");
+    }
+
+    modalNexLink.addEventListener("click", function(e) {
+      if (e.target === modalNexLink) fecharNexLink();
+    });
+
+    function gerarLinkWhats() {
+      let numero = document.getElementById("whatsNumero").value.replace(/\D/g, "");
+      let texto = document.getElementById("whatsTexto").value;
+
+      if (numero.length < 10) {
+        alert("Digite um número válido com DDD (ex: 71999999999)");
+        return;
+      }
+
+      if (!numero.startsWith("55")) {
+        numero = "55" + numero;
+      }
+
+      let linkFinal = "https://wa.me/" + numero;
+      if (texto.trim() !== "") {
+        linkFinal += "?text=" + encodeURIComponent(texto);
+      }
+
+      document.getElementById("linkGerado").value = linkFinal;
+      document.getElementById("btnTestarLink").href = linkFinal;
+      document.getElementById("boxResultado").style.display = "block";
+    }
+
+    function copiarLinkWhats() {
+      let campoLink = document.getElementById("linkGerado");
+      campoLink.select();
+      navigator.clipboard.writeText(campoLink.value);
+      let btn = document.getElementById("btnCopiar");
+      btn.textContent = "Copiado! ✅";
+      setTimeout(() => btn.textContent = "Copiar Link", 2000);
+    }
   </script>
 
 </body>
