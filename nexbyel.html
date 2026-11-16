@@ -121,7 +121,7 @@
     }
     .btn-card-roxo { background-color: rgba(130, 87, 229, 0.2); color: #a883ff; }
 
-    /* JANELA EM SEGUNDO PLANO (MODAL DE ORÇAMENTO) */
+    /* JANELA EM SEGUNDO PLANO (MODAL) */
     .modal-fundo {
       display: none;
       position: fixed;
@@ -129,21 +129,21 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(5px);
-      z-index: 300;
+      background-color: rgba(0, 0, 0, 0.88);
+      z-index: 999;
       justify-content: center;
       align-items: center;
       padding: 16px;
     }
     .modal-janela {
       background-color: #18181d;
-      border: 1px solid #8257e5;
+      border: 2px solid #8257e5;
       border-radius: 20px;
-      padding: 24px 20px;
+      padding: 22px 18px;
       width: 100%;
       max-width: 390px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      max-height: 90vh;
+      overflow-y: auto;
     }
     .modal-topo {
       display: flex;
@@ -154,8 +154,8 @@
     .modal-topo h3 { font-size: 18px; color: #ffffff; }
     .modal-topo h3 span { color: #00b37e; }
     .btn-fechar {
-      background-color: #29292e;
-      color: #a8a8b3;
+      background-color: #e55757;
+      color: white;
       border: none;
       width: 32px;
       height: 32px;
@@ -163,7 +163,7 @@
       font-weight: bold;
       cursor: pointer;
     }
-    label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 5px; color: #d4d4d8; }
+    label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 4px; color: #d4d4d8; }
     input, select, textarea {
       width: 100%;
       background-color: #0e0e11;
@@ -235,7 +235,7 @@
     <p>A NexByel desenvolve sites modernos, ferramentas web interativas e interfaces rápidas pensadas para o futuro.</p>
     <div class="botoes-hero">
       <a href="#projetos" class="btn-primario">Explorar Sistemas</a>
-      <button class="btn-secundario" onclick="abrirOrcamento('Site Profissional')">Falar com a Equipe</button>
+      <button type="button" class="btn-secundario" onclick="abrirOrcamento('Site Profissional')">Falar com a Equipe</button>
     </div>
   </div>
 
@@ -247,17 +247,17 @@
       <div class="card">
         <h3>🌐 Sites Profissionais</h3>
         <p>Páginas modernas, responsivas e otimizadas para celulares e computadores.</p>
-        <button class="btn-card btn-card-roxo" onclick="abrirOrcamento('Site Profissional')">Solicitar Site →</button>
+        <button type="button" class="btn-card btn-card-roxo" onclick="abrirOrcamento('Site Profissional')">Solicitar Site →</button>
       </div>
       <div class="card">
         <h3>⚡ Aplicações Web</h3>
         <p>Ferramentas interativas e sistemas inteligentes desenvolvidos com JavaScript.</p>
-        <button class="btn-card btn-card-roxo" onclick="abrirOrcamento('Sistema / Aplicacao Web')">Pedir Sistema →</button>
+        <button type="button" class="btn-card btn-card-roxo" onclick="abrirOrcamento('Sistema / Aplicacao Web')">Pedir Sistema →</button>
       </div>
       <div class="card">
         <h3>🎨 Design de Interface</h3>
         <p>Identidade visual moderna com foco em usabilidade e navegação intuitiva.</p>
-        <button class="btn-card btn-card-roxo" onclick="abrirOrcamento('Design de Interface')">Pedir Design / Orçamento →</button>
+        <button type="button" class="btn-card btn-card-roxo" onclick="abrirOrcamento('Design de Interface')">Pedir Design / Orçamento →</button>
       </div>
     </div>
   </section>
@@ -276,7 +276,7 @@
       <div class="card">
         <h3>🔐 NexPass (Em Breve)</h3>
         <p>Gerador inteligente de senhas seguras em desenvolvimento pelo laboratório NexByel.</p>
-        <button class="btn-card btn-card-roxo" onclick="abrirOrcamento('Avisar sobre NexPass')">Avisar quando lançar</button>
+        <button type="button" class="btn-card btn-card-roxo" onclick="abrirOrcamento('Avisar sobre NexPass')">Avisar quando lançar</button>
       </div>
     </div>
   </section>
@@ -286,10 +286,10 @@
     <div class="modal-janela">
       <div class="modal-topo">
         <h3>Orçamento Nex<span>Byel</span></h3>
-        <button class="btn-fechar" onclick="fecharOrcamento()">✕</button>
+        <button type="button" class="btn-fechar" onclick="fecharOrcamento()">✕</button>
       </div>
 
-      <form action="nexbyel.oficial@gmail.com" method="POST">
+      <form action="https://formsubmit.co" method="POST">
         <input type="hidden" name="_subject" value="Novo Pedido de Orçamento - NexByel!">
         <input type="hidden" name="_captcha" value="false">
 
