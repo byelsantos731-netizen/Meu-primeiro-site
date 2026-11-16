@@ -3,108 +3,536 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Byel Santos | Dev Web</title>
+  <title>NexByel | Tecnologia & Inovação Digital</title>
   <style>
-    body {
-      background: linear-gradient(135deg, #121214 0%, #2e1d59 50%, #8257e5 100%);
-      color: #ffffff;
-      font-family: 'Segoe UI', Roboto, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 20px;
+    * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Roboto, sans-serif;
     }
-    .cartao {
-      background-color: rgba(32, 32, 36, 0.92);
+
+    body {
+      background-color: #0b0b0f;
       color: #ffffff;
-      padding: 32px 24px;
-      border-radius: 20px;
-      text-align: center;
-      max-width: 360px;
-      width: 100%;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(130, 87, 229, 0.4);
+      line-height: 1.6;
     }
-    .cartao.claro {
-      background-color: rgba(255, 255, 255, 0.95);
-      color: #121214;
+
+    /* Cabeçalho Fixo */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(11, 11, 15, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(130, 87, 229, 0.25);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    img {
-      width: 105px;
-      height: 105px;
-      border-radius: 50%;
-      border: 3px solid #8257e5;
-      padding: 3px;
-      background-color: #121214;
-      margin-bottom: 12px;
-    }
-    h1 {
-      margin: 8px 0 4px;
-      font-size: 24px;
-    }
-    .badge {
-      display: inline-block;
-      background-color: rgba(130, 87, 229, 0.2);
-      color: #a883ff;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      margin-bottom: 12px;
-    }
-    p {
-      font-size: 14px;
-      line-height: 1.5;
-      opacity: 0.85;
-      margin-bottom: 20px;
-    }
-    .link-botao, button {
-      display: block;
-      width: 100%;
-      background: linear-gradient(90deg, #8257e5, #6833e4);
-      color: white;
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       text-decoration: none;
-      padding: 13px;
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .brand span {
+      color: #00e699;
+    }
+
+    nav {
+      display: flex;
+      gap: 16px;
+    }
+
+    nav a, nav button {
+      background: none;
       border: none;
+      color: #c4c4cc;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    nav a:hover, nav button:hover {
+      color: #00e699;
+    }
+
+    /* Seção Principal (Hero) */
+    .hero {
+      text-align: center;
+      padding: 50px 20px 60px;
+      background: radial-gradient(circle at top, rgba(130, 87, 229, 0.25) 0%, rgba(11, 11, 15, 1) 70%);
+    }
+
+    .logo-destaque {
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 20px;
+      filter: drop-shadow(0 0 18px rgba(130, 87, 229, 0.6)) drop-shadow(0 0 18px rgba(0, 230, 153, 0.4));
+    }
+
+    .tag-topo {
+      display: inline-block;
+      background-color: rgba(0, 230, 153, 0.12);
+      color: #00e699;
+      border: 1px solid rgba(0, 230, 153, 0.3);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .texto-gradiente {
+      background: linear-gradient(90deg, #996dff, #00e699);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: #a8a8b3;
+      max-width: 480px;
+      margin: 0 auto 28px;
+      font-size: 15px;
+    }
+
+    .botoes-hero {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primario {
+      background: linear-gradient(90deg, #8257e5, #6833e4);
+      color: #ffffff;
+      border: none;
+      padding: 14px 24px;
       border-radius: 10px;
-      margin-top: 12px;
       font-size: 15px;
       font-weight: bold;
-      box-sizing: border-box;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(130, 87, 229, 0.4);
     }
-    .botao-projeto {
-      background: linear-gradient(90deg, #00b37e, #00875f);
+
+    .btn-secundario {
+      background-color: #18181f;
+      color: #ffffff;
+      border: 1px solid #292933;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
     }
-    .botao-tema {
-      background: transparent;
-      border: 2px solid #8257e5;
+
+    /* Seções */
+    section {
+      padding: 50px 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .titulo-secao {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .titulo-secao h2 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .titulo-secao p {
+      color: #a8a8b3;
+      font-size: 14px;
+    }
+
+    .card {
+      background-color: #14141a;
+      border: 1px solid #24242e;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: #a8a8b3;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .btn-card {
+      display: inline-block;
+      background-color: rgba(130, 87, 229, 0.15);
       color: #a883ff;
+      border: 1px solid rgba(130, 87, 229, 0.4);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .btn-verde {
+      display: inline-block;
+      background-color: #00b37e;
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    /* Rodapé */
+    footer {
+      text-align: center;
+      padding: 35px 20px;
+      border-top: 1px solid #1e1e26;
+      color: #7c7c8a;
+      font-size: 13px;
+    }
+
+    /* JANELA INTERNA (MODAL) DE ATENDIMENTO */
+    .modal-fundo {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(6px);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-fundo.ativo {
+      display: flex;
+    }
+
+    .modal-janela {
+      background-color: #16161d;
+      border: 1px solid #8257e5;
+      border-radius: 18px;
+      width: 100%;
+      max-width: 400px;
+      padding: 26px 22px;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      animation: abrirJanela 0.25s ease;
+    }
+
+    @keyframes abrirJanela {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .fechar-modal {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: #24242e;
+      color: #ffffff;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .modal-janela h2 {
+      font-size: 20px;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+
+    .modal-sub {
+      font-size: 13px;
+      color: #00e699;
+      margin-bottom: 18px;
+      font-weight: bold;
+    }
+
+    .campo {
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    .campo label {
+      display: block;
+      font-size: 13px;
+      color: #c4c4cc;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .campo input, .campo textarea {
+      width: 100%;
+      background-color: #0d0d12;
+      border: 1px solid #2e2e3a;
+      border-radius: 10px;
+      padding: 12px;
+      color: #ffffff;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .campo input:focus, .campo textarea:focus {
+      border-color: #00e699;
+    }
+
+    .btn-enviar {
+      width: 100%;
+      background: linear-gradient(90deg, #8257e5, #00b37e);
+      color: #ffffff;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+
+    .aviso-sucesso {
+      display: none;
+      text-align: center;
+      padding: 20px 10px;
+    }
+
+    .aviso-sucesso h3 {
+      color: #00e699;
+      margin-bottom: 8px;
     }
   </style>
 </head>
 <body>
 
-  <div class="cartao" id="meuCartao">
-    <img src="https://avatars.githubusercontent.com/byelsantos731-netizen" alt="Minha foto">
-    <h1>Byel Santos</h1>
-    <span class="badge">DEV WEB • 13 ANOS</span>
-    <p>Criando projetos reais direto do Android com HTML, CSS e JavaScript 🚀</p>
+  <!-- Definição da Logo SVG Oficial NexByel -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="nexGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#996dff" />
+        <stop offset="100%" stop-color="#00e699" />
+      </linearGradient>
+    </defs>
+  </svg>
 
-    <a href="calculadora.html" class="link-botao botao-projeto">🧮 Abrir Minha Calculadora</a>
-    <a href="https://github.com" target="_blank" class="link-botao">💻 Meu GitHub</a>
-    <a href="https://youtube.com" target="_blank" class="link-botao">▶️ Meu Canal Favorito</a>
-    
-    <button class="botao-tema" onclick="mudarTema()">Trocar Tema 🎨</button>
+  <!-- Cabeçalho -->
+  <header>
+    <a href="#" class="brand">
+      <svg width="32" height="32" viewBox="0 0 120 120" fill="none">
+        <path d="M32 38L12 60L32 82" stroke="#996dff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M88 38L108 60L88 82" stroke="#00e699" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M44 25H68C76 25 81 30 81 38C81 45 77 50 71 52C78 54 83 60 83 68C83 78 76 85 66 85H44V25Z" stroke="url(#nexGrad)" stroke-width="7" stroke-linejoin="round"/>
+        <path d="M44 62L75 33" stroke="url(#nexGrad)" stroke-width="6"/>
+      </svg>
+      <div>Nex<span>Byel</span></div>
+    </a>
+    <nav>
+      <a href="#solucoes">Soluções</a>
+      <a href="#sistemas">Sistemas</a>
+      <button onclick="abrirJanela('Contato Geral')">Contato</button>
+    </nav>
+  </header>
+
+  <!-- Tela Principal -->
+  <div class="hero">
+    <div class="logo-destaque">
+      <svg viewBox="0 0 120 120" fill="none">
+        <path d="M30 36L10 60L30 84" stroke="#996dff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M90 36L110 60L90 84" stroke="#00e699" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M42 22H68C77 22 83 28 83 37C83 45 78 51 71 53C79 55 85 62 85 71C85 82 77 90 66 90H42V22Z" stroke="url(#nexGrad)" stroke-width="6.5" stroke-linejoin="round"/>
+        <path d="M53 34H65C69 34 71 36 71 40C71 43 69 46 65 46H53V34Z" stroke="url(#nexGrad)" stroke-width="4.5"/>
+        <path d="M53 63H66C71 63 73 66 73 71C73 75 71 78 66 78H53V63Z" stroke="url(#nexGrad)" stroke-width="4.5"/>
+        <path d="M42 64L78 30" stroke="url(#nexGrad)" stroke-width="5.5"/>
+      </svg>
+    </div>
+
+    <div class="tag-topo">TECNOLOGIA & INOVAÇÃO DIGITAL</div>
+    <h1>Transformando ideias em <span class="texto-gradiente">produtos digitais</span> reais.</h1>
+    <p>A NexByel desenvolve sites modernos, ferramentas web interativas e interfaces rápidas pensadas para o futuro.</p>
+
+    <div class="botoes-hero">
+      <a href="#sistemas" class="btn-primario">Explorar Sistemas</a>
+      <button class="btn-secundario" onclick="abrirJanela('Falar com a Equipe')">Falar com a Equipe</button>
+    </div>
+  </div>
+
+  <!-- Soluções -->
+  <section id="solucoes">
+    <div class="titulo-secao">
+      <h2>O que a NexByel faz</h2>
+      <p>Desenvolvimento focado em velocidade, design e experiência do usuário.</p>
+    </div>
+
+    <div class="card">
+      <h3>🌐 Sites Profissionais</h3>
+      <p>Páginas modernas, responsivas e otimizadas para celulares e computadores.</p>
+      <button class="btn-card" onclick="abrirJanela('Orçamento: Site Profissional')">Pedir Orçamento →</button>
+    </div>
+
+    <div class="card">
+      <h3>🎨 Design de Interface</h3>
+      <p>Criação de identidades visuais, logos digitais e navegação intuitiva.</p>
+      <button class="btn-card" onclick="abrirJanela('Orçamento: Design de Interface')">Pedir Orçamento →</button>
+    </div>
+
+    <div class="card">
+      <h3>🛠️ Suporte & Soluções Web</h3>
+      <p>Ajustes, melhorias em sites existentes e consultoria para projetos digitais.</p>
+      <button class="btn-card" onclick="abrirJanela('Suporte / Resolver Problema')">Solicitar Ajuda →</button>
+    </div>
+  </section>
+
+  <!-- Sistemas -->
+  <section id="sistemas">
+    <div class="titulo-secao">
+      <h2>Sistemas NexByel</h2>
+      <p>Ferramentas oficiais rodando dentro da plataforma.</p>
+    </div>
+
+    <div class="card">
+      <h3>🧮 Calculadora NexByel</h3>
+      <p>Calculadora web oficial com interface escura e resposta instantânea.</p>
+      <a href="calculadora.html" class="btn-verde">🧮 Abrir Calculadora</a>
+    </div>
+
+    <div class="card">
+      <h3>🔐 NexPass (Em Breve)</h3>
+      <p>Gerador inteligente de senhas seguras em desenvolvimento pelo laboratório NexByel.</p>
+      <button class="btn-card" onclick="abrirJanela('Avisar lançamento: NexPass')">Avisar quando lançar</button>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <p>© 2026 NexByel Tecnologia • Fundada por Byel Santos</p>
+    <p style="margin-top: 6px;">Contato oficial: nexbyel.ofical@gmail.com</p>
+  </footer>
+
+  <!-- JANELA INTERNA (MODAL) DE ORÇAMENTO E CONTATO -->
+  <div class="modal-fundo" id="modalContato">
+    <div class="modal-janela">
+      <button class="fechar-modal" onclick="fecharJanela()">✕</button>
+
+      <div id="areaFormulario">
+        <h2>Olá, como podemos te ajudar?</h2>
+        <div class="modal-sub" id="assuntoSelecionado">Assunto: Pedir Orçamento</div>
+
+        <form id="formNexByel" action="https://formsubmit.co/nexbyel.ofical@gmail.com" method="POST">
+          <!-- Configurações ocultas de envio -->
+          <input type="hidden" name="_subject" id="emailSubject" value="Novo contato no site NexByel!">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+
+          <div class="campo">
+            <label>Nome:</label>
+            <input type="text" name="Nome" required placeholder="Digite seu nome">
+          </div>
+
+          <div class="campo">
+            <label>Número de telefone / e-mail:</label>
+            <input type="text" name="Contato" required placeholder="(71) 99999-9999 ou seu@email.com">
+          </div>
+
+          <div class="campo">
+            <label>Como podemos ajudar:</label>
+            <textarea name="Mensagem" rows="4" required placeholder="Descreva o site, orçamento ou dúvida..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-enviar" id="btnConfirmar">Enviar / Confirmar</button>
+        </form>
+      </div>
+
+      <div class="aviso-sucesso" id="areaSucesso">
+        <h3>✅ Mensagem Enviada!</h3>
+        <p style="color: #c4c4cc; font-size: 14px; margin-bottom: 16px;">
+          Sua solicitação foi enviada para a equipe da <strong>NexByel</strong>. Responderemos em breve!
+        </p>
+        <button class="btn-primario" onclick="fecharJanela()">Voltar ao Site</button>
+      </div>
+    </div>
   </div>
 
   <script>
-    function mudarTema() {
-      let cartao = document.getElementById("meuCartao");
-      cartao.classList.toggle("claro");
+    const modal = document.getElementById("modalContato");
+    const assuntoTexto = document.getElementById("assuntoSelecionado");
+    const emailSubject = document.getElementById("emailSubject");
+    const form = document.getElementById("formNexByel");
+    const areaFormulario = document.getElementById("areaFormulario");
+    const areaSucesso = document.getElementById("areaSucesso");
+    const btnConfirmar = document.getElementById("btnConfirmar");
+
+    function abrirJanela(assunto) {
+      assuntoTexto.textContent = "Assunto: " + assunto;
+      emailSubject.value = "NexByel - " + assunto;
+      areaFormulario.style.display = "block";
+      areaSucesso.style.display = "none";
+      modal.classList.add("ativo");
     }
+
+    function fecharJanela() {
+      modal.classList.remove("ativo");
+    }
+
+    // Fechar ao clicar fora da janela
+    modal.addEventListener("click", function(e) {
+      if (e.target === modal) {
+        fecharJanela();
+      }
+    });
+
+    // Envio direto sem sair do site
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      btnConfirmar.textContent = "Enviando...";
+      btnConfirmar.disabled = true;
+
+      fetch("https://formsubmit.co/ajax/nexbyel.ofical@gmail.com", {
+        method: "POST",
+        body: new FormData(form)
+      })
+      .then(response => response.json())
+      .then(data => {
+        form.reset();
+        areaFormulario.style.display = "none";
+        areaSucesso.style.display = "block";
+        btnConfirmar.textContent = "Enviar / Confirmar";
+        btnConfirmar.disabled = false;
+      })
+      .catch(error => {
+        // Caso o navegador bloqueie AJAX, faz o envio tradicional
+        form.submit();
+      });
+    });
   </script>
 
 </body>
