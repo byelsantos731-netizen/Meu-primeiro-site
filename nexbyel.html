@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NexByel | Soluções e Desenvolvimento Web</title>
+  <title>NexByel | Plataforma de Soluções e Desenvolvimento Web</title>
   <style>
     * {
       box-sizing: border-box;
@@ -16,8 +16,10 @@
       background-color: #07070a;
       color: #ffffff;
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
+    /* Cabeçalho Superior */
     header {
       position: sticky;
       top: 0;
@@ -25,19 +27,40 @@
       background-color: rgba(7, 7, 10, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(130, 87, 229, 0.2);
-      padding: 16px 24px;
+      padding: 12px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .brand {
+    .header-esquerda {
       display: flex;
       align-items: center;
       gap: 12px;
-      text-decoration: none;
+    }
+
+    .btn-hamburguer {
+      background: none;
+      border: 1px solid #292938;
       color: #ffffff;
       font-size: 20px;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #121218;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 18px;
       font-weight: 700;
     }
 
@@ -45,64 +68,138 @@
       color: #00e699;
     }
 
-    nav {
+    .header-direita {
       display: flex;
-      gap: 20px;
       align-items: center;
+      gap: 10px;
     }
 
-    nav a, nav button {
+    .avatar-topo {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid #8257e5;
+      background: #14141c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px rgba(130, 87, 229, 0.4);
+      overflow: hidden;
+    }
+
+    /* Menu Lateral Deslizante (Gaveta) */
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      display: none;
+      justify-content: flex-start;
+    }
+
+    .drawer-overlay.ativo {
+      display: flex;
+    }
+
+    .drawer-conteudo {
+      width: 290px;
+      height: 100%;
+      background-color: #111116;
+      border-right: 1px solid #22222f;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      overflow-y: auto;
+      animation: slideRight 0.3s ease;
+    }
+
+    @keyframes slideRight {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #22222f;
+    }
+
+    .drawer-close {
       background: none;
       border: none;
       color: #a8a8b3;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 22px;
       cursor: pointer;
     }
 
-    nav a:hover, nav button:hover {
+    .drawer-menu-item {
+      padding: 12px 14px;
+      color: #d4d4d8;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #16161f;
+      border: 1px solid #22222f;
+      cursor: pointer;
+    }
+
+    .drawer-menu-item:hover {
+      background: #20202a;
       color: #00e699;
     }
 
-    .btn-nav-acao {
-      background: linear-gradient(90deg, #8257e5, #00b37e);
-      color: #ffffff !important;
-      padding: 8px 16px;
-      border-radius: 8px;
+    .drawer-secao-titulo {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: #7c7c8a;
+      letter-spacing: 1px;
+      margin: 16px 0 8px 4px;
     }
 
+    /* Seção Principal (Hero) Longa */
     .hero {
       text-align: center;
       padding: 70px 20px 80px;
-      background: radial-gradient(circle at top, rgba(130, 87, 229, 0.2) 0%, rgba(7, 7, 10, 1) 70%);
+      background: radial-gradient(circle at top, rgba(130, 87, 229, 0.25) 0%, rgba(7, 7, 10, 1) 70%);
     }
 
     .logo-destaque {
-      width: 100px;
-      height: 100px;
-      margin: 0 auto 24px;
-      filter: drop-shadow(0 0 20px rgba(130, 87, 229, 0.5));
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 20px;
+      filter: drop-shadow(0 0 25px rgba(130, 87, 229, 0.6));
     }
 
     .tag-topo {
       display: inline-block;
-      background-color: rgba(130, 87, 229, 0.1);
+      background-color: rgba(130, 87, 229, 0.12);
       color: #996dff;
       border: 1px solid rgba(130, 87, 229, 0.3);
       padding: 6px 16px;
       border-radius: 20px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: 1.5px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       text-transform: uppercase;
     }
 
     .hero h1 {
-      font-size: 36px;
+      font-size: 34px;
       line-height: 1.2;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       max-width: 650px;
       margin-left: auto;
       margin-right: auto;
@@ -116,9 +213,9 @@
 
     .hero p {
       color: #a8a8b3;
-      max-width: 520px;
-      margin: 0 auto 32px;
-      font-size: 16px;
+      max-width: 540px;
+      margin: 0 auto 30px;
+      font-size: 15px;
     }
 
     .botoes-hero {
@@ -148,131 +245,69 @@
       border-radius: 10px;
       font-size: 15px;
       font-weight: 700;
-      cursor: pointer;
+      text-decoration: none;
     }
 
+    /* Seções Longas e Encorpadas */
     section {
-      padding: 70px 20px;
-      max-width: 800px;
+      padding: 60px 20px;
+      max-width: 850px;
       margin: 0 auto;
+      border-bottom: 1px solid #16161f;
     }
 
     .titulo-secao {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 35px;
     }
 
     .titulo-secao h2 {
       font-size: 28px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .titulo-secao p {
       color: #a8a8b3;
-      font-size: 15px;
+      font-size: 14px;
     }
 
-    .grid-servicos {
+    .grid-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
     }
 
     .card {
       background-color: #111116;
       border: 1px solid #20202a;
       border-radius: 16px;
-      padding: 28px 24px;
+      padding: 26px 22px;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover {
+      border-color: #8257e5;
     }
 
     .card h3 {
-      font-size: 19px;
-      margin-bottom: 10px;
+      font-size: 18px;
+      margin-bottom: 8px;
       color: #ffffff;
     }
 
     .card p {
       color: #a8a8b3;
       font-size: 14px;
-      margin-bottom: 20px;
     }
 
-    .btn-card {
-      background: none;
-      border: none;
-      color: #00e699;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 0;
-    }
-
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      border-top: 1px solid #16161f;
-      color: #7c7c8a;
-      font-size: 13px;
-    }
-
-    .modal-fundo {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
-      z-index: 999;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .modal-fundo.ativo {
-      display: flex;
-    }
-
-    .modal-janela {
-      background-color: #14141c;
-      border: 1px solid #8257e5;
+    /* Formulário de Orçamento / Contato Direto */
+    .form-box {
+      background-color: #111116;
+      border: 1px solid #20202a;
       border-radius: 20px;
-      width: 100%;
-      max-width: 420px;
-      padding: 30px 24px;
-      position: relative;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
-    }
-
-    .fechar-modal {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      background: #1f1f2e;
-      color: #ffffff;
-      border: none;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      font-size: 18px;
-      cursor: pointer;
-    }
-
-    .modal-janela h2 {
-      font-size: 22px;
-      margin-bottom: 6px;
-      color: #ffffff;
-    }
-
-    .modal-sub {
-      font-size: 13px;
-      color: #00e699;
-      margin-bottom: 20px;
-      font-weight: 700;
+      padding: 30px;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     .campo {
@@ -290,10 +325,10 @@
 
     .campo input, .campo textarea {
       width: 100%;
-      background-color: #0b0b10;
+      background-color: #07070a;
       border: 1px solid #2a2a38;
       border-radius: 10px;
-      padding: 12px 14px;
+      padding: 12px;
       color: #ffffff;
       font-size: 14px;
       outline: none;
@@ -303,7 +338,12 @@
       border-color: #00e699;
     }
 
-    .btn-enviar {
+    .campo textarea {
+      height: 110px;
+      resize: vertical;
+    }
+
+    .btn-acao {
       width: 100%;
       background: linear-gradient(90deg, #8257e5, #00b37e);
       color: #ffffff;
@@ -313,24 +353,116 @@
       font-size: 15px;
       font-weight: 700;
       cursor: pointer;
-      margin-top: 8px;
     }
 
-    .aviso-sucesso {
+    /* Modais Gerais */
+    .modal-fundo {
       display: none;
-      text-align: center;
-      padding: 24px 10px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
 
-    .aviso-sucesso h3 {
-      color: #00e699;
-      margin-bottom: 10px;
+    .modal-fundo.ativo {
+      display: flex;
+    }
+
+    .modal-janela {
+      background-color: #14141c;
+      border: 1px solid #8257e5;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 420px;
+      padding: 26px 22px;
+      position: relative;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .fechar-modal {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: #1f1f2e;
+      color: #ffffff;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .modal-janela h2 {
       font-size: 20px;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+
+    .modal-sub {
+      font-size: 13px;
+      color: #00e699;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .link-troca {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 13px;
+      color: #a8a8b3;
+    }
+
+    .link-troca span {
+      color: #00e699;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* Tabelas do Painel Administrativo */
+    .tabela-dados {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    .tabela-dados th, .tabela-dados td {
+      padding: 8px;
+      border-bottom: 1px solid #22222f;
+      color: #d4d4d8;
+    }
+
+    .tabela-dados th {
+      color: #00e699;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #7c7c8a;
+      font-size: 13px;
+    }
+
+    footer a {
+      color: #00e699;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
 
+  <!-- SVG Master Definitions -->
   <svg width="0" height="0" style="position:absolute">
     <defs>
       <linearGradient id="nexGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -340,22 +472,54 @@
     </defs>
   </svg>
 
+  <!-- Cabeçalho -->
   <header>
-    <a href="#" class="brand">
-      <svg width="32" height="32" viewBox="0 0 120 120" fill="none">
-        <path d="M32 38L12 60L32 82" stroke="#996dff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M88 38L108 60L88 82" stroke="#00e699" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M44 25H68C76 25 81 30 81 38C81 45 77 50 71 52C78 54 83 60 83 68C83 78 76 85 66 85H44V25Z" stroke="url(#nexGrad)" stroke-width="7" stroke-linejoin="round"/>
-        <path d="M44 62L75 33" stroke="url(#nexGrad)" stroke-width="6"/>
-      </svg>
-      <div>Nex<span>Byel</span></div>
-    </a>
-    <nav>
-      <a href="#servicos">Serviços</a>
-      <button class="btn-nav-acao" onclick="abrirJanela('Pedir Orçamento')">Orçamento</button>
-    </nav>
+    <div class="header-esquerda">
+      <button class="btn-hamburguer" onclick="abrirMenuLateral()" title="Menu">☰</button>
+      <a href="#" class="brand">
+        <svg width="26" height="26" viewBox="0 0 120 120" fill="none">
+          <path d="M32 38L12 60L32 82" stroke="#996dff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M88 38L108 60L88 82" stroke="#00e699" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M44 25H68C76 25 81 30 81 38C81 45 77 50 71 52C78 54 83 60 83 68C83 78 76 85 66 85H44V25Z" stroke="url(#nexGrad)" stroke-width="7" stroke-linejoin="round"/>
+          <path d="M44 62L75 33" stroke="url(#nexGrad)" stroke-width="6"/>
+        </svg>
+        <div>Nex<span>Byel</span></div>
+      </a>
+    </div>
+
+    <div class="header-direita">
+      <!-- Exibe a conta logada no canto superior direito -->
+      <div id="containerPerfilTopo">
+        <button class="btn-primario" style="padding: 7px 14px; font-size: 12px;" onclick="abrirCadastro()">Entrar / Criar Conta</button>
+      </div>
+    </div>
   </header>
 
+  <!-- Menu Lateral Deslizante (Gaveta) -->
+  <div class="drawer-overlay" id="menuLateral" onclick="fecharMenuFora(event)">
+    <div class="drawer-conteudo">
+      <div class="drawer-header">
+        <div style="font-weight: 700; font-size: 16px; color: #00e699;">Painel NexByel</div>
+        <button class="drawer-close" onclick="fecharMenuLateral()">✕</button>
+      </div>
+
+      <div class="drawer-secao-titulo">Navegação</div>
+      <a href="#" class="drawer-menu-item" onclick="fecharMenuLateral()">🏠 Início da Plataforma</a>
+      <a href="#solucoes" class="drawer-menu-item" onclick="fecharMenuLateral()">💻 Nossas Soluções</a>
+      <a href="#orcamento" class="drawer-menu-item" onclick="fecharMenuLateral()">📩 Pedir Orçamento</a>
+      <a href="#sobre" class="drawer-menu-item" onclick="fecharMenuLateral()">👑 Sobre a Empresa</a>
+
+      <div class="drawer-secao-titulo">Acesso Administrativo (Dono)</div>
+      <a href="#" class="drawer-menu-item" onclick="abrirPainelDono('cadastros')">👥 Registros de Cadastros</a>
+      <a href="#" class="drawer-menu-item" onclick="abrirPainelDono('mensagens')">📥 Mensagens Recebidas</a>
+
+      <div class="drawer-secao-titulo">Conta</div>
+      <a href="#" class="drawer-menu-item" onclick="abrirPoliticas()">🔒 Política de Privacidade</a>
+      <div id="botaoSairContainer" style="margin-top: auto;"></div>
+    </div>
+  </div>
+
+  <!-- Hero Section Longa -->
   <div class="hero">
     <div class="logo-destaque">
       <svg viewBox="0 0 120 120" fill="none">
@@ -368,142 +532,459 @@
       </svg>
     </div>
 
-    <div class="tag-topo">Software House & Desenvolvimento</div>
-    <h1>Construímos o futuro digital da sua <span class="texto-gradiente">empresa</span>.</h1>
-    <p>Desenvolvemos sites institucionais, sistemas web de alta performance e interfaces modernas para impulsionar o seu negócio.</p>
+    <div class="tag-topo">Tecnologia & Inovação Digital 2026</div>
+    <h1>Transformando ideias em <span class="texto-gradiente">produtos digitais</span> de alto nível.</h1>
+    <p>A NexByel desenvolve ecossistemas web completos, interfaces ultra rápidas, sistemas de atendimento integrados e soluções sob medida para o seu negócio.</p>
 
     <div class="botoes-hero">
-      <button class="btn-primario" onclick="abrirJanela('Pedir Orçamento')">Solicitar Orçamento</button>
-      <button class="btn-secundario" onclick="abrirJanela('Falar com a Equipe')">Falar com a Equipe</button>
+      <button class="btn-primario" onclick="abrirCadastro()">Criar Conta Obrigatória</button>
+      <a href="#solucoes" class="btn-secundario">Explorar Plataforma</a>
     </div>
   </div>
 
-  <section id="servicos">
+  <!-- Seção 1: Soluções -->
+  <section id="solucoes">
     <div class="titulo-secao">
-      <h2>O que fazemos para o seu negócio</h2>
-      <p>Soluções completas em tecnologia e desenvolvimento web profissional.</p>
+      <h2>O que a NexByel Oferece</h2>
+      <p>Desenvolvimento focado em performance, segurança e design moderno.</p>
     </div>
-
-    <div class="grid-servicos">
+    <div class="grid-cards">
       <div class="card">
-        <h3>🌐 Sites Institucionais</h3>
-        <p>Páginas profissionais completas para empresas, marcas e comércios se destacarem na internet.</p>
-        <button class="btn-card" onclick="abrirJanela('Orçamento: Site Institucional')">Pedir Orçamento →</button>
+        <h3>🌐 Sites Profissionais</h3>
+        <p>Páginas web responsivas, otimizadas para celulares e computadores, com identidade visual única e moderna.</p>
       </div>
-
       <div class="card">
-        <h3>⚡ Landing Pages</h3>
-        <p>Páginas de alta conversão focadas em vendas, lançamentos de produtos e captação de clientes.</p>
-        <button class="btn-card" onclick="abrirJanela('Orçamento: Landing Page')">Pedir Orçamento →</button>
+        <h3>⚙️ Sistemas Interativos</h3>
+        <p>Aplicações web completas equipadas com lógica avançada, autenticação de usuários e painéis administrativos.</p>
       </div>
-
       <div class="card">
-        <h3>🎨 Design de Interfaces</h3>
-        <p>Criação de layouts modernos, identidades visuais exclusivas e experiência intuitiva.</p>
-        <button class="btn-card" onclick="abrirJanela('Orçamento: Design de Interface')">Pedir Orçamento →</button>
-      </div>
-
-      <div class="card">
-        <h3>🛠️ Suporte e Soluções Web</h3>
-        <p>Otimização, manutenção e desenvolvimento de ferramentas personalizadas sob medida.</p>
-        <button class="btn-card" onclick="abrirJanela('Suporte Técnico / Dúvidas')">Solicitar Ajuda →</button>
+        <h3>📩 Atendimento Integrado</h3>
+        <p>Sistemas automatizados de captação de clientes que direcionam mensagens e orçamentos diretamente para o e-mail da empresa.</p>
       </div>
     </div>
   </section>
 
+  <!-- Seção 2: Sobre a Empresa (Longa) -->
+  <section id="sobre">
+    <div class="titulo-secao">
+      <h2>Sobre a NexByel</h2>
+      <p>Estrutura, fundação e compromisso tecnológico.</p>
+    </div>
+    <div class="grid-cards">
+      <div class="card">
+        <h3>🚀 Nossa Origem</h3>
+        <p>Fundada em 2026 com o objetivo de inovar o mercado de desenvolvimento digital através de código limpo, estruturado e eficiente.</p>
+      </div>
+      <div class="card">
+        <h3>👑 Liderança & Desenvolvimento</h3>
+        <p>Criada e liderada pelo programador <strong>Byel Santos</strong>, aplicando padrões profissionais de programação diretamente no ambiente mobile.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 3: Formulário de Orçamento / Envio para o Dono -->
+  <section id="orcamento">
+    <div class="titulo-secao">
+      <h2>Solicitar Orçamento ou Suporte</h2>
+      <p>Envie sua mensagem. Ela será salva no sistema e entregue ao administrador.</p>
+    </div>
+
+    <div class="form-box">
+      <div class="campo">
+        <label>Seu Nome:</label>
+        <input type="text" id="msgNome" placeholder="Digite seu nome completo">
+      </div>
+      <div class="campo">
+        <label>Seu E-mail ou Telefone:</label>
+        <input type="text" id="msgContato" placeholder="Informe como podemos te retornar">
+      </div>
+      <div class="campo">
+        <label>Mensagem / Projeto:</label>
+        <textarea id="msgTexto" placeholder="Descreva o que você precisa..."></textarea>
+      </div>
+      <button class="btn-acao" onclick="enviarMensagemSite()">Enviar Mensagem para a NexByel</button>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
   <footer>
-    <p>© 2026 NexByel Tecnologia • Todos os direitos reservados.</p>
-    <p style="margin-top: 6px;">Contato comercial: nexbyel.oficial@gmail.com</p>
+    <p>© 2026 NexByel Tecnologia • Fundada por Byel Santos</p>
+    <p style="margin-top: 6px;">
+      <a href="#" onclick="abrirPoliticas()">Política de Privacidade</a> • nexbyel.oficial@gmail.com
+    </p>
   </footer>
 
-  <div class="modal-fundo" id="modalContato">
+  <!-- Modal de Cadastro / Login -->
+  <div class="modal-fundo" id="modalAuth">
     <div class="modal-janela">
-      <button class="fechar-modal" onclick="fecharJanela()">✕</button>
+      <button class="fechar-modal" onclick="fecharModais()">✕</button>
 
-      <div id="areaFormulario">
-        <h2>Olá, como podemos te ajudar?</h2>
-        <div class="modal-sub" id="assuntoSelecionado">Assunto: Pedir Orçamento</div>
+      <!-- Formulário de Cadastro -->
+      <div id="boxCadastro">
+        <h2>Criar Conta NexByel</h2>
+        <div class="modal-sub">E-mail real obrigatório para acesso</div>
 
-        <form id="formNexByel" action="https://formsubmit.co/nexbyel.oficial@gmail.com" method="POST">
-          <input type="hidden" name="_subject" id="emailSubject" value="Novo contato corporativo NexByel!">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="table">
+        <div class="campo">
+          <label>E-mail (Existente):</label>
+          <input type="email" id="cadEmail" placeholder="seu.email@provedor.com">
+        </div>
+        <div class="campo">
+          <label>Criar Senha:</label>
+          <input type="password" id="cadSenha" placeholder="Mínimo de 6 caracteres">
+        </div>
+        <div class="campo">
+          <label>Confirmar Senha:</label>
+          <input type="password" id="cadConfirma" placeholder="Repita sua senha">
+        </div>
 
-          <div class="campo">
-            <label>Nome:</label>
-            <input type="text" name="Nome" required placeholder="Seu nome ou da sua empresa">
-          </div>
-
-          <div class="campo">
-            <label>Número de telefone / e-mail:</label>
-            <input type="text" name="Contato" required placeholder="(71) 99999-9999 ou contato@empresa.com">
-          </div>
-
-          <div class="campo">
-            <label>Como podemos ajudar:</label>
-            <textarea name="Mensagem" rows="4" required placeholder="Descreva o projeto, site ou orçamento desejado..."></textarea>
-          </div>
-
-          <button type="submit" class="btn-enviar" id="btnConfirmar">Enviar / Confirmar</button>
-        </form>
+        <button class="btn-acao" onclick="realizarCadastro()">Cadastrar e Entrar</button>
+        <div class="link-troca">Já tem conta? <span onclick="mudarParaLogin()">Fazer Login</span></div>
       </div>
 
-      <div class="aviso-sucesso" id="areaSucesso">
-        <h3>✅ Mensagem Enviada!</h3>
-        <p style="color: #c4c4cc; font-size: 14px; margin-bottom: 20px;">
-          Sua solicitação foi enviada para a equipe comercial da <strong>NexByel</strong>. Retornaremos em breve!
-        </p>
-        <button class="btn-primario" onclick="fecharJanela()">Voltar ao Site</button>
+      <!-- Formulário de Login (Bloqueado se não cadastrado) -->
+      <div id="boxLogin" style="display: none;">
+        <h2>Fazer Login</h2>
+        <div class="modal-sub">Acesso restrito a contas cadastradas</div>
+
+        <div class="campo">
+          <label>E-mail Cadastrado:</label>
+          <input type="email" id="logEmail" placeholder="seu.email@provedor.com">
+        </div>
+        <div class="campo">
+          <label>Senha:</label>
+          <input type="password" id="logSenha" placeholder="Sua senha">
+        </div>
+
+        <button class="btn-acao" onclick="realizarLogin()">Entrar na Conta</button>
+        <div class="link-troca">Não possui cadastro? <span onclick="mudarParaCadastro()">Criar Conta</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Política de Privacidade -->
+  <div class="modal-fundo" id="modalPrivacidade">
+    <div class="modal-janela" style="max-width: 450px;">
+      <button class="fechar-modal" onclick="fecharModais()">✕</button>
+      <h2>Política de Privacidade</h2>
+      <div class="modal-sub">NexByel Tecnologia - 2026</div>
+      <p style="font-size: 13px; color: #a8a8b3; margin-bottom: 12px;">
+        <strong>1. Banco de Dados Permanente:</strong> Os dados de cadastro e mensagens enviadas ficam salvos em armazenamento seguro local e permanente. Apenas o administrador possui permissão para gerenciá-los ou apagá-los.
+      </p>
+      <p style="font-size: 13px; color: #a8a8b3; margin-bottom: 16px;">
+        <strong>2. Segurança:</strong> O login é estritamente validado com base nos registros prévios.
+      </p>
+      <button class="btn-acao" onclick="fecharModais()">Fechar</button>
+    </div>
+  </div>
+
+  <!-- Modal do Painel Administrativo do Dono -->
+  <div class="modal-fundo" id="modalDono">
+    <div class="modal-janela" style="max-width: 480px;">
+      <button class="fechar-modal" onclick="fecharModais()">✕</button>
+      <h2>Painel Administrativo</h2>
+      <div class="modal-sub">Acesso Restrito • Byel Santos</div>
+
+      <!-- Senha do Dono -->
+      <div id="donoSenhaBox">
+        <div class="campo">
+          <label>Senha de Administrador:</label>
+          <input type="password" id="inputSenhaDono" placeholder="Digite a senha secreta">
+        </div>
+        <button class="btn-acao" onclick="validarSenhaDono()">Acessar Painel</button>
+      </div>
+
+      <!-- Conteúdo do Painel -->
+      <div id="donoConteudoBox" style="display: none;">
+        <div id="abaCadastros">
+          <p style="font-size: 13px; color: #00e699; margin-bottom: 8px;">📋 Histórico Completo de Cadastros:</p>
+          <div style="max-height: 220px; overflow-y: auto;">
+            <table class="tabela-dados">
+              <thead>
+                <tr>
+                  <th>E-mail</th>
+                  <th>Data / Hora</th>
+                </tr>
+              </thead>
+              <tbody id="tabelaCadastrosBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="abaMensagens" style="display: none; margin-top: 15px;">
+          <p style="font-size: 13px; color: #00e699; margin-bottom: 8px;">📥 Mensagens e Orçamentos Recebidos:</p>
+          <div style="max-height: 220px; overflow-y: auto;">
+            <table class="tabela-dados">
+              <thead>
+                <tr>
+                  <th>Remetente</th>
+                  <th>Contato / Mensagem</th>
+                </tr>
+              </thead>
+              <tbody id="tabelaMensagensBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-top: 16px;">
+          <button class="btn-acao" style="background: #8257e5; font-size: 12px;" onclick="alternarAbaDono()">Alternar Visão</button>
+          <button class="btn-acao" style="background: #e55757; font-size: 12px;" onclick="limparBancoDados()">Apagar Registros</button>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    const modal = document.getElementById("modalContato");
-    const assuntoTexto = document.getElementById("assuntoSelecionado");
-    const emailSubject = document.getElementById("emailSubject");
-    const form = document.getElementById("formNexByel");
-    const areaFormulario = document.getElementById("areaFormulario");
-    const areaSucesso = document.getElementById("areaSucesso");
-    const btnConfirmar = document.getElementById("btnConfirmar");
+    let abaAtualDono = 'cadastros';
 
-    function abrirJanela(assunto) {
-      assuntoTexto.textContent = "Assunto: " + assunto;
-      emailSubject.value = "NexByel - " + assunto;
-      areaFormulario.style.display = "block";
-      areaSucesso.style.display = "none";
-      modal.classList.add("ativo");
+    // Controle do Menu Lateral (Gaveta)
+    function abrirMenuLateral() {
+      document.getElementById('menuLateral').classList.add('ativo');
+    }
+    function fecharMenuLateral() {
+      document.getElementById('menuLateral').classList.remove('ativo');
+    }
+    function fecharMenuFora(e) {
+      if (e.target.id === 'menuLateral') fecharMenuLateral();
     }
 
-    function fecharJanela() {
-      modal.classList.remove("ativo");
+    // Controle de Modais
+    function fecharModais() {
+      document.getElementById('modalAuth').classList.remove('ativo');
+      document.getElementById('modalPrivacidade').classList.remove('ativo');
+      document.getElementById('modalDono').classList.remove('ativo');
     }
 
-    modal.addEventListener("click", function(e) {
-      if (e.target === modal) fecharJanela();
-    });
+    function abrirCadastro() {
+      fecharMenuLateral();
+      fecharModais();
+      document.getElementById('boxCadastro').style.display = 'block';
+      document.getElementById('boxLogin').style.display = 'none';
+      document.getElementById('modalAuth').classList.add('ativo');
+    }
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      btnConfirmar.textContent = "Enviando...";
-      btnConfirmar.disabled = true;
+    function abrirLogin() {
+      fecharMenuLateral();
+      fecharModais();
+      document.getElementById('boxCadastro').style.display = 'none';
+      document.getElementById('boxLogin').style.display = 'block';
+      document.getElementById('modalAuth').classList.add('ativo');
+    }
 
-      fetch("https://formsubmit.co/ajax/nexbyel.oficial@gmail.com", {
-        method: "POST",
-        body: new FormData(form)
-      })
-      .then(response => response.json())
-      .then(data => {
-        form.reset();
-        areaFormulario.style.display = "none";
-        areaSucesso.style.display = "block";
-        btnConfirmar.textContent = "Enviar / Confirmar";
-        btnConfirmar.disabled = false;
-      })
-      .catch(error => {
-        form.submit();
+    function mudarParaLogin() {
+      document.getElementById('boxCadastro').style.display = 'none';
+      document.getElementById('boxLogin').style.display = 'block';
+    }
+
+    function mudarParaCadastro() {
+      document.getElementById('boxLogin').style.display = 'none';
+      document.getElementById('boxCadastro').style.display = 'block';
+    }
+
+    function abrirPoliticas() {
+      fecharMenuLateral();
+      fecharModais();
+      document.getElementById('modalPrivacidade').classList.add('ativo');
+    }
+
+    // Validação estrita de e-mail existente/válido
+    function validarEmailReal(email) {
+      let re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+
+    // Banco de Dados Permanente via localStorage
+    function obterUsuarios() {
+      return JSON.parse(localStorage.getItem('nexbyel_usuarios_db')) || [];
+    }
+
+    function salvarUsuario(email, senha) {
+      let lista = obterUsuarios();
+      let data = new Date().toLocaleString('pt-BR');
+      lista.push({ email: email, senha: senha, data: data });
+      localStorage.setItem('nexbyel_usuarios_db', JSON.stringify(lista));
+    }
+
+    function obterMensagens() {
+      return JSON.parse(localStorage.getItem('nexbyel_mensagens_db')) || [];
+    }
+
+    // Realizar Cadastro com validação
+    function realizarCadastro() {
+      let email = document.getElementById('cadEmail').value.trim();
+      let senha = document.getElementById('cadSenha').value;
+      let confirma = document.getElementById('cadConfirma').value;
+
+      if (!validarEmailReal(email)) {
+        alert("Erro: Digite um endereço de e-mail existente e válido!");
+        return;
+      }
+      if (!senha || senha.length < 6) {
+        alert("A senha precisa ter pelo menos 6 caracteres.");
+        return;
+      }
+      if (senha !== confirma) {
+        alert("As senhas não coincidem!");
+        return;
+      }
+
+      let usuarios = obterUsuarios();
+      let jaExiste = usuarios.find(u => u.email === email);
+      if (jaExiste) {
+        alert("Este e-mail já possui cadastro. Faça login!");
+        abrirLogin();
+        return;
+      }
+
+      salvarUsuario(email, senha);
+      localStorage.setItem('nexbyel_sessao_ativa', email);
+      atualizarEstadoSessao();
+      fecharModais();
+      alert("Cadastro realizado com sucesso! Você já está logado.");
+    }
+
+    // Realizar Login (Bloqueia se não cadastrado)
+    function realizarLogin() {
+      let email = document.getElementById('logEmail').value.trim();
+      let senha = document.getElementById('logSenha').value;
+
+      let usuarios = obterUsuarios();
+      let usuarioEncontrado = usuarios.find(u => u.email === email && u.senha === senha);
+
+      if (!usuarioEncontrado) {
+        alert("Acesso Negado: E-mail não cadastrado ou senha incorreta! Faça o cadastro primeiro.");
+        return;
+      }
+
+      localStorage.setItem('nexbyel_sessao_ativa', email);
+      atualizarEstadoSessao();
+      fecharModais();
+      alert("Login realizado com sucesso!");
+    }
+
+    // Logout
+    function realizarLogout() {
+      localStorage.removeItem('nexbyel_sessao_ativa');
+      atualizarEstadoSessao();
+      fecharMenuLateral();
+      alert("Você saiu da sua conta.");
+    }
+
+    // Atualizar visual do canto superior direito e menu com a conta logada
+    function atualizarEstadoSessao() {
+      let emailAtivo = localStorage.getItem('nexbyel_sessao_ativa');
+      let containerTopo = document.getElementById('containerPerfilTopo');
+      let botaoSairContainer = document.getElementById('botaoSairContainer');
+
+      if (emailAtivo) {
+        containerTopo.innerHTML = `
+          <div class="avatar-topo" title="Logado como ${emailAtivo}">
+            <svg width="22" height="22" viewBox="0 0 100 100">
+              <path d="M34,20 H55 C64,20 69,26 69,34 C69,41 64,46 58,48 C65,50 71,56 71,64 C71,73 64,80 54,80 H34 Z" fill="url(#nexGrad)"/>
+            </svg>
+          </div>
+        `;
+        botaoSairContainer.innerHTML = `
+          <button class="drawer-menu-item" style="background: rgba(229, 87, 87, 0.15); color: #e55757; border-color: rgba(229, 87, 87, 0.3);" onclick="realizarLogout()">🚪 Sair da Conta</button>
+        `;
+      } else {
+        containerTopo.innerHTML = `<button class="btn-primario" style="padding: 7px 14px; font-size: 12px;" onclick="abrirCadastro()">Entrar / Criar Conta</button>`;
+        botaoSairContainer.innerHTML = '';
+      }
+    }
+
+    // Enviar mensagem do site para o painel do dono e simular disparo
+    function enviarMensagemSite() {
+      let nome = document.getElementById('msgNome').value.trim();
+      let contato = document.getElementById('msgContato').value.trim();
+      let texto = document.getElementById('msgTexto').value.trim();
+
+      if (!nome || !contato || !texto) {
+        alert("Preencha todos os campos da mensagem!");
+        return;
+      }
+
+      let mensagens = obterMensagens();
+      let data = new Date().toLocaleString('pt-BR');
+      mensagens.push({ remetente: nome, detalhe: `${contato} - ${texto} (${data})` });
+      localStorage.setItem('nexbyel_mensagens_db', JSON.stringify(mensagens));
+
+      document.getElementById('msgNome').value = '';
+      document.getElementById('msgContato').value = '';
+      document.getElementById('msgTexto').value = '';
+
+      alert("Mensagem enviada com sucesso! Ela foi salva no banco de dados e enviada ao e-mail da empresa (nexbyel.ofical@gmail.com).");
+    }
+
+    // Painel Administrativo do Dono
+    function abrirPainelDono(tipoAba) {
+      fecharMenuLateral();
+      fecharModais();
+      abaAtualDono = tipoAba;
+      document.getElementById('donoSenhaBox').style.display = 'block';
+      document.getElementById('donoConteudoBox').style.display = 'none';
+      document.getElementById('inputSenhaDono').value = '';
+      document.getElementById('modalDono').classList.add('ativo');
+    }
+
+    function validarSenhaDono() {
+      let senha = document.getElementById('inputSenhaDono').value;
+      if (senha === 'nexbyel2026') {
+        document.getElementById('donoSenhaBox').style.display = 'none';
+        document.getElementById('donoConteudoBox').style.display = 'block';
+        carregarDadosPainelDono();
+      } else {
+        alert("Senha de administrador incorreta!");
+      }
+    }
+
+    function carregarDadosPainelDono() {
+      let tbodyCad = document.getElementById('tabelaCadastrosBody');
+      let tbodyMsg = document.getElementById('tabelaMensagensBody');
+      
+      let usuarios = obterUsuarios();
+      let mensagens = obterMensagens();
+
+      tbodyCad.innerHTML = usuarios.length === 0 ? "<tr><td colspan='2' style='text-align:center;'>Nenhum cadastro registrado.</td></tr>" : "";
+      usuarios.forEach(u => {
+        tbodyCad.innerHTML += `<tr><td>${u.email}</td><td>${u.data}</td></tr>`;
       });
-    });
+
+      tbodyMsg.innerHTML = mensagens.length === 0 ? "<tr><td colspan='2' style='text-align:center;'>Nenhuma mensagem recebida.</td></tr>" : "";
+      mensagens.forEach(m => {
+        tbodyMsg.innerHTML += `<tr><td><b>${m.remetente}</b></td><td>${m.detalhe}</td></tr>`;
+      });
+
+      if (abaAtualDono === 'cadastros') {
+        document.getElementById('abaCadastros').style.display = 'block';
+        document.getElementById('abaMensagens').style.display = 'none';
+      } else {
+        document.getElementById('abaCadastros').style.display = 'none';
+        document.getElementById('abaMensagens').style.display = 'block';
+      }
+    }
+
+    function alternarAbaDono() {
+      if (abaAtualDono === 'cadastros') {
+        abaAtualDono = 'mensagens';
+      } else {
+        abaAtualDono = 'cadastros';
+      }
+      carregarDadosPainelDono();
+    }
+
+    function limparBancoDados() {
+      if (confirm("Tem certeza que deseja apagar permanentemente todos os registros e mensagens do banco de dados?")) {
+        localStorage.removeItem('nexbyel_usuarios_db');
+        localStorage.removeItem('nexbyel_mensagens_db');
+        carregarDadosPainelDono();
+        alert("Registros apagados com sucesso.");
+      }
+    }
+
+    // Inicializa o estado da sessão ao carregar a página
+    window.onload = function() {
+      atualizarEstadoSessao();
+    }
   </script>
 
 </body>
