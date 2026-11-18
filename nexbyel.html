@@ -602,7 +602,7 @@
         <label>Mensagem / Projeto:</label>
         <textarea id="msgTexto" placeholder="Descreva o que você precisa..."></textarea>
       </div>
-      <button class="btn-acao" onclick="enviarMensagemSite()">Enviar Mensagem para a NexByel</button>
+      <button class="btn-acao" id="btnEnviarMsg" onclick="enviarMensagemSite()">Enviar Mensagem para a NexByel</button>
     </div>
   </section>
 
@@ -892,27 +892,49 @@
       }
     }
 
-    // Enviar mensagem do site para o painel do dono e simular disparo
+    // Enviar mensagem do site para o painel do dono E para nexbyel.oficial@gmail.com
     function enviarMensagemSite() {
       let nome = document.getElementById('msgNome').value.trim();
       let contato = document.getElementById('msgContato').value.trim();
       let texto = document.getElementById('msgTexto').value.trim();
+      let btn = document.getElementById('btnEnviarMsg');
 
       if (!nome || !contato || !texto) {
         alert("Preencha todos os campos da mensagem!");
         return;
       }
 
+      // Salva no painel interno do site
       let mensagens = obterMensagens();
       let data = new Date().toLocaleString('pt-BR');
       mensagens.push({ remetente: nome, detalhe: `${contato} - ${texto} (${data})` });
       localStorage.setItem('nexbyel_mensagens_db', JSON.stringify(mensagens));
 
-      document.getElementById('msgNome').value = '';
-      document.getElementById('msgContato').value = '';
-      document.getElementById('msgTexto').value = '';
+      // Dispara para o e-mail oficial via FormSubmit em segundo plano
+      btn.innerText = "Enviando...";
+      btn.disabled = true;
 
-      alert("Mensagem enviada com sucesso! Ela foi salva no banco de dados e enviada ao e-mail da empresa (nexbyel.ofical@gmail.com).");
+      fetch("https://formsubmit.co/ajax/nexbyel.oficial@gmail.com", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: "Novo Orçamento / Contato - Site NexByel",
+          Nome: nome,
+          Contato: contato,
+          Mensagem: texto
+        })
+      })
+      .finally(() => {
+        document.getElementById('msgNome').value = '';
+        document.getElementById('msgContato').value = '';
+        document.getElementById('msgTexto').value = '';
+        btn.innerText = "Enviar Mensagem para a NexByel";
+        btn.disabled = false;
+        alert("Mensagem enviada com sucesso! Ela foi salva no painel do site e enviada para nexbyel.oficial@gmail.com.");
+      });
     }
 
     // Painel Administrativo do Dono
