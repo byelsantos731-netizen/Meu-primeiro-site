@@ -23,6 +23,120 @@
       overflow-x: hidden;
     }
 
+    body.preview-open > *:not(#sitePreviewOverlay):not(.modal-backdrop):not(.edit-topbar):not(#toastBanner) {
+      display: none !important;
+    }
+
+    /* Visualizador de Site Pronto (Amostra para o Cliente) */
+    .site-preview-overlay {
+      display: none;
+      min-height: 100vh;
+      background: #0b0b12;
+      color: #f4f4f8;
+    }
+
+    .site-preview-overlay.open {
+      display: block;
+    }
+
+    .preview-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 300;
+      background: rgba(12, 12, 20, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #26263a;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .preview-topbar-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: #00e699;
+      background: rgba(0, 230, 153, 0.14);
+      border: 1px solid rgba(0, 230, 153, 0.35);
+      padding: 5px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .btn-back-nexbyel {
+      background: #7c6cf0;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 9px 13px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .sample-site-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 28px 18px 64px;
+    }
+
+    .sample-hero {
+      border-radius: 20px;
+      padding: 28px 20px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .sample-hero h2 {
+      font-size: 28px;
+      line-height: 1.18;
+      margin: 10px 0;
+      color: #ffffff;
+    }
+
+    .sample-hero p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.84);
+      margin-bottom: 18px;
+    }
+
+    .sample-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .sample-box {
+      background: #12121d;
+      border: 1px solid #232336;
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sample-box h3 {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .sample-box p {
+      font-size: 13px;
+      color: #9b9bae;
+    }
+
+    .sample-price {
+      font-size: 16px;
+      font-weight: 800;
+      color: #00e699;
+      white-space: nowrap;
+    }
+
     /* Banner de Confirmação no Topo */
     .toast-banner {
       display: none;
@@ -916,6 +1030,21 @@
       resize: vertical;
     }
 
+    .payment-box {
+      background: #0b0b12;
+      border: 1px solid #232336;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .payment-box-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #00e699;
+      margin-bottom: 8px;
+    }
+
     .switch-link {
       margin-top: 12px;
       text-align: center;
@@ -976,6 +1105,26 @@
       align-items: center;
       gap: 8px;
       margin-bottom: 6px;
+    }
+
+    .order-pay-row {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #1d1d2d;
+      font-size: 12px;
+      color: #c4c4d6;
+    }
+
+    .order-pay-select {
+      width: 100%;
+      margin-top: 6px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: #09090f;
+      color: #00e699;
+      border: 1px solid #2b2b42;
+      font-size: 12px;
+      font-weight: 600;
     }
 
     .admin-table {
@@ -1053,6 +1202,15 @@
     </defs>
   </svg>
 
+  <!-- Site Pronto em Tela Cheia (Amostra para o Cliente) -->
+  <div class="site-preview-overlay" id="sitePreviewOverlay">
+    <div class="preview-topbar">
+      <span class="preview-topbar-badge" id="previewTopBadge">Amostra NexByel</span>
+      <button type="button" class="btn-back-nexbyel" onclick="closeReadySite()">← Voltar para NexByel</button>
+    </div>
+    <div class="sample-site-wrap" id="sampleSiteContainer"></div>
+  </div>
+
   <!-- Barra Flutuante do Modo EDIT exclusivo do dono -->
   <div class="edit-topbar" id="editTopbar">
     <span>MODO EDIT ATIVO (Dono)</span>
@@ -1081,7 +1239,7 @@
 
   <!-- Banner de Sucesso -->
   <div class="toast-banner" id="toastBanner">
-    <span id="toastText">Sucesso! Você entrou na sua conta.</span>
+    <span id="toastText">Sucesso! Você entrou na sua conta NexByel.</span>
     <button class="toast-close" onclick="hideToast()" aria-label="Fechar aviso">✕</button>
   </div>
 
@@ -1183,8 +1341,8 @@
   <!-- Portfólio / Projetos Modelo -->
   <section id="portfolio">
     <div class="section-tag">Portfólio</div>
-    <h2 class="section-title">Projetos modelo desenvolvidos pela NexByel</h2>
-    <p class="section-sub">Veja exemplos reais de estrutura, velocidade e acabamento visual que entregamos.</p>
+    <h2 class="section-title">Sites prontos de amostra para mostrar ao cliente</h2>
+    <p class="section-sub">Abra um site pronto na tela para apresentar ao cliente como o projeto funciona na prática.</p>
 
     <div class="cards-stack">
       <div class="portfolio-card">
@@ -1192,12 +1350,12 @@
           <div class="preview-browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
           <span class="preview-tag">Barbearia &amp; Estilo</span>
           <div class="preview-title">Navalha de Ouro Barbearia</div>
-          <div class="preview-desc">Agendamento rápido, tabela de cortes e localização integrada.</div>
+          <div class="preview-desc">Site pronto com tabela de cortes, horários e botão de pedido.</div>
         </div>
         <div class="portfolio-body">
-          <h3>Site para Barbearia</h3>
-          <p>Visual escuro sofisticado com botão de reserva de horário direto pelo celular.</p>
-          <button class="card-link" onclick="openPortfolioDemo('Barbearia')">Ver demonstração →</button>
+          <h3>Site Pronto: Barbearia</h3>
+          <p>Mostre ao cliente um site de barbearia completo com serviços, preços e agendamento.</p>
+          <button class="card-link" onclick="openReadySite('Barbearia')">Abrir site pronto →</button>
         </div>
       </div>
 
@@ -1206,12 +1364,12 @@
           <div class="preview-browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
           <span class="preview-tag">E-commerce &amp; Games</span>
           <div class="preview-title">NexStore Gamer Gear</div>
-          <div class="preview-desc">Vitrine de periféricos, carrinho interativo e cálculo de pedido.</div>
+          <div class="preview-desc">Site pronto com vitrine gamer, preços e simulação de compra.</div>
         </div>
         <div class="portfolio-body">
-          <h3>Loja Gamer</h3>
-          <p>Catálogo dinâmico com destaque neon, filtros de produtos e checkout ágil.</p>
-          <button class="card-link" onclick="openPortfolioDemo('Loja Gamer')">Ver demonstração →</button>
+          <h3>Site Pronto: Loja Gamer</h3>
+          <p>Mostre ao cliente uma loja virtual gamer com produtos, destaque e pedido direto.</p>
+          <button class="card-link" onclick="openReadySite('Loja Gamer')">Abrir site pronto →</button>
         </div>
       </div>
 
@@ -1220,12 +1378,12 @@
           <div class="preview-browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
           <span class="preview-tag">Empresa &amp; Negócios</span>
           <div class="preview-title">Apex Soluções Empresariais</div>
-          <div class="preview-desc">Apresentação institucional, equipe, serviços e captação de leads.</div>
+          <div class="preview-desc">Site pronto institucional com serviços, diferenciais e proposta.</div>
         </div>
         <div class="portfolio-body">
-          <h3>Site Corporativo</h3>
-          <p>Layout limpo e profissional focado em transmitir autoridade e fechar contratos.</p>
-          <button class="card-link" onclick="openPortfolioDemo('Corporativo')">Ver demonstração →</button>
+          <h3>Site Pronto: Corporativo</h3>
+          <p>Mostre ao cliente uma página empresarial limpa para apresentar serviços e fechar negócios.</p>
+          <button class="card-link" onclick="openReadySite('Corporativo')">Abrir site pronto →</button>
         </div>
       </div>
     </div>
@@ -1235,13 +1393,13 @@
   <section id="planos">
     <div class="section-tag">Planos e Preços</div>
     <h2 class="section-title">Escolha o pacote ideal para o seu projeto</h2>
-    <p class="section-sub">Valores transparentes e entrega sob medida. Clique no pacote para pedir o seu.</p>
+    <p class="section-sub">Valores transparentes, opção de parcelamento e entrega sob medida. Clique no pacote para pedir o seu.</p>
 
     <div class="cards-stack">
       <div class="plan-card">
         <div class="plan-name">Site Básico / Landing Page</div>
         <p style="font-size:14px; color:#9b9bae;">Ideal para divulgar um serviço, perfil ou produto em uma página rápida.</p>
-        <div class="plan-price">R$ 150 <small>pagamento único</small></div>
+        <div class="plan-price">R$ 150 <small>à vista ou parcelado</small></div>
         <ul class="plan-list">
           <li>Página única moderna e responsiva</li>
           <li>Botões diretos para contato e orçamento</li>
@@ -1255,7 +1413,7 @@
         <span class="plan-badge">Mais pedido</span>
         <div class="plan-name">Site Completo Institucional</div>
         <p style="font-size:14px; color:#9b9bae;">Perfeito para empresas e marcas que precisam de presença profissional completa.</p>
-        <div class="plan-price">R$ 320 <small>pagamento único</small></div>
+        <div class="plan-price">R$ 320 <small>à vista ou parcelado</small></div>
         <ul class="plan-list">
           <li>Até 5 seções ou páginas completas</li>
           <li>Portfólio, serviços, sobre e formulário</li>
@@ -1268,7 +1426,7 @@
       <div class="plan-card">
         <div class="plan-name">Loja / Sistema Personalizado</div>
         <p style="font-size:14px; color:#9b9bae;">Para quem precisa de catálogo, área de cliente, cadastro ou painel administrativo.</p>
-        <div class="plan-price">R$ 550 <small>a partir de</small></div>
+        <div class="plan-price">R$ 550 <small>a partir de • parcelável</small></div>
         <ul class="plan-list">
           <li>Painel administrativo exclusivo do dono</li>
           <li>Cadastro e login de clientes</li>
@@ -1327,7 +1485,7 @@
       <div class="sim-result">
         <div class="sim-result-label">Estimativa do projeto</div>
         <div class="sim-result-value" id="simTotalValue">R$ 150</div>
-        <div class="sim-result-note">Valor aproximado. Podemos ajustar detalhes na conversa.</div>
+        <div class="sim-result-note">Valor aproximado e parcelável. Você escolhe a forma de pagamento no pedido.</div>
         <button type="button" class="btn-primary" onclick="sendSimulatedQuote()">Enviar essa estimativa →</button>
       </div>
     </div>
@@ -1354,8 +1512,8 @@
 
       <div class="card">
         <div class="step-num purple">03</div>
-        <h3>Criação</h3>
-        <p>Desenvolvemos e mostramos cada etapa para você aprovar.</p>
+        <h3>Criação e Pagamento</h3>
+        <p>Desenvolvemos o site e você escolhe pagar à vista ou parcelado via Pix, QR Code, Débito ou Crédito.</p>
       </div>
 
       <div class="card">
@@ -1385,11 +1543,11 @@
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Preciso pagar mensalidade?</span>
+          <span>Quais são as formas de pagamento e dá para parcelar?</span>
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-answer">
-          Não! O desenvolvimento do site tem pagamento único. Você só terá custo mensal se quiser contratar um domínio próprio (.com.br) ou hospedagem paga; caso contrário, publicamos gratuitamente.
+          Sim, pode parcelar! Aceitamos <strong>Pix</strong>, <strong>QR Code</strong>, <strong>Cartão de Débito</strong> e <strong>Cartão de Crédito</strong> (à vista ou parcelado), e você pode escolher ou ajustar sua forma de pagamento na criação do site ou na Área do Cliente.
         </div>
       </div>
 
@@ -1409,7 +1567,7 @@
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-answer">
-          Basta criar sua conta aqui na NexByel com o mesmo e-mail usado no pedido e clicar em "Meus Pedidos" no topo da página para ver o status atualizado em tempo real.
+          Você pode criar sua conta aqui na NexByel com o mesmo e-mail usado no pedido e clicar em "Meus Pedidos" no topo da página para ver o status e escolher a forma de pagamento.
         </div>
       </div>
     </div>
@@ -1439,7 +1597,7 @@
   <section id="contato">
     <div class="section-tag">Contato</div>
     <h2 class="section-title">Fale com a NexByel</h2>
-    <p class="section-sub">Escolha o que você precisa — abrimos uma janela rápida para enviar sua mensagem direto para o nosso e-mail oficial.</p>
+    <p class="section-sub">Escolha o que você precisa — abrimos uma janela rápida para enviar sua mensagem direto para a NexByel.</p>
 
     <div class="cards-stack">
       <div class="card">
@@ -1472,7 +1630,7 @@
     </div>
 
     <div class="contact-email-note">
-      ✉ Ou escreva para <strong>NEXBYEL.OFICIAL@GMAIL.COM</strong>
+      ✉ Canal oficial NexByel: <strong>NEXBYEL.OFICIAL@GMAIL.COM</strong>
     </div>
   </section>
 
@@ -1496,7 +1654,7 @@
     <div class="modal">
       <button class="modal-close" onclick="closeAllModals()" aria-label="Fechar janela">✕</button>
       <h3 id="contactModalTitle">Pedir orçamento</h3>
-      <p>Sua mensagem vai direto para <strong>NEXBYEL.OFICIAL@GMAIL.COM</strong> e fica salva na sua Área do Cliente.</p>
+      <p>Enviado pela <strong>NexByel</strong> para <strong>NEXBYEL.OFICIAL@GMAIL.COM</strong> e salvo na sua Área do Cliente.</p>
 
       <form id="contactForm" onsubmit="submitContactForm(event)">
         <div class="field">
@@ -1507,24 +1665,37 @@
           <label for="clientEmail">Seu e-mail (para acompanhar o status)</label>
           <input type="email" id="clientEmail" required placeholder="seu@email.com" />
         </div>
+
+        <div class="payment-box">
+          <div class="payment-box-title">Forma de pagamento (após criação do site)</div>
+          <div class="field" style="margin-bottom:8px;">
+            <label for="paymentMethod">Como deseja pagar?</label>
+            <select id="paymentMethod" onchange="toggleInstallmentsSelect()">
+              <option value="Pix">Pix</option>
+              <option value="QR Code">QR Code</option>
+              <option value="Cartão de Débito">Cartão de Débito</option>
+              <option value="Cartão de Crédito">Cartão de Crédito</option>
+            </select>
+          </div>
+          <div class="field" style="margin-bottom:0;">
+            <label for="paymentInstallments">À vista ou parcelado?</label>
+            <select id="paymentInstallments">
+              <option value="À vista">À vista</option>
+              <option value="Parcelado em 2x">Parcelado em 2x</option>
+              <option value="Parcelado em 3x">Parcelado em 3x</option>
+              <option value="Parcelado em 4x">Parcelado em 4x</option>
+              <option value="Parcelado em 6x">Parcelado em 6x</option>
+            </select>
+          </div>
+        </div>
+
         <div class="field">
           <label for="clientMessage">Detalhes do pedido</label>
           <textarea id="clientMessage" required placeholder="Conte o que precisa..."></textarea>
         </div>
-        <button type="submit" class="btn-primary" id="submitContactBtn">Enviar para NEXBYEL.OFICIAL@GMAIL.COM</button>
+        <button type="submit" class="btn-primary" id="submitContactBtn">Enviar para NexByel</button>
         <div class="status-msg" id="contactStatusMsg"></div>
       </form>
-    </div>
-  </div>
-
-  <!-- Modal de Demonstração do Portfólio -->
-  <div class="modal-backdrop" id="demoModalBackdrop" onclick="handleBackdrop(event, 'demoModalBackdrop')">
-    <div class="modal">
-      <button class="modal-close" onclick="closeAllModals()" aria-label="Fechar janela">✕</button>
-      <h3 id="demoTitle">Demonstração</h3>
-      <p id="demoSubtitle">Modelo visual interativo NexByel</p>
-      <div id="demoContent" style="background:#09090f; border:1px solid #252538; border-radius:14px; padding:16px; margin-bottom:16px; font-size:14px; color:#dcdce8;"></div>
-      <button type="button" class="btn-primary" id="demoOrderBtn">Quero um site parecido →</button>
     </div>
   </div>
 
@@ -1532,8 +1703,8 @@
   <div class="modal-backdrop" id="clientAreaBackdrop" onclick="handleBackdrop(event, 'clientAreaBackdrop')">
     <div class="modal">
       <button class="modal-close" onclick="closeAllModals()" aria-label="Fechar janela">✕</button>
-      <h3>Área do Cliente</h3>
-      <p id="clientAreaSubtitle">Acompanhe o status dos seus pedidos na NexByel.</p>
+      <h3>Área do Cliente • NexByel</h3>
+      <p id="clientAreaSubtitle">Acompanhe o status do seu site e escolha a forma de pagamento.</p>
       <div id="clientOrdersList"></div>
       <button type="button" class="btn-primary" style="margin-top:10px;" onclick="openContactModal('Novo pedido de projeto')">Fazer novo pedido →</button>
     </div>
@@ -1546,13 +1717,13 @@
 
       <div id="stepRegister">
         <h3>Criar conta na NexByel</h3>
-        <p>Exigimos um e-mail real com confirmação por código.</p>
+        <p>Enviaremos um código de confirmação da <strong>NexByel</strong> para o seu e-mail.</p>
         <div class="field">
           <label for="regName">Seu nome</label>
           <input type="text" id="regName" placeholder="Ex: Byel Santos" />
         </div>
         <div class="field">
-          <label for="regEmail">Seu e-mail real</label>
+          <label for="regEmail">Seu e-mail</label>
           <input type="email" id="regEmail" placeholder="exemplo@gmail.com" />
         </div>
         <div class="field">
@@ -1569,8 +1740,8 @@
       </div>
 
       <div id="stepVerify" style="display: none;">
-        <h3>Confirmar e-mail</h3>
-        <p id="verifyInfoText">Digite o código de 6 dígitos enviado para o seu e-mail.</p>
+        <h3>Confirmar e-mail • NexByel</h3>
+        <p id="verifyInfoText">Digite o código de 6 dígitos enviado pela NexByel para o seu e-mail.</p>
         <div class="field">
           <label for="verifyCodeInput">Código de 6 dígitos</label>
           <input type="text" id="verifyCodeInput" maxlength="6" placeholder="000000" style="text-align:center; font-size:20px; letter-spacing:4px; font-weight:700;" />
@@ -1581,8 +1752,8 @@
       </div>
 
       <div id="stepLogin" style="display: none;">
-        <h3>Fazer login</h3>
-        <p>Apenas contas previamente cadastradas podem entrar.</p>
+        <h3>Fazer login • NexByel</h3>
+        <p>Acesse sua conta cadastrada na NexByel.</p>
         <div class="field">
           <label for="loginEmail">E-mail cadastrado</label>
           <input type="email" id="loginEmail" placeholder="exemplo@gmail.com" />
@@ -1602,7 +1773,7 @@
   <div class="modal-backdrop" id="adminModalBackdrop" onclick="handleBackdrop(event, 'adminModalBackdrop')">
     <div class="modal">
       <button class="modal-close" onclick="closeAllModals()" aria-label="Fechar janela">✕</button>
-      <h3>Painel do Administrador</h3>
+      <h3>Painel do Administrador • NexByel</h3>
       <p>Acesso exclusivo • Byel Santos</p>
 
       <div id="adminAuthBox">
@@ -1631,12 +1802,12 @@
         </div>
 
         <div id="adminTabMessages" style="display: none;">
-          <strong style="color:#00e699; font-size:13px;">Pedidos e mensagens (altere o status abaixo)</strong>
+          <strong style="color:#00e699; font-size:13px;">Pedidos, pagamento e status</strong>
           <table class="admin-table">
             <thead>
               <tr>
                 <th>Cliente</th>
-                <th>Pedido &amp; Status</th>
+                <th>Pedido, Pagamento &amp; Status</th>
               </tr>
             </thead>
             <tbody id="adminMessagesBody"></tbody>
@@ -1666,6 +1837,98 @@
 
     function hideToast() {
       document.getElementById('toastBanner').classList.remove('show');
+    }
+
+    /* Sites Prontos de Amostra para Mostrar ao Cliente */
+    function openReadySite(type) {
+      closeAllModals();
+      closeDrawer();
+      const overlay = document.getElementById('sitePreviewOverlay');
+      const container = document.getElementById('sampleSiteContainer');
+      const badge = document.getElementById('previewTopBadge');
+
+      if (type === 'Barbearia') {
+        badge.textContent = 'Site Pronto • Barbearia';
+        container.innerHTML = `
+          <div class="sample-hero" style="background:linear-gradient(135deg,#221911,#382718);">
+            <span class="preview-tag">Barbearia • Atendimento Seg a Sáb</span>
+            <h2>Navalha de Ouro Barbearia</h2>
+            <p>Corte americano, degradê, barba na toalha quente e atendimento rápido no celular.</p>
+            <button type="button" class="btn-primary" onclick="openContactModal('Pedido: Site Barbearia (Navalha de Ouro)')">Pedir um site igual a este →</button>
+          </div>
+          <div class="sample-grid">
+            <div class="sample-box">
+              <div><h3>Corte Americano / Degradê</h3><p>Acabamento navalhado e finalização profissional.</p></div>
+              <div class="sample-price">R$ 35</div>
+            </div>
+            <div class="sample-box">
+              <div><h3>Barba Completa</h3><p>Alinhamento na navalha e hidratação.</p></div>
+              <div class="sample-price">R$ 25</div>
+            </div>
+            <div class="sample-box">
+              <div><h3>Combo Corte + Barba</h3><p>Pacote completo com desconto especial.</p></div>
+              <div class="sample-price">R$ 50</div>
+            </div>
+          </div>
+          <button type="button" class="btn-secondary" onclick="openContactModal('Orçamento: Site para Barbearia')">Quero este modelo para minha barbearia</button>
+        `;
+      } else if (type === 'Loja Gamer') {
+        badge.textContent = 'Site Pronto • Loja Gamer';
+        container.innerHTML = `
+          <div class="sample-hero" style="background:linear-gradient(135deg,#171130,#281959);">
+            <span class="preview-tag">Loja Virtual • Setup &amp; Games</span>
+            <h2>NexStore Gamer Gear</h2>
+            <p>Vitrine de periféricos, destaque de ofertas e pedido rápido com opção de parcelamento.</p>
+            <button type="button" class="btn-primary" onclick="openContactModal('Pedido: Loja Gamer (NexStore)')">Pedir uma loja igual a esta →</button>
+          </div>
+          <div class="sample-grid">
+            <div class="sample-box">
+              <div><h3>Teclado Mecânico RGB</h3><p>Switch tátil, resposta rápida e iluminação customizada.</p></div>
+              <div class="sample-price">R$ 189</div>
+            </div>
+            <div class="sample-box">
+              <div><h3>Mouse Gamer 12000 DPI</h3><p>Leve, ergonômico e botões programáveis.</p></div>
+              <div class="sample-price">R$ 129</div>
+            </div>
+            <div class="sample-box">
+              <div><h3>Headset Surround 7.1</h3><p>Áudio nítido para partidas competitivas.</p></div>
+              <div class="sample-price">R$ 159</div>
+            </div>
+          </div>
+          <button type="button" class="btn-secondary" onclick="openContactModal('Orçamento: Loja Virtual Gamer')">Quero este modelo para minha loja</button>
+        `;
+      } else {
+        badge.textContent = 'Site Pronto • Corporativo';
+        container.innerHTML = `
+          <div class="sample-hero" style="background:linear-gradient(135deg,#0f222e,#17394d);">
+            <span class="preview-tag">Institucional • Empresas</span>
+            <h2>Apex Soluções Empresariais</h2>
+            <p>Apresentação profissional da empresa, serviços, credibilidade e captação de clientes.</p>
+            <button type="button" class="btn-primary" onclick="openContactModal('Pedido: Site Corporativo (Apex)')">Pedir um site corporativo assim →</button>
+          </div>
+          <div class="sample-grid">
+            <div class="sample-box">
+              <div><h3>Consultoria e Gestão</h3><p>Diagnóstico e organização de processos empresariais.</p></div>
+              <div class="sample-price">Sob consulta</div>
+            </div>
+            <div class="sample-box">
+              <div><h3>Atendimento a Clientes</h3><p>Canal direto para orçamento e suporte rápido.</p></div>
+              <div class="sample-price">24/7</div>
+            </div>
+          </div>
+          <button type="button" class="btn-secondary" onclick="openContactModal('Orçamento: Site Corporativo')">Quero este modelo para minha empresa</button>
+        `;
+      }
+
+      document.body.classList.add('preview-open');
+      overlay.classList.add('open');
+      window.scrollTo(0, 0);
+    }
+
+    function closeReadySite() {
+      document.getElementById('sitePreviewOverlay').classList.remove('open');
+      document.body.classList.remove('preview-open');
+      window.scrollTo(0, 0);
     }
 
     /* Modo EDIT exclusivo do dono */
@@ -1732,7 +1995,6 @@
       document.getElementById('contactModalBackdrop').classList.remove('open');
       document.getElementById('authModalBackdrop').classList.remove('open');
       document.getElementById('adminModalBackdrop').classList.remove('open');
-      document.getElementById('demoModalBackdrop').classList.remove('open');
       document.getElementById('clientAreaBackdrop').classList.remove('open');
     }
 
@@ -1743,52 +2005,6 @@
     /* FAQ */
     function toggleFaq(btn) {
       btn.parentElement.classList.toggle('open');
-    }
-
-    /* Portfólio Demo */
-    function openPortfolioDemo(type) {
-      closeAllModals();
-      const titleEl = document.getElementById('demoTitle');
-      const subEl = document.getElementById('demoSubtitle');
-      const contentEl = document.getElementById('demoContent');
-      const orderBtn = document.getElementById('demoOrderBtn');
-
-      if (type === 'Barbearia') {
-        titleEl.textContent = 'Navalha de Ouro Barbearia';
-        subEl.textContent = 'Modelo de site para barbearias e salões';
-        contentEl.innerHTML = `
-          <strong style="color:#fbbf24;">✦ Estrutura incluída:</strong><br><br>
-          • Tabela de preços (Corte, Barba, Combo)<br>
-          • Galeria de cortes e ambiente<br>
-          • Horário de funcionamento e endereço<br>
-          • Botão direto de agendamento no celular
-        `;
-        orderBtn.onclick = () => openContactModal('Orçamento: Site modelo Barbearia');
-      } else if (type === 'Loja Gamer') {
-        titleEl.textContent = 'NexStore Gamer Gear';
-        subEl.textContent = 'Modelo de loja virtual e catálogo';
-        contentEl.innerHTML = `
-          <strong style="color:#9e92ff;">✦ Estrutura incluída:</strong><br><br>
-          • Vitrine de produtos com fotos e preços<br>
-          • Filtro por categoria (Teclados, Mouses, Headsets)<br>
-          • Carrinho de compras com soma automática<br>
-          • Finalização de pedido rápida
-        `;
-        orderBtn.onclick = () => openContactModal('Orçamento: Site modelo Loja Gamer');
-      } else {
-        titleEl.textContent = 'Apex Soluções Empresariais';
-        subEl.textContent = 'Modelo de site corporativo e serviços';
-        contentEl.innerHTML = `
-          <strong style="color:#00e699;">✦ Estrutura incluída:</strong><br><br>
-          • Apresentação profissional da empresa<br>
-          • Lista de serviços e diferenciais<br>
-          • Depoimentos e resultados<br>
-          • Formulário de solicitação de proposta
-        `;
-        orderBtn.onclick = () => openContactModal('Orçamento: Site modelo Corporativo');
-      }
-
-      document.getElementById('demoModalBackdrop').classList.add('open');
     }
 
     /* Simulador de Orçamento */
@@ -1812,11 +2028,31 @@
       if (document.getElementById('simUrgent').checked) extras.push('Entrega Expressa 48h');
 
       const summary =
-        `Simulação de Orçamento (Estimativa: R$ ${total})\n` +
+        `Simulação de Orçamento NexByel (Estimativa: R$ ${total})\n` +
         `• Estrutura: ${pagesText}\n` +
         `• Extras: ${extras.length ? extras.join(', ') : 'Nenhum'}`;
 
-      openContactModal('Orçamento Simulado (R$ ' + total + ')', summary);
+      openContactModal('Orçamento Simulado NexByel (R$ ' + total + ')', summary);
+    }
+
+    function toggleInstallmentsSelect() {
+      const method = document.getElementById('paymentMethod').value;
+      const instSelect = document.getElementById('paymentInstallments');
+      if (method === 'Cartão de Crédito') {
+        instSelect.innerHTML = `
+          <option value="À vista no crédito">À vista no crédito</option>
+          <option value="Parcelado em 2x">Parcelado em 2x</option>
+          <option value="Parcelado em 3x">Parcelado em 3x</option>
+          <option value="Parcelado em 4x">Parcelado em 4x</option>
+          <option value="Parcelado em 6x">Parcelado em 6x</option>
+        `;
+      } else {
+        instSelect.innerHTML = `
+          <option value="À vista">À vista</option>
+          <option value="Parcelado em 2x">Parcelado em 2x</option>
+          <option value="Parcelado em 3x">Parcelado em 3x</option>
+        `;
+      }
     }
 
     /* Contato */
@@ -1835,6 +2071,7 @@
         document.getElementById('clientMessage').value = prefillMessage;
       }
 
+      toggleInstallmentsSelect();
       document.getElementById('contactModalBackdrop').classList.add('open');
     }
 
@@ -1917,7 +2154,7 @@
       pendingUser = { name, email, pass, code };
 
       btn.disabled = true;
-      btn.textContent = 'Enviando código...';
+      btn.textContent = 'Enviando código da NexByel...';
       statusEl.textContent = '';
 
       fetch('https://formsubmit.co/ajax/' + encodeURIComponent(email), {
@@ -1927,15 +2164,16 @@
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          _subject: 'Código de confirmação - NexByel',
-          Mensagem: 'Use este código de 6 dígitos para ativar sua conta na NexByel:',
-          Codigo: code
+          _subject: 'NexByel - Código de confirmação da sua conta',
+          Remetente_Oficial: 'NexByel (NEXBYEL.OFICIAL@GMAIL.COM)',
+          Mensagem: 'Esta mensagem foi enviada pela NexByel. Use o código abaixo para confirmar seu cadastro:',
+          Codigo_NexByel: code
         })
       })
       .then(() => {
         document.getElementById('stepRegister').style.display = 'none';
         document.getElementById('stepVerify').style.display = 'block';
-        document.getElementById('verifyInfoText').textContent = 'Enviamos um código de 6 dígitos para ' + email + '. Confira caixa de entrada ou spam.';
+        document.getElementById('verifyInfoText').textContent = 'A NexByel enviou um código de 6 dígitos para ' + email + '. Confira caixa de entrada ou spam.';
       })
       .catch(() => {
         statusEl.textContent = 'Falha ao enviar código. Teste pelo link online do site.';
@@ -1951,7 +2189,7 @@
       const statusEl = document.getElementById('verifyStatusMsg');
 
       if (!pendingUser || codeInput !== pendingUser.code) {
-        statusEl.textContent = 'Código incorreto. Confira o número enviado ao seu e-mail.';
+        statusEl.textContent = 'Código incorreto. Confira o número enviado pela NexByel.';
         return;
       }
 
@@ -1981,14 +2219,14 @@
       const found = users.find(u => u.email === email && u.pass === pass);
 
       if (!found) {
-        statusEl.textContent = 'Acesso negado: cadastre sua conta primeiro ou confira e-mail e senha.';
+        statusEl.textContent = 'Acesso negado: cadastre sua conta na NexByel ou confira e-mail e senha.';
         return;
       }
 
       localStorage.setItem('nexbyel_active_session', JSON.stringify({ name: found.name, email: found.email }));
       renderSessionUI();
       closeAllModals();
-      showToast('Sucesso! Você entrou na sua conta.');
+      showToast('Sucesso! Você entrou na sua conta NexByel.');
     }
 
     function logoutUser() {
@@ -1996,6 +2234,17 @@
       renderSessionUI();
       closeDrawer();
       hideToast();
+    }
+
+    function updateClientPayment(orderId, newMethod, newInstallments) {
+      const messages = getMessages();
+      const idx = messages.findIndex(m => m.id === orderId);
+      if (idx === -1) return;
+      if (newMethod) messages[idx].paymentMethod = newMethod;
+      if (newInstallments) messages[idx].paymentInstallments = newInstallments;
+      localStorage.setItem('nexbyel_messages', JSON.stringify(messages));
+      openClientArea();
+      showToast('Forma de pagamento atualizada na NexByel!');
     }
 
     /* Área do Cliente Logado */
@@ -2011,13 +2260,15 @@
       const messages = getMessages();
       const myOrders = messages.filter(m => (m.email || '').toLowerCase() === session.email.toLowerCase());
       const listEl = document.getElementById('clientOrdersList');
-      document.getElementById('clientAreaSubtitle').textContent = `Conta: ${session.email}`;
+      document.getElementById('clientAreaSubtitle').textContent = `Conta NexByel: ${session.email}`;
 
       if (!myOrders.length) {
         listEl.innerHTML = `<div class="order-item" style="text-align:center; color:#9b9bae;">Você ainda não enviou nenhum pedido com este e-mail.</div>`;
       } else {
         listEl.innerHTML = myOrders.map(order => {
           const status = order.status || 'Em análise';
+          const method = order.paymentMethod || 'Pix';
+          const installments = order.paymentInstallments || 'À vista';
           let pillClass = 'status-analise';
           if (status === 'Em criação') pillClass = 'status-criacao';
           if (status === 'Pronto') pillClass = 'status-pronto';
@@ -2029,7 +2280,25 @@
                 <span class="status-pill ${pillClass}">${status}</span>
               </div>
               <div style="font-size:12px; color:#a1a1b5;">${order.message || order.info}</div>
-              <div style="font-size:11px; color:#6f6f85; margin-top:6px;">Enviado em: ${order.date || ''}</div>
+              <div class="order-pay-row">
+                <div><strong>Pagamento escolhido:</strong> ${method} (${installments})</div>
+                <label style="display:block; margin-top:8px; font-size:11px; color:#9b9bae;">Alterar forma de pagamento / parcelamento:</label>
+                <select class="order-pay-select" onchange="updateClientPayment(${order.id}, this.value, null)">
+                  <option value="Pix" ${method === 'Pix' ? 'selected' : ''}>Pix</option>
+                  <option value="QR Code" ${method === 'QR Code' ? 'selected' : ''}>QR Code</option>
+                  <option value="Cartão de Débito" ${method === 'Cartão de Débito' ? 'selected' : ''}>Cartão de Débito</option>
+                  <option value="Cartão de Crédito" ${method === 'Cartão de Crédito' ? 'selected' : ''}>Cartão de Crédito</option>
+                </select>
+                <select class="order-pay-select" onchange="updateClientPayment(${order.id}, null, this.value)">
+                  <option value="À vista" ${installments === 'À vista' ? 'selected' : ''}>À vista</option>
+                  <option value="À vista no crédito" ${installments === 'À vista no crédito' ? 'selected' : ''}>À vista no crédito</option>
+                  <option value="Parcelado em 2x" ${installments === 'Parcelado em 2x' ? 'selected' : ''}>Parcelado em 2x</option>
+                  <option value="Parcelado em 3x" ${installments === 'Parcelado em 3x' ? 'selected' : ''}>Parcelado em 3x</option>
+                  <option value="Parcelado em 4x" ${installments === 'Parcelado em 4x' ? 'selected' : ''}>Parcelado em 4x</option>
+                  <option value="Parcelado em 6x" ${installments === 'Parcelado em 6x' ? 'selected' : ''}>Parcelado em 6x</option>
+                </select>
+              </div>
+              <div style="font-size:11px; color:#6f6f85; margin-top:8px;">Enviado em: ${order.date || ''}</div>
             </div>
           `;
         }).join('');
@@ -2065,7 +2334,7 @@
       } else {
         topBox.innerHTML = `<button class="btn-auth-top" onclick="openAuthModal('login')">Entrar</button>`;
         heroBox.innerHTML = `
-          <button class="btn-primary" onclick="openAuthModal('register')">Criar conta obrigatória →</button>
+          <button class="btn-primary" onclick="openAuthModal('register')">Criar conta na NexByel →</button>
           <a href="#planos" class="btn-secondary">Ver planos e preços</a>
         `;
         drawerClientBox.innerHTML = '';
@@ -2078,6 +2347,8 @@
       event.preventDefault();
       const name = document.getElementById('clientName').value.trim();
       const email = document.getElementById('clientEmail').value.trim().toLowerCase();
+      const paymentMethod = document.getElementById('paymentMethod').value;
+      const paymentInstallments = document.getElementById('paymentInstallments').value;
       const message = document.getElementById('clientMessage').value.trim();
       const statusEl = document.getElementById('contactStatusMsg');
       const btn = document.getElementById('submitContactBtn');
@@ -2088,6 +2359,8 @@
         client: name,
         email: email,
         topic: currentTopic,
+        paymentMethod: paymentMethod,
+        paymentInstallments: paymentInstallments,
         message: message,
         date: new Date().toLocaleString('pt-BR'),
         status: 'Em análise'
@@ -2095,7 +2368,7 @@
       localStorage.setItem('nexbyel_messages', JSON.stringify(messages));
 
       btn.disabled = true;
-      btn.textContent = 'Enviando...';
+      btn.textContent = 'Enviando pela NexByel...';
       statusEl.textContent = '';
 
       fetch('https://formsubmit.co/ajax/' + OFFICIAL_EMAIL, {
@@ -2106,22 +2379,25 @@
         },
         body: JSON.stringify({
           _subject: 'NexByel - ' + currentTopic,
+          Origem: 'NexByel',
           Assunto: currentTopic,
           Nome: name,
           Email_Cliente: email,
+          Forma_de_Pagamento: `${paymentMethod} (${paymentInstallments})`,
           Detalhes: message
         })
       })
       .then(() => {
         document.getElementById('contactForm').reset();
-        statusEl.textContent = 'Enviado para ' + OFFICIAL_EMAIL + ' e salvo em Meus Pedidos!';
+        toggleInstallmentsSelect();
+        statusEl.textContent = 'Enviado pela NexByel para ' + OFFICIAL_EMAIL + ' e salvo em Meus Pedidos!';
       })
       .catch(() => {
         statusEl.textContent = 'Salvo em Meus Pedidos! Para envio por e-mail, teste pelo link online do site.';
       })
       .finally(() => {
         btn.disabled = false;
-        btn.textContent = 'Enviar para ' + OFFICIAL_EMAIL;
+        btn.textContent = 'Enviar para NexByel';
       });
     }
 
@@ -2169,11 +2445,13 @@
       messagesBody.innerHTML = messages.length
         ? messages.map((m, idx) => {
             const currentStatus = m.status || 'Em análise';
+            const payInfo = `${m.paymentMethod || 'Pix'} (${m.paymentInstallments || 'À vista'})`;
             return `
               <tr>
                 <td><strong>${m.client}</strong><br><span style="font-size:11px; color:#9b9bae;">${m.email || ''}</span></td>
                 <td>
                   <strong>${m.topic || 'Contato'}</strong><br>
+                  <span style="font-size:11px; color:#00e699;">Pagamento: ${payInfo}</span><br>
                   <span>${m.message || m.info}</span><br>
                   <select class="admin-status-select" onchange="updateOrderStatus(${idx}, this.value)">
                     <option value="Em análise" ${currentStatus === 'Em análise' ? 'selected' : ''}>Status: Em análise</option>
@@ -2209,6 +2487,7 @@
       applySavedEdits();
       renderSessionUI();
       calculateEstimate();
+      toggleInstallmentsSelect();
     });
   </script>
 </body>
