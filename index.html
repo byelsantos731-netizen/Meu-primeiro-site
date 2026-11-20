@@ -3,8 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>NexByel | Soluções e Desenvolvimento Web</title>
   <style>
+    :root {
+      --pink-shock: #ff007f;
+      --pink-soft: #ff4da6;
+      --black-pure: #050508;
+      --black-elevated: #0e0e14;
+      --white-pure: #ffffff;
+      --white-soft: #f2f2f7;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -13,22 +24,26 @@
     }
 
     body {
-      background-color: #07070c;
-      color: #f4f4f8;
+      background-color: var(--pink-shock);
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.24), transparent 36%),
+        radial-gradient(circle at 88% 18%, rgba(5, 5, 8, 0.45), transparent 44%),
+        linear-gradient(180deg, #ff007f 0%, #e00070 55%, #050508 100%);
+      color: var(--white-pure);
       line-height: 1.6;
       overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    body.preview-open > *:not(#sitePreviewOverlay):not(.modal-backdrop):not(.edit-topbar):not(#toastBanner) {
+    body.preview-open > *:not(#sitePreviewOverlay):not(.modal-backdrop):not(#toastBanner) {
       display: none !important;
     }
 
-    /* Visualizador de Site Pronto (Amostra para o Cliente) */
     .site-preview-overlay {
       display: none;
       min-height: 100vh;
-      background: #0b0b12;
-      color: #f4f4f8;
+      background: linear-gradient(180deg, #ff007f 0%, #17040f 45%, #050508 100%);
+      color: var(--white-pure);
     }
 
     .site-preview-overlay.open {
@@ -39,9 +54,9 @@
       position: sticky;
       top: 0;
       z-index: 300;
-      background: rgba(12, 12, 20, 0.96);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid #26263a;
+      background: rgba(5, 5, 8, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
       padding: 12px 16px;
       display: flex;
       justify-content: space-between;
@@ -51,23 +66,23 @@
 
     .preview-topbar-badge {
       font-size: 11px;
-      font-weight: 700;
-      color: #00e699;
-      background: rgba(0, 230, 153, 0.14);
-      border: 1px solid rgba(0, 230, 153, 0.35);
-      padding: 5px 10px;
+      font-weight: 800;
+      color: var(--white-pure);
+      background: var(--pink-shock);
+      border: 1px solid var(--white-pure);
+      padding: 5px 11px;
       border-radius: 999px;
       white-space: nowrap;
     }
 
     .btn-back-nexbyel {
-      background: #7c6cf0;
-      color: #ffffff;
+      background: var(--white-pure);
+      color: var(--black-pure);
       border: none;
       border-radius: 10px;
-      padding: 9px 13px;
+      padding: 9px 14px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       white-space: nowrap;
     }
@@ -79,22 +94,23 @@
     }
 
     .sample-hero {
-      border-radius: 20px;
+      border-radius: 22px;
       padding: 24px 20px;
       margin-bottom: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: var(--black-pure);
+      border: 1px solid rgba(255, 255, 255, 0.25);
     }
 
     .sample-hero h2 {
       font-size: 26px;
       line-height: 1.18;
       margin: 10px 0;
-      color: #ffffff;
+      color: var(--white-pure);
     }
 
     .sample-hero p {
       font-size: 14px;
-      color: rgba(255, 255, 255, 0.84);
+      color: var(--white-soft);
       margin-bottom: 16px;
     }
 
@@ -106,8 +122,8 @@
     }
 
     .sample-box {
-      background: #12121d;
-      border: 1px solid #232336;
+      background: var(--black-pure);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       border-radius: 16px;
       padding: 16px;
       display: flex;
@@ -119,23 +135,24 @@
     .sample-box h3 {
       font-size: 15px;
       margin-bottom: 3px;
+      color: var(--white-pure);
     }
 
     .sample-box p {
       font-size: 12px;
-      color: #9b9bae;
+      color: var(--white-soft);
     }
 
     .sample-price {
       font-size: 15px;
       font-weight: 800;
-      color: #00e699;
+      color: var(--pink-soft);
       white-space: nowrap;
     }
 
     .sample-pay-card {
-      background: #12121d;
-      border: 1px solid #2a2a40;
+      background: var(--black-pure);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       border-radius: 18px;
       padding: 18px;
     }
@@ -143,39 +160,38 @@
     .sample-pay-title {
       font-size: 15px;
       font-weight: 800;
-      color: #ffffff;
+      color: var(--white-pure);
       margin-bottom: 4px;
     }
 
     .sample-pay-sub {
       font-size: 12px;
-      color: #9b9bae;
+      color: var(--white-soft);
       margin-bottom: 14px;
     }
 
     .sample-pay-box {
-      background: rgba(0, 230, 153, 0.08);
-      border: 1px solid rgba(0, 230, 153, 0.3);
+      background: rgba(255, 0, 127, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.26);
       border-radius: 12px;
       padding: 12px 14px;
       margin-top: 12px;
       margin-bottom: 14px;
       font-size: 13px;
-      color: #dcdce8;
+      color: var(--white-pure);
     }
 
-    /* Banner de Confirmação no Topo */
     .toast-banner {
       display: none;
       position: sticky;
       top: 58px;
       z-index: 150;
-      background-color: #163829;
-      border-bottom: 1px solid #00e699;
-      color: #d7ffec;
+      background: var(--black-pure);
+      border-bottom: 2px solid var(--white-pure);
+      color: var(--white-pure);
       padding: 11px 16px;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
@@ -188,68 +204,12 @@
     .toast-close {
       background: transparent;
       border: none;
-      color: #d7ffec;
+      color: var(--white-pure);
       font-size: 18px;
       cursor: pointer;
       padding: 0 4px;
     }
 
-    /* Barra Flutuante do Modo EDIT exclusivo do dono */
-    .edit-topbar {
-      display: none;
-      position: fixed;
-      bottom: 16px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2500;
-      background: #141422;
-      border: 1px solid #00e699;
-      border-radius: 14px;
-      padding: 10px 14px;
-      gap: 8px;
-      align-items: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
-      width: calc(100% - 32px);
-      max-width: 440px;
-    }
-
-    .edit-topbar.active {
-      display: flex;
-    }
-
-    .edit-topbar span {
-      font-size: 12px;
-      font-weight: 700;
-      color: #00e699;
-      flex: 1;
-    }
-
-    .edit-topbar button {
-      border: none;
-      border-radius: 8px;
-      padding: 8px 10px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .btn-save-edit {
-      background: #00e699;
-      color: #07070c;
-    }
-
-    .btn-reset-edit {
-      background: #252538;
-      color: #f4f4f8;
-    }
-
-    .editable-active {
-      outline: 1px dashed rgba(0, 230, 153, 0.65);
-      border-radius: 6px;
-      cursor: text;
-    }
-
-    /* Cabeçalho */
     header {
       position: sticky;
       top: 0;
@@ -258,9 +218,9 @@
       justify-content: space-between;
       align-items: center;
       padding: 13px 16px;
-      background-color: rgba(7, 7, 12, 0.95);
+      background-color: rgba(5, 5, 8, 0.94);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid #1b1b29;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
     }
 
     .brand {
@@ -268,7 +228,7 @@
       align-items: center;
       gap: 9px;
       text-decoration: none;
-      color: #ffffff;
+      color: var(--white-pure);
       font-size: 20px;
       font-weight: 800;
       background: transparent;
@@ -277,7 +237,7 @@
     }
 
     .brand span {
-      color: #00e699;
+      color: var(--pink-soft);
     }
 
     .header-right {
@@ -287,13 +247,13 @@
     }
 
     .btn-client-area {
-      background: rgba(0, 230, 153, 0.14);
-      border: 1px solid rgba(0, 230, 153, 0.4);
-      color: #00e699;
+      background: var(--white-pure);
+      border: none;
+      color: var(--black-pure);
       border-radius: 999px;
-      padding: 6px 11px;
+      padding: 6px 12px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
     }
 
@@ -301,13 +261,13 @@
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      background: #12121d;
-      border: 1px solid #2e2e46;
+      background: var(--black-pure);
+      border: 1px solid var(--white-pure);
       padding: 4px 10px 4px 4px;
       border-radius: 999px;
       font-size: 12px;
-      font-weight: 600;
-      color: #e4e4ee;
+      font-weight: 700;
+      color: var(--white-pure);
       max-width: 135px;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -319,42 +279,42 @@
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #7c6cf0, #00e699);
-      color: #07070c;
+      background: var(--pink-shock);
+      color: var(--white-pure);
       font-weight: 800;
       font-size: 13px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      border: 1px solid var(--white-pure);
     }
 
     .btn-auth-top {
-      background: #7c6cf0;
-      color: #ffffff;
+      background: var(--white-pure);
+      color: var(--black-pure);
       border: none;
       border-radius: 10px;
-      padding: 8px 12px;
+      padding: 8px 13px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
     }
 
     .menu-btn {
       background: transparent;
       border: none;
-      color: #ffffff;
+      color: var(--white-pure);
       font-size: 24px;
       cursor: pointer;
       padding: 4px 6px;
     }
 
-    /* Menu Lateral */
     .drawer-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.78);
+      background: rgba(5, 5, 8, 0.84);
       z-index: 900;
       justify-content: flex-end;
     }
@@ -367,8 +327,8 @@
       width: 100%;
       max-width: 340px;
       height: 100%;
-      background: #0c0c14;
-      border-left: 1px solid #1e1e2e;
+      background: var(--black-pure);
+      border-left: 2px solid var(--pink-shock);
       padding: 20px;
       display: flex;
       flex-direction: column;
@@ -381,14 +341,14 @@
       justify-content: space-between;
       align-items: center;
       padding-bottom: 16px;
-      border-bottom: 1px solid #191926;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
       margin-bottom: 10px;
     }
 
     .drawer-close {
       background: transparent;
       border: none;
-      color: #a1a1b5;
+      color: var(--white-pure);
       font-size: 24px;
       cursor: pointer;
     }
@@ -397,9 +357,9 @@
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 1.4px;
-      color: #797990;
+      color: var(--pink-soft);
       margin: 12px 0 6px;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .drawer-links {
@@ -409,35 +369,35 @@
     }
 
     .drawer-links button {
-      color: #e4e4ee;
+      color: var(--white-pure);
       background: transparent;
       border: none;
       text-align: left;
-      padding: 10px 6px;
+      padding: 10px 8px;
       font-size: 14px;
-      font-weight: 500;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       cursor: pointer;
       width: 100%;
-      border-radius: 6px;
+      border-radius: 8px;
     }
 
     .drawer-links button.active-tab {
-      color: #00e699;
-      font-weight: 700;
-      background: rgba(0, 230, 153, 0.08);
+      color: var(--black-pure);
+      font-weight: 800;
+      background: var(--white-pure);
     }
 
     .drawer-cta {
       margin-top: 14px;
       width: 100%;
       padding: 13px;
-      border: none;
+      border: 1px solid var(--white-pure);
       border-radius: 12px;
-      background: #7c6cf0;
-      color: #ffffff;
+      background: var(--pink-shock);
+      color: var(--white-pure);
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
     }
 
@@ -446,9 +406,9 @@
       width: 100%;
       padding: 12px;
       border-radius: 12px;
-      background: rgba(239, 68, 68, 0.14);
-      border: 1px solid rgba(239, 68, 68, 0.35);
-      color: #ff8a8a;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: var(--white-pure);
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
@@ -457,26 +417,24 @@
     .drawer-footer {
       text-align: center;
       padding-top: 18px;
-      color: #8f8fa3;
+      color: var(--white-soft);
       font-size: 12px;
     }
 
-    /* Hero Compacto */
     .hero {
-      padding: 36px 20px 26px;
+      padding: 34px 20px 24px;
       text-align: center;
-      background: radial-gradient(circle at 50% 0%, rgba(124, 108, 240, 0.2), rgba(0, 230, 153, 0.05) 45%, transparent 75%);
     }
 
     .pill {
       display: inline-block;
       padding: 6px 14px;
       border-radius: 999px;
-      background: rgba(124, 108, 240, 0.14);
-      border: 1px solid rgba(124, 108, 240, 0.35);
-      color: #9e92ff;
+      background: var(--black-pure);
+      border: 1px solid var(--white-pure);
+      color: var(--white-pure);
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 1.2px;
       text-transform: uppercase;
       margin-bottom: 14px;
@@ -485,22 +443,25 @@
     .hero h1 {
       font-size: 31px;
       line-height: 1.15;
-      font-weight: 800;
+      font-weight: 900;
       max-width: 500px;
       margin: 0 auto 12px;
+      color: var(--white-pure);
     }
 
     .grad-text {
-      background: linear-gradient(90deg, #8b7cf6, #00e699);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--black-pure);
+      background: var(--white-pure);
+      padding: 0 8px;
+      border-radius: 8px;
     }
 
     .hero p {
-      color: #9b9bae;
+      color: var(--white-pure);
       font-size: 15px;
       max-width: 440px;
-      margin: 0 auto 20px;
+      margin: 0 auto 18px;
+      font-weight: 500;
     }
 
     .hero-actions {
@@ -508,18 +469,18 @@
       flex-direction: column;
       gap: 10px;
       max-width: 360px;
-      margin: 0 auto 18px;
+      margin: 0 auto 16px;
     }
 
     .btn-primary {
       width: 100%;
       padding: 14px 20px;
-      border: none;
+      border: 1px solid var(--white-pure);
       border-radius: 12px;
-      background: #7c6cf0;
-      color: #ffffff;
+      background: var(--black-pure);
+      color: var(--white-pure);
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       text-decoration: none;
       display: inline-block;
@@ -530,11 +491,11 @@
       width: 100%;
       padding: 14px 20px;
       border-radius: 12px;
-      background: #11111a;
-      border: 1px solid #232336;
-      color: #ffffff;
+      background: var(--white-pure);
+      border: 1px solid var(--black-pure);
+      color: var(--black-pure);
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 800;
       text-decoration: none;
       display: inline-block;
       text-align: center;
@@ -547,17 +508,17 @@
       justify-content: center;
       gap: 10px 18px;
       font-size: 12px;
-      color: #a6a6ba;
+      color: var(--white-pure);
+      font-weight: 700;
     }
 
-    .hl-green { color: #00e699; }
-    .hl-purple { color: #9e92ff; }
+    .hl-green { color: var(--black-pure); background: var(--white-pure); padding: 1px 6px; border-radius: 6px; }
+    .hl-purple { color: var(--white-pure); background: var(--black-pure); padding: 1px 6px; border-radius: 6px; }
 
-    /* Barra de Abas (Evita Página Longa) */
     .tabs-bar-wrap {
       max-width: 680px;
       margin: 0 auto;
-      padding: 0 16px 8px;
+      padding: 0 16px 12px;
     }
 
     .tabs-scroll {
@@ -573,28 +534,27 @@
     }
 
     .tab-pill {
-      background: #101018;
-      border: 1px solid #232336;
-      color: #b4b4c8;
+      background: var(--black-pure);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      color: var(--white-pure);
       border-radius: 999px;
       padding: 8px 14px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       white-space: nowrap;
       flex-shrink: 0;
     }
 
     .tab-pill.active {
-      background: rgba(0, 230, 153, 0.14);
-      border-color: #00e699;
-      color: #00e699;
+      background: var(--white-pure);
+      border-color: var(--white-pure);
+      color: var(--black-pure);
     }
 
-    /* Seções em Modo Aba */
     section.tab-section {
       display: none;
-      padding: 24px 20px 36px;
+      padding: 22px 20px 34px;
       max-width: 680px;
       margin: 0 auto;
     }
@@ -606,27 +566,32 @@
     .section-tag {
       text-align: center;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 900;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #00e699;
-      margin-bottom: 8px;
+      color: var(--white-pure);
+      background: var(--black-pure);
+      display: table;
+      margin: 0 auto 8px;
+      padding: 4px 12px;
+      border-radius: 999px;
     }
 
     .section-title {
       text-align: center;
       font-size: 25px;
       line-height: 1.2;
-      font-weight: 800;
+      font-weight: 900;
       margin-bottom: 10px;
+      color: var(--white-pure);
     }
 
     .section-sub {
       text-align: center;
-      color: #9b9bae;
+      color: var(--white-soft);
       font-size: 14px;
       max-width: 460px;
-      margin: 0 auto 22px;
+      margin: 0 auto 20px;
     }
 
     .cards-stack {
@@ -636,55 +601,44 @@
     }
 
     .card {
-      background: #101018;
-      border: 1px solid #1e1e2e;
+      background: var(--black-pure);
+      border: 1px solid rgba(255, 255, 255, 0.24);
       border-radius: 18px;
       padding: 20px;
     }
 
     .icon-box {
-      width: 40px;
-      height: 40px;
-      border-radius: 11px;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 18px;
       margin-bottom: 12px;
-    }
-
-    .icon-purple {
-      background: rgba(124, 108, 240, 0.16);
-      color: #9e92ff;
-    }
-
-    .icon-mint {
-      background: linear-gradient(135deg, rgba(124, 108, 240, 0.25), rgba(0, 230, 153, 0.25));
-      color: #00e699;
+      background: var(--pink-shock);
+      color: var(--white-pure);
+      border: 1px solid var(--white-pure);
       font-weight: 800;
     }
 
     .step-num {
       font-size: 24px;
-      font-weight: 800;
-      color: #00e699;
+      font-weight: 900;
+      color: var(--pink-soft);
       margin-bottom: 6px;
       line-height: 1.1;
     }
 
-    .step-num.purple {
-      color: #9e92ff;
-    }
-
     .card h3 {
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 6px;
-      color: #ffffff;
+      color: var(--white-pure);
     }
 
     .card p {
-      color: #9b9bae;
+      color: var(--white-soft);
       font-size: 14px;
     }
 
@@ -692,36 +646,24 @@
       margin-top: 12px;
       background: transparent;
       border: none;
-      color: #00e699;
+      color: var(--pink-soft);
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       padding: 0;
     }
 
-    /* Portfólio */
     .portfolio-card {
-      background: #101018;
-      border: 1px solid #1e1e2e;
+      background: var(--black-pure);
+      border: 1px solid rgba(255, 255, 255, 0.24);
       border-radius: 18px;
       overflow: hidden;
     }
 
     .portfolio-preview {
       padding: 18px 20px;
-      border-bottom: 1px solid #1e1e2e;
-    }
-
-    .preview-barber {
-      background: linear-gradient(135deg, #1b1510, #2c2117);
-    }
-
-    .preview-gamer {
-      background: linear-gradient(135deg, #140f29, #1f1447);
-    }
-
-    .preview-corp {
-      background: linear-gradient(135deg, #0d1d26, #122d3a);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+      background: linear-gradient(135deg, #16050e, #2d071b);
     }
 
     .preview-browser-bar {
@@ -735,30 +677,31 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.28);
+      background: var(--white-pure);
     }
 
     .preview-tag {
       display: inline-block;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       padding: 3px 10px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
-      color: #ffffff;
+      background: var(--pink-shock);
+      color: var(--white-pure);
+      border: 1px solid var(--white-pure);
       margin-bottom: 6px;
     }
 
     .preview-title {
       font-size: 18px;
       font-weight: 800;
-      color: #ffffff;
+      color: var(--white-pure);
       margin-bottom: 3px;
     }
 
     .preview-desc {
       font-size: 12px;
-      color: rgba(255, 255, 255, 0.78);
+      color: var(--white-soft);
     }
 
     .portfolio-body {
@@ -768,34 +711,34 @@
     .portfolio-body h3 {
       font-size: 17px;
       margin-bottom: 5px;
+      color: var(--white-pure);
     }
 
     .portfolio-body p {
       font-size: 13px;
-      color: #9b9bae;
+      color: var(--white-soft);
       margin-bottom: 10px;
     }
 
-    /* Planos */
     .plan-card {
-      background: #101018;
-      border: 1px solid #1e1e2e;
+      background: var(--black-pure);
+      border: 1px solid rgba(255, 255, 255, 0.24);
       border-radius: 18px;
       padding: 22px 20px;
     }
 
     .plan-card.featured {
-      border: 1px solid #7c6cf0;
-      background: linear-gradient(180deg, rgba(124, 108, 240, 0.12), #101018 45%);
+      border: 2px solid var(--white-pure);
     }
 
     .plan-badge {
       display: inline-block;
-      background: #7c6cf0;
-      color: #ffffff;
+      background: var(--pink-shock);
+      color: var(--white-pure);
+      border: 1px solid var(--white-pure);
       font-size: 11px;
-      font-weight: 700;
-      padding: 4px 10px;
+      font-weight: 800;
+      padding: 4px 11px;
       border-radius: 999px;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -806,19 +749,20 @@
       font-size: 19px;
       font-weight: 800;
       margin-bottom: 4px;
+      color: var(--white-pure);
     }
 
     .plan-price {
       font-size: 28px;
-      font-weight: 800;
-      color: #00e699;
+      font-weight: 900;
+      color: var(--pink-soft);
       margin: 8px 0 6px;
     }
 
     .plan-price small {
       font-size: 12px;
-      font-weight: 500;
-      color: #9b9bae;
+      font-weight: 600;
+      color: var(--white-soft);
     }
 
     .plan-list {
@@ -828,19 +772,18 @@
       flex-direction: column;
       gap: 7px;
       font-size: 13px;
-      color: #d0d0de;
+      color: var(--white-pure);
     }
 
     .plan-list li::before {
       content: "✓ ";
-      color: #00e699;
-      font-weight: 800;
+      color: var(--pink-soft);
+      font-weight: 900;
     }
 
-    /* Simulador */
     .sim-box {
-      background: #101018;
-      border: 1px solid #242438;
+      background: var(--black-pure);
+      border: 1px solid rgba(255, 255, 255, 0.26);
       border-radius: 20px;
       padding: 20px;
     }
@@ -852,8 +795,8 @@
     .sim-label {
       display: block;
       font-size: 13px;
-      font-weight: 700;
-      color: #ffffff;
+      font-weight: 800;
+      color: var(--white-pure);
       margin-bottom: 8px;
     }
 
@@ -861,9 +804,9 @@
       width: 100%;
       padding: 12px;
       border-radius: 12px;
-      background: #09090f;
-      border: 1px solid #2b2b42;
-      color: #ffffff;
+      background: #101018;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: var(--white-pure);
       font-size: 14px;
       outline: none;
     }
@@ -873,8 +816,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      background: #0b0b12;
-      border: 1px solid #1e1e2e;
+      background: #101018;
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 12px;
       padding: 11px 13px;
       margin-bottom: 8px;
@@ -886,19 +829,19 @@
       align-items: center;
       gap: 10px;
       font-size: 13px;
-      color: #e4e4ee;
+      color: var(--white-pure);
     }
 
     .sim-check input {
       width: 17px;
       height: 17px;
-      accent-color: #00e699;
+      accent-color: var(--pink-shock);
     }
 
     .sim-price-tag {
       font-size: 12px;
-      font-weight: 700;
-      color: #00e699;
+      font-weight: 800;
+      color: var(--pink-soft);
       white-space: nowrap;
     }
 
@@ -906,8 +849,8 @@
       margin-top: 14px;
       padding: 16px;
       border-radius: 14px;
-      background: rgba(124, 108, 240, 0.12);
-      border: 1px solid rgba(124, 108, 240, 0.35);
+      background: rgba(255, 0, 127, 0.16);
+      border: 1px solid var(--white-pure);
       text-align: center;
     }
 
@@ -915,26 +858,44 @@
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 1.3px;
-      color: #b7afff;
+      color: var(--white-pure);
+      font-weight: 800;
     }
 
     .sim-result-value {
       font-size: 30px;
-      font-weight: 800;
-      color: #00e699;
+      font-weight: 900;
+      color: var(--white-pure);
       margin: 4px 0 6px;
+    }
+
+    .sim-deadline-badge {
+      display: inline-block;
+      background: var(--black-pure);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: var(--pink-soft);
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 8px;
     }
 
     .sim-result-note {
       font-size: 12px;
-      color: #9b9bae;
+      color: var(--white-soft);
       margin-bottom: 12px;
     }
 
-    /* FAQ */
+    .sim-actions-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
     .faq-item {
-      background: #101018;
-      border: 1px solid #1e1e2e;
+      background: var(--black-pure);
+      border: 1px solid rgba(255, 255, 255, 0.24);
       border-radius: 16px;
       overflow: hidden;
     }
@@ -943,7 +904,7 @@
       width: 100%;
       background: transparent;
       border: none;
-      color: #ffffff;
+      color: var(--white-pure);
       padding: 16px 18px;
       text-align: left;
       font-size: 15px;
@@ -956,18 +917,18 @@
     }
 
     .faq-icon {
-      color: #00e699;
+      color: var(--pink-soft);
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 800;
       transition: transform 0.2s;
     }
 
     .faq-answer {
       display: none;
       padding: 0 18px 16px;
-      color: #9b9bae;
+      color: var(--white-soft);
       font-size: 13px;
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
       padding-top: 10px;
     }
 
@@ -981,24 +942,20 @@
 
     .contact-email-note {
       text-align: center;
-      color: #9b9bae;
+      color: var(--white-pure);
       font-size: 13px;
       margin-top: 18px;
-    }
-
-    .contact-email-note strong {
-      color: #e4e4ee;
       font-weight: 600;
     }
 
-    /* Rodapé Compacto */
     footer {
-      border-top: 1px solid #161622;
+      border-top: 1px solid rgba(255, 255, 255, 0.24);
       padding: 24px 20px 34px;
       text-align: center;
-      color: #8b8b9e;
+      color: var(--white-pure);
+      background: var(--black-pure);
       font-size: 12px;
-      margin-top: 12px;
+      margin-top: 18px;
     }
 
     .footer-brand {
@@ -1007,12 +964,12 @@
       gap: 8px;
       font-size: 17px;
       font-weight: 800;
-      color: #ffffff;
+      color: var(--white-pure);
       margin-bottom: 6px;
     }
 
     .footer-brand span {
-      color: #00e699;
+      color: var(--pink-soft);
     }
 
     .help-link {
@@ -1020,20 +977,19 @@
       align-items: center;
       gap: 6px;
       margin-top: 10px;
-      color: #00e699;
+      color: var(--pink-soft);
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 800;
       background: transparent;
       border: none;
       cursor: pointer;
     }
 
-    /* Modais */
     .modal-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.82);
+      background: rgba(5, 5, 8, 0.86);
       backdrop-filter: blur(6px);
       z-index: 1000;
       justify-content: center;
@@ -1047,14 +1003,15 @@
 
     .modal {
       width: 100%;
-      max-width: 450px;
-      background: #12121b;
-      border: 1px solid #26263a;
+      max-width: 460px;
+      background: var(--black-pure);
+      border: 2px solid var(--pink-shock);
       border-radius: 18px;
       padding: 22px;
       position: relative;
-      max-height: 86vh;
+      max-height: 88vh;
       overflow-y: auto;
+      color: var(--white-pure);
     }
 
     .modal-close {
@@ -1063,7 +1020,7 @@
       right: 16px;
       background: transparent;
       border: none;
-      color: #9b9bae;
+      color: var(--white-pure);
       font-size: 22px;
       cursor: pointer;
     }
@@ -1071,12 +1028,61 @@
     .modal h3 {
       font-size: 19px;
       margin-bottom: 6px;
+      color: var(--white-pure);
     }
 
     .modal p {
       font-size: 13px;
-      color: #9b9bae;
+      color: var(--white-soft);
       margin-bottom: 14px;
+    }
+
+    .checklist-tip {
+      background: rgba(255, 0, 127, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 12px;
+      padding: 11px 12px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      color: var(--white-pure);
+    }
+
+    .checklist-tip strong {
+      color: var(--pink-soft);
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .pix-copy-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #101018;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 10px;
+      padding: 9px 12px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+      font-size: 12px;
+    }
+
+    .pix-key-text {
+      color: var(--pink-soft);
+      font-weight: 700;
+      word-break: break-all;
+    }
+
+    .btn-copy-mini {
+      background: var(--pink-shock);
+      border: 1px solid var(--white-pure);
+      color: var(--white-pure);
+      border-radius: 8px;
+      padding: 6px 11px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
     }
 
     .field {
@@ -1086,8 +1092,9 @@
     .field label {
       display: block;
       font-size: 12px;
-      color: #c4c4d6;
+      color: var(--white-pure);
       margin-bottom: 5px;
+      font-weight: 600;
     }
 
     .field input,
@@ -1096,11 +1103,17 @@
       width: 100%;
       padding: 11px 12px;
       border-radius: 10px;
-      border: 1px solid #27273b;
-      background: #09090f;
-      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: #101018;
+      color: var(--white-pure);
       font-size: 14px;
       outline: none;
+    }
+
+    .field input.field-error,
+    .field textarea.field-error {
+      border-color: #ff4da6;
+      box-shadow: 0 0 0 1px #ff4da6;
     }
 
     .field textarea {
@@ -1112,22 +1125,23 @@
       margin-top: 12px;
       text-align: center;
       font-size: 13px;
-      color: #9b9bae;
+      color: var(--white-soft);
     }
 
     .switch-link button {
       background: transparent;
       border: none;
-      color: #00e699;
-      font-weight: 700;
+      color: var(--pink-soft);
+      font-weight: 800;
       cursor: pointer;
     }
 
     .status-msg {
       margin-top: 10px;
       font-size: 13px;
-      color: #00e699;
+      color: var(--pink-soft);
       min-height: 18px;
+      font-weight: 700;
     }
 
     .status-pill {
@@ -1135,27 +1149,60 @@
       padding: 3px 10px;
       border-radius: 999px;
       font-size: 11px;
+      font-weight: 800;
+      background: var(--pink-shock);
+      color: var(--white-pure);
+    }
+
+    .paid-pill {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      background: var(--white-pure);
+      color: var(--black-pure);
+      margin-left: 6px;
+    }
+
+    .unread-pill {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      background: #ff4da6;
+      color: var(--black-pure);
+      margin-left: 6px;
+    }
+
+    .stage-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin: 10px 0;
+    }
+
+    .stage-step {
+      text-align: center;
+      font-size: 11px;
       font-weight: 700;
+      padding: 6px 4px;
+      border-radius: 8px;
+      background: #12121c;
+      color: #8c8ca4;
+      border: 1px solid rgba(255, 255, 255, 0.14);
     }
 
-    .status-analise {
-      background: rgba(250, 204, 21, 0.16);
-      color: #fde047;
-    }
-
-    .status-criacao {
-      background: rgba(124, 108, 240, 0.22);
-      color: #b7afff;
-    }
-
-    .status-pronto {
-      background: rgba(0, 230, 153, 0.18);
-      color: #00e699;
+    .stage-step.done {
+      background: var(--pink-shock);
+      color: var(--white-pure);
+      border-color: var(--white-pure);
     }
 
     .order-item {
-      background: #0b0b12;
-      border: 1px solid #222234;
+      background: #101018;
+      border: 1px solid rgba(255, 255, 255, 0.22);
       border-radius: 12px;
       padding: 13px;
       margin-bottom: 10px;
@@ -1172,9 +1219,9 @@
     .order-pay-row {
       margin-top: 10px;
       padding-top: 10px;
-      border-top: 1px solid #1d1d2d;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
       font-size: 12px;
-      color: #c4c4d6;
+      color: var(--white-soft);
     }
 
     .order-pay-select {
@@ -1182,11 +1229,121 @@
       margin-top: 6px;
       padding: 8px 10px;
       border-radius: 8px;
-      background: #09090f;
-      color: #00e699;
-      border: 1px solid #2b2b42;
+      background: #08080e;
+      color: var(--white-pure);
+      border: 1px solid rgba(255, 255, 255, 0.28);
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
+    }
+
+    .admin-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .admin-stat-box {
+      background: #101018;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .admin-stat-num {
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--pink-soft);
+    }
+
+    .admin-stat-lbl {
+      font-size: 10px;
+      color: var(--white-soft);
+    }
+
+    .admin-filter-bar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .admin-filter-bar input,
+    .admin-filter-bar select {
+      background: #101018;
+      color: var(--white-pure);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 8px;
+      padding: 7px 9px;
+      font-size: 12px;
+    }
+
+    .admin-filter-bar input {
+      flex: 1;
+      min-width: 130px;
+    }
+
+    .btn-mini-light {
+      background: var(--white-pure);
+      color: var(--black-pure);
+      border: none;
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .btn-mini-pink {
+      background: var(--pink-shock);
+      color: var(--white-pure);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 7px;
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .btn-mini-dark {
+      background: #1a1a26;
+      color: var(--white-pure);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 7px;
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-mini-del {
+      background: #7c003d;
+      color: var(--white-pure);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 7px;
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .order-tools-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .admin-note-input {
+      width: 100%;
+      margin-top: 8px;
+      padding: 7px 9px;
+      border-radius: 8px;
+      background: #08080e;
+      color: var(--white-pure);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      font-size: 11px;
     }
 
     .admin-table {
@@ -1198,39 +1355,26 @@
 
     .admin-table th,
     .admin-table td {
-      border-bottom: 1px solid #232336;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
       padding: 8px 6px;
       text-align: left;
-      color: #dcdce8;
+      color: var(--white-pure);
       vertical-align: top;
     }
 
     .admin-table th {
-      color: #00e699;
+      color: var(--pink-soft);
     }
 
     .admin-status-select {
-      background: #09090f;
-      color: #00e699;
-      border: 1px solid #2e2e46;
+      background: #08080e;
+      color: var(--white-pure);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 8px;
       padding: 5px 6px;
       font-size: 11px;
       font-weight: 700;
       margin-top: 6px;
-    }
-
-    .btn-edit-trigger {
-      background: #00e699;
-      color: #07070c;
-      border: none;
-      border-radius: 10px;
-      padding: 11px 14px;
-      font-size: 13px;
-      font-weight: 800;
-      cursor: pointer;
-      width: 100%;
-      margin-bottom: 12px;
     }
 
     .admin-actions {
@@ -1240,13 +1384,13 @@
     }
 
     .btn-danger {
-      background: #c93b4b;
-      color: #ffffff;
-      border: none;
+      background: #9e004f;
+      color: var(--white-pure);
+      border: 1px solid var(--white-pure);
       border-radius: 10px;
       padding: 11px 14px;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       flex: 1;
     }
@@ -1254,17 +1398,15 @@
 </head>
 <body>
 
-  <!-- Definição de Gradiente SVG -->
   <svg width="0" height="0" style="position:absolute">
     <defs>
       <linearGradient id="nexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#8b7cf6" />
-        <stop offset="100%" stop-color="#00e699" />
+        <stop offset="0%" stop-color="#ffffff" />
+        <stop offset="100%" stop-color="#ff4da6" />
       </linearGradient>
     </defs>
   </svg>
 
-  <!-- Site Pronto em Tela Cheia (Amostra para o Cliente) -->
   <div class="site-preview-overlay" id="sitePreviewOverlay">
     <div class="preview-topbar">
       <span class="preview-topbar-badge" id="previewTopBadge">Amostra NexByel</span>
@@ -1273,20 +1415,11 @@
     <div class="sample-site-wrap" id="sampleSiteContainer"></div>
   </div>
 
-  <!-- Barra Flutuante do Modo EDIT exclusivo do dono -->
-  <div class="edit-topbar" id="editTopbar">
-    <span>MODO EDIT ATIVO (Dono)</span>
-    <button type="button" class="btn-save-edit" onclick="saveSiteEdits()">Salvar</button>
-    <button type="button" class="btn-reset-edit" onclick="resetSiteEdits()">Restaurar</button>
-    <button type="button" class="btn-reset-edit" onclick="disableEditMode()">Sair</button>
-  </div>
-
-  <!-- Cabeçalho -->
   <header>
     <button type="button" class="brand" onclick="switchTab('portfolio')">
       <svg width="26" height="26" viewBox="0 0 120 120" fill="none">
-        <path d="M32 38L12 60L32 82" stroke="#8b7cf6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M88 38L108 60L88 82" stroke="#00e699" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M32 38L12 60L32 82" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M88 38L108 60L88 82" stroke="#ff4da6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M44 25H68C76 25 81 30 81 38C81 45 77 50 71 52C78 54 83 60 83 68C83 78 76 85 66 85H44V25Z" stroke="url(#nexGrad)" stroke-width="7" stroke-linejoin="round"/>
         <path d="M44 62L75 33" stroke="url(#nexGrad)" stroke-width="6"/>
       </svg>
@@ -1299,21 +1432,19 @@
     </div>
   </header>
 
-  <!-- Banner de Sucesso -->
   <div class="toast-banner" id="toastBanner">
     <span id="toastText">Sucesso! Você entrou na sua conta NexByel.</span>
     <button type="button" class="toast-close" onclick="hideToast()" aria-label="Fechar aviso">✕</button>
   </div>
 
-  <!-- Menu Lateral -->
   <div class="drawer-backdrop" id="drawerBackdrop" onclick="handleDrawerBackdrop(event)">
     <aside class="drawer">
       <div>
         <div class="drawer-top">
           <button type="button" class="brand" onclick="closeDrawer(); switchTab('portfolio');">
             <svg width="26" height="26" viewBox="0 0 120 120" fill="none">
-              <path d="M32 38L12 60L32 82" stroke="#8b7cf6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M88 38L108 60L88 82" stroke="#00e699" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M32 38L12 60L32 82" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M88 38L108 60L88 82" stroke="#ff4da6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M44 25H68C76 25 81 30 81 38C81 45 77 50 71 52C78 54 83 60 83 68C83 78 76 85 66 85H44V25Z" stroke="url(#nexGrad)" stroke-width="7" stroke-linejoin="round"/>
               <path d="M44 62L75 33" stroke="url(#nexGrad)" stroke-width="6"/>
             </svg>
@@ -1326,10 +1457,10 @@
 
         <div class="drawer-section-label">Abas do site</div>
         <nav class="drawer-links">
-          <button type="button" data-nav="portfolio" onclick="closeDrawer(); switchTab('portfolio')">Portfólio e Amostras</button>
-          <button type="button" data-nav="servicos" onclick="closeDrawer(); switchTab('servicos')">Serviços</button>
+          <button type="button" data-nav="portfolio" onclick="closeDrawer(); switchTab('portfolio')">Amostras</button>
           <button type="button" data-nav="planos" onclick="closeDrawer(); switchTab('planos')">Planos e Preços</button>
           <button type="button" data-nav="simulador" onclick="closeDrawer(); switchTab('simulador')">Simulador de Orçamento</button>
+          <button type="button" data-nav="servicos" onclick="closeDrawer(); switchTab('servicos')">Serviços</button>
           <button type="button" data-nav="como-funciona" onclick="closeDrawer(); switchTab('como-funciona')">Como funciona</button>
           <button type="button" data-nav="faq" onclick="closeDrawer(); switchTab('faq')">Perguntas Frequentes</button>
           <button type="button" data-nav="sobre" onclick="closeDrawer(); switchTab('sobre')">Sobre</button>
@@ -1352,11 +1483,10 @@
     </aside>
   </div>
 
-  <!-- Hero Compacto -->
   <div class="hero">
     <div class="pill">NexByel • Sites sob medida</div>
     <h1>Sites prontos e modernos com a <span class="grad-text">NexByel</span>.</h1>
-    <p>Escolha uma aba abaixo para ver amostras, planos, simulador ou pedir seu site sem rolagem gigante.</p>
+    <p>Escolha uma aba abaixo para ver amostras, planos, simulador ou pedir seu site.</p>
 
     <div class="hero-actions" id="heroActionsBox"></div>
 
@@ -1367,7 +1497,6 @@
     </div>
   </div>
 
-  <!-- Barra de Abas -->
   <div class="tabs-bar-wrap">
     <div class="tabs-scroll" role="tablist">
       <button type="button" class="tab-pill active" data-tab="portfolio" onclick="switchTab('portfolio')">Amostras</button>
@@ -1381,15 +1510,14 @@
     </div>
   </div>
 
-  <!-- ABA 1: Portfólio / Sites Prontos -->
   <section id="portfolio" class="tab-section active-view">
     <div class="section-tag">Amostras Prontas</div>
-    <h2 class="section-title">Abra um site pronto para mostrar ao cliente</h2>
-    <p class="section-sub">Toque em abrir para mostrar a amostra em tela cheia na hora.</p>
+    <h2 class="section-title">Modelos para mostrar ao cliente</h2>
+    <p class="section-sub">Toque em abrir site pronto para ver a amostra em tela cheia.</p>
 
     <div class="cards-stack">
       <div class="portfolio-card">
-        <div class="portfolio-preview preview-barber">
+        <div class="portfolio-preview">
           <div class="preview-browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
           <span class="preview-tag">Barbearia &amp; Estilo</span>
           <div class="preview-title">Navalha de Ouro Barbearia</div>
@@ -1403,7 +1531,7 @@
       </div>
 
       <div class="portfolio-card">
-        <div class="portfolio-preview preview-gamer">
+        <div class="portfolio-preview">
           <div class="preview-browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
           <span class="preview-tag">E-commerce &amp; Games</span>
           <div class="preview-title">NexStore Gamer Gear</div>
@@ -1417,7 +1545,7 @@
       </div>
 
       <div class="portfolio-card">
-        <div class="portfolio-preview preview-corp">
+        <div class="portfolio-preview">
           <div class="preview-browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
           <span class="preview-tag">Empresa &amp; Negócios</span>
           <div class="preview-title">Apex Soluções Empresariais</div>
@@ -1429,10 +1557,37 @@
           <button type="button" class="card-link" onclick="openReadySite('Corporativo')">Abrir site pronto →</button>
         </div>
       </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-preview">
+          <div class="preview-browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <span class="preview-tag">Portfólio &amp; Criador</span>
+          <div class="preview-title">Studio Criativo Byel</div>
+          <div class="preview-desc">Apresentação de projetos, bio e chamada para contato direto.</div>
+        </div>
+        <div class="portfolio-body">
+          <h3>Site Pronto: Portfólio / Criador</h3>
+          <p>Ideal para criadores, designers e profissionais exibirem seu trabalho.</p>
+          <button type="button" class="card-link" onclick="openReadySite('Portfolio')">Abrir site pronto →</button>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-preview">
+          <div class="preview-browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <span class="preview-tag">Restaurante &amp; Delivery</span>
+          <div class="preview-title">Sabor Express Delivery</div>
+          <div class="preview-desc">Cardápio rápido, combos e pedido direto no celular.</div>
+        </div>
+        <div class="portfolio-body">
+          <h3>Site Pronto: Delivery / Restaurante</h3>
+          <p>Mostra pratos, valores e facilita o pedido para clientes locais.</p>
+          <button type="button" class="card-link" onclick="openReadySite('Delivery')">Abrir site pronto →</button>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ABA 2: Planos e Preços -->
   <section id="planos" class="tab-section">
     <div class="section-tag">Planos e Preços</div>
     <h2 class="section-title">Escolha o pacote do projeto</h2>
@@ -1441,7 +1596,7 @@
     <div class="cards-stack">
       <div class="plan-card">
         <div class="plan-name">Site Básico / Landing Page</div>
-        <p style="font-size:13px; color:#9b9bae;">Página única rápida para divulgar serviço, perfil ou produto.</p>
+        <p style="font-size:13px; color:#f2f2f7;">Página única rápida para divulgar serviço, perfil ou produto.</p>
         <div class="plan-price">R$ 150 <small>Pix / QR Code Nubank</small></div>
         <ul class="plan-list">
           <li>Página única moderna e responsiva</li>
@@ -1454,7 +1609,7 @@
       <div class="plan-card featured">
         <span class="plan-badge">Mais pedido</span>
         <div class="plan-name">Site Completo Institucional</div>
-        <p style="font-size:13px; color:#9b9bae;">Estrutura completa para empresas e marcas crescerem online.</p>
+        <p style="font-size:13px; color:#ffffff;">Estrutura completa para empresas e marcas crescerem online.</p>
         <div class="plan-price">R$ 320 <small>Pix / QR Code Nubank</small></div>
         <ul class="plan-list">
           <li>Seções completas e amostras do negócio</li>
@@ -1466,7 +1621,7 @@
 
       <div class="plan-card">
         <div class="plan-name">Loja / Sistema Personalizado</div>
-        <p style="font-size:13px; color:#9b9bae;">Catálogo, área de cliente, cadastro ou painel administrativo.</p>
+        <p style="font-size:13px; color:#f2f2f7;">Catálogo, área de cliente, cadastro ou painel administrativo.</p>
         <div class="plan-price">R$ 550 <small>a partir de • combinado</small></div>
         <ul class="plan-list">
           <li>Painel administrativo do dono</li>
@@ -1478,11 +1633,10 @@
     </div>
   </section>
 
-  <!-- ABA 3: Simulador -->
   <section id="simulador" class="tab-section">
     <div class="section-tag">Simulador</div>
     <h2 class="section-title">Calcule uma estimativa na hora</h2>
-    <p class="section-sub">Marque o que o projeto precisa e envie direto para a NexByel.</p>
+    <p class="section-sub">Marque o que o projeto precisa, copie o resumo ou envie direto para a NexByel.</p>
 
     <div class="sim-box">
       <div class="sim-group">
@@ -1525,13 +1679,16 @@
       <div class="sim-result">
         <div class="sim-result-label">Estimativa do projeto</div>
         <div class="sim-result-value" id="simTotalValue">R$ 150</div>
+        <div class="sim-deadline-badge" id="simDeadlineBadge">Prazo estimado: 2 a 4 dias</div>
         <div class="sim-result-note">Cobrança via Pix / QR Code Nubank ou condições combinadas no pedido.</div>
-        <button type="button" class="btn-primary" onclick="sendSimulatedQuote()">Enviar essa estimativa →</button>
+        <div class="sim-actions-row">
+          <button type="button" class="btn-primary" onclick="sendSimulatedQuote()">Enviar essa estimativa →</button>
+          <button type="button" class="btn-secondary" onclick="copySimulatedSummary()">Copiar resumo da estimativa</button>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ABA 4: Serviços -->
   <section id="servicos" class="tab-section">
     <div class="section-tag">Serviços</div>
     <h2 class="section-title">O que a NexByel desenvolve</h2>
@@ -1539,29 +1696,28 @@
 
     <div class="cards-stack">
       <div class="card">
-        <div class="icon-box icon-purple">⊞</div>
+        <div class="icon-box">⊞</div>
         <h3>Sites institucionais</h3>
         <p>Presença profissional para apresentar a empresa e conquistar clientes.</p>
       </div>
       <div class="card">
-        <div class="icon-box icon-purple">🚀</div>
+        <div class="icon-box">🚀</div>
         <h3>Landing pages</h3>
         <p>Páginas focadas em divulgar serviços, ofertas ou campanhas.</p>
       </div>
       <div class="card">
-        <div class="icon-box icon-purple">🛍</div>
+        <div class="icon-box">🛍</div>
         <h3>Lojas e catálogos</h3>
         <p>Vitrine de produtos e pedidos diretos com visual moderno.</p>
       </div>
       <div class="card">
-        <div class="icon-box icon-purple">&lt;/&gt;</div>
+        <div class="icon-box">&lt;/&gt;</div>
         <h3>Sistemas e painéis</h3>
         <p>Áreas de cliente, cadastros e painel de gerenciamento.</p>
       </div>
     </div>
   </section>
 
-  <!-- ABA 5: Como funciona -->
   <section id="como-funciona" class="tab-section">
     <div class="section-tag">Como funciona</div>
     <h2 class="section-title">Do pedido ao site no ar</h2>
@@ -1579,19 +1735,18 @@
         <p>Montamos o layout e a estrutura de acordo com o pedido.</p>
       </div>
       <div class="card">
-        <div class="step-num purple">03</div>
+        <div class="step-num">03</div>
         <h3>Pagamento (Pix / QR Code Nubank)</h3>
         <p>Geramos a cobrança Pix / QR Code na conta Nubank ou combinamos as condições do acordo.</p>
       </div>
       <div class="card">
-        <div class="step-num purple">04</div>
+        <div class="step-num">04</div>
         <h3>Entrega</h3>
         <p>O site vai ao ar pronto para uso.</p>
       </div>
     </div>
   </section>
 
-  <!-- ABA 6: FAQ -->
   <section id="faq" class="tab-section">
     <div class="section-tag">Dúvidas</div>
     <h2 class="section-title">Perguntas Frequentes</h2>
@@ -1614,7 +1769,7 @@
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-answer">
-          Crie sua conta na NexByel com o mesmo e-mail usado no pedido e clique em <strong>Meus Pedidos</strong> no topo.
+          Crie sua conta na NexByel com o mesmo e-mail usado no pedido e clique em <strong>Meus Pedidos</strong> no topo para ver as etapas.
         </div>
       </div>
 
@@ -1624,13 +1779,12 @@
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-answer">
-          Sim! Vá na aba <strong>Amostras</strong> e abra os modelos de Barbearia, Loja Gamer ou Corporativo na tela.
+          Sim! Use a aba <strong>Amostras</strong> para conferir os modelos prontos antes de fechar o seu pedido.
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ABA 7: Sobre -->
   <section id="sobre" class="tab-section">
     <div class="section-tag">Quem somos</div>
     <h2 class="section-title">Sobre a NexByel</h2>
@@ -1638,19 +1792,18 @@
 
     <div class="cards-stack">
       <div class="card">
-        <div class="icon-box icon-purple">🚀</div>
+        <div class="icon-box">🚀</div>
         <h3>Nossa criação</h3>
         <p>A NexByel nasceu em 2026 para criar sites modernos, rápidos e fáceis de navegar no celular.</p>
       </div>
       <div class="card">
-        <div class="icon-box icon-purple">👑</div>
+        <div class="icon-box">👑</div>
         <h3>O fundador</h3>
         <p>Liderada por <strong>Byel Santos</strong>, com foco em entregas diretas e práticas para cada cliente.</p>
       </div>
     </div>
   </section>
 
-  <!-- ABA 8: Contato -->
   <section id="contato" class="tab-section">
     <div class="section-tag">Contato</div>
     <h2 class="section-title">Fale com a NexByel</h2>
@@ -1658,25 +1811,25 @@
 
     <div class="cards-stack">
       <div class="card">
-        <div class="icon-box icon-mint">✦</div>
+        <div class="icon-box">✦</div>
         <h3>Pedir orçamento</h3>
         <p>Receba uma proposta para o seu site.</p>
         <button type="button" class="card-link" onclick="openContactModal('Pedir orçamento')">Abrir →</button>
       </div>
       <div class="card">
-        <div class="icon-box icon-mint">⊞</div>
+        <div class="icon-box">⊞</div>
         <h3>Pedir um site</h3>
         <p>Solicite a criação do site da sua marca.</p>
         <button type="button" class="card-link" onclick="openContactModal('Pedir um site')">Abrir →</button>
       </div>
       <div class="card">
-        <div class="icon-box icon-mint">🔧</div>
+        <div class="icon-box">🔧</div>
         <h3>Resolver um problema</h3>
         <p>Peça ajuste ou suporte no seu projeto.</p>
         <button type="button" class="card-link" onclick="openContactModal('Resolver um problema')">Abrir →</button>
       </div>
       <div class="card">
-        <div class="icon-box icon-mint">?</div>
+        <div class="icon-box">?</div>
         <h3>Tirar dúvidas</h3>
         <p>Envie sua pergunta para a NexByel.</p>
         <button type="button" class="card-link" onclick="openContactModal('Tirar dúvidas')">Abrir →</button>
@@ -1688,12 +1841,11 @@
     </div>
   </section>
 
-  <!-- Rodapé Compacto -->
   <footer>
     <div class="footer-brand">
       <svg width="22" height="22" viewBox="0 0 120 120" fill="none">
-        <path d="M32 38L12 60L32 82" stroke="#8b7cf6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M88 38L108 60L88 82" stroke="#00e699" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M32 38L12 60L32 82" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M88 38L108 60L88 82" stroke="#ff4da6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M44 25H68C76 25 81 30 81 38C81 45 77 50 71 52C78 54 83 60 83 68C83 78 76 85 66 85H44V25Z" stroke="url(#nexGrad)" stroke-width="7" stroke-linejoin="round"/>
         <path d="M44 62L75 33" stroke="url(#nexGrad)" stroke-width="6"/>
       </svg>
@@ -1706,30 +1858,43 @@
   <!-- Modal de Contato / Orçamento -->
   <div class="modal-backdrop" id="contactModalBackdrop" onclick="handleBackdrop(event, 'contactModalBackdrop')">
     <div class="modal">
-      <button type="button" class="modal-close" onclick="closeAllModals()" aria-label="Fechar janela">✕</button>
+      <button type="button" class="modal-close" onclick="closeContactModalWithDraftCheck()" aria-label="Fechar janela">✕</button>
       <h3 id="contactModalTitle">Pedir orçamento</h3>
       <p>Enviado pela <strong>NexByel</strong> para <strong>NEXBYEL.OFICIAL@GMAIL.COM</strong> e salvo na sua Área do Cliente.</p>
+
+      <div class="checklist-tip">
+        <strong>O que ajuda a agilizar seu site:</strong>
+        Nome da marca, tipo de página/produtos, cores preferidas e se já tem logo ou referência.
+      </div>
+
+      <div class="pix-copy-row">
+        <div>
+          <div style="font-size:10px; color:#f2f2f7;">Chave Pix / Contato Nubank NexByel</div>
+          <div class="pix-key-text">NEXBYEL.OFICIAL@GMAIL.COM</div>
+        </div>
+        <button type="button" class="btn-copy-mini" onclick="copyPixKey()">Copiar</button>
+      </div>
 
       <form id="contactForm" onsubmit="submitContactForm(event)">
         <div class="field">
           <label for="clientName">Seu nome</label>
-          <input type="text" id="clientName" required placeholder="Digite o seu nome" />
+          <input type="text" id="clientName" required maxlength="80" placeholder="Digite o seu nome" oninput="clearFieldError(this)" />
         </div>
         <div class="field">
           <label for="clientEmail">Seu e-mail (para acompanhar o status)</label>
-          <input type="email" id="clientEmail" required placeholder="seu@email.com" />
+          <input type="email" id="clientEmail" required maxlength="120" placeholder="seu@email.com" oninput="clearFieldError(this)" />
         </div>
         <div class="field">
           <label for="paymentMethod">Forma de pagamento (Nubank)</label>
           <select id="paymentMethod">
-            <option value="Pix (Conta Nubank)">Pix (Conta Nubank)</option>
             <option value="QR Code Pix (Conta Nubank)">QR Code Pix (Conta Nubank)</option>
+            <option value="Pix (Conta Nubank)">Pix (Conta Nubank)</option>
             <option value="A combinar com a NexByel">A combinar com a NexByel</option>
           </select>
         </div>
         <div class="field">
           <label for="clientMessage">Detalhes do pedido</label>
-          <textarea id="clientMessage" required placeholder="Conte o que precisa..."></textarea>
+          <textarea id="clientMessage" required maxlength="800" placeholder="Conte o que precisa..." oninput="clearFieldError(this)"></textarea>
         </div>
         <button type="submit" class="btn-primary" id="submitContactBtn">Enviar para NexByel</button>
         <div class="status-msg" id="contactStatusMsg"></div>
@@ -1743,12 +1908,21 @@
       <button type="button" class="modal-close" onclick="closeAllModals()" aria-label="Fechar janela">✕</button>
       <h3>Área do Cliente • NexByel</h3>
       <p id="clientAreaSubtitle">Acompanhe o status do seu site e a forma de pagamento.</p>
+
+      <div class="pix-copy-row" style="margin-top:0;">
+        <div>
+          <div style="font-size:10px; color:#f2f2f7;">Chave Pix / Contato Nubank NexByel</div>
+          <div class="pix-key-text">NEXBYEL.OFICIAL@GMAIL.COM</div>
+        </div>
+        <button type="button" class="btn-copy-mini" onclick="copyPixKey()">Copiar Pix</button>
+      </div>
+
       <div id="clientOrdersList"></div>
       <button type="button" class="btn-primary" style="margin-top:10px;" onclick="openContactModal('Novo pedido de projeto')">Fazer novo pedido →</button>
     </div>
   </div>
 
-  <!-- Modal de Conta (Cadastro, Código e Login) -->
+  <!-- Modal de Conta -->
   <div class="modal-backdrop" id="authModalBackdrop" onclick="handleBackdrop(event, 'authModalBackdrop')">
     <div class="modal">
       <button type="button" class="modal-close" onclick="closeAllModals()" aria-label="Fechar janela">✕</button>
@@ -1758,19 +1932,19 @@
         <p>Enviaremos um código de confirmação da <strong>NexByel</strong> para o seu e-mail.</p>
         <div class="field">
           <label for="regName">Seu nome</label>
-          <input type="text" id="regName" placeholder="Ex: Byel Santos" />
+          <input type="text" id="regName" maxlength="80" placeholder="Ex: Byel Santos" oninput="clearFieldError(this)" />
         </div>
         <div class="field">
           <label for="regEmail">Seu e-mail</label>
-          <input type="email" id="regEmail" placeholder="exemplo@gmail.com" />
+          <input type="email" id="regEmail" maxlength="120" placeholder="exemplo@gmail.com" oninput="clearFieldError(this)" />
         </div>
         <div class="field">
           <label for="regPassword">Criar senha (mín. 6 caracteres)</label>
-          <input type="password" id="regPassword" placeholder="Digite sua senha" />
+          <input type="password" id="regPassword" maxlength="64" placeholder="Digite sua senha" oninput="clearFieldError(this)" />
         </div>
         <div class="field">
           <label for="regConfirm">Confirmar senha</label>
-          <input type="password" id="regConfirm" placeholder="Repita sua senha" />
+          <input type="password" id="regConfirm" maxlength="64" placeholder="Repita sua senha" oninput="clearFieldError(this)" />
         </div>
         <button type="button" class="btn-primary" id="sendCodeBtn" onclick="startRegistration()">Enviar código de verificação</button>
         <div class="switch-link">Já tem conta? <button type="button" onclick="showLoginStep()">Fazer login</button></div>
@@ -1794,11 +1968,11 @@
         <p>Acesse sua conta cadastrada na NexByel.</p>
         <div class="field">
           <label for="loginEmail">E-mail cadastrado</label>
-          <input type="email" id="loginEmail" placeholder="exemplo@gmail.com" />
+          <input type="email" id="loginEmail" maxlength="120" placeholder="exemplo@gmail.com" />
         </div>
         <div class="field">
           <label for="loginPassword">Senha</label>
-          <input type="password" id="loginPassword" placeholder="Digite sua senha" />
+          <input type="password" id="loginPassword" maxlength="64" placeholder="Digite sua senha" />
         </div>
         <button type="button" class="btn-primary" onclick="performLogin()">Entrar na conta</button>
         <div class="switch-link">Ainda não tem conta? <button type="button" onclick="showRegisterStep()">Criar conta</button></div>
@@ -1817,22 +1991,22 @@
       <div id="adminAuthBox">
         <div class="field">
           <label for="adminPassInput">Senha do dono</label>
-          <input type="password" id="adminPassInput" placeholder="Digite a senha secreta" />
+          <input type="password" id="adminPassInput" maxlength="64" placeholder="Digite a senha secreta" />
         </div>
-        <button type="button" class="btn-primary" onclick="unlockAdmin()">Entrar no painel</button>
+        <button type="button" class="btn-primary" id="unlockAdminBtn" onclick="unlockAdmin()">Entrar no painel</button>
         <div class="status-msg" id="adminStatusMsg"></div>
       </div>
 
       <div id="adminContentBox" style="display: none;">
-        <button type="button" class="btn-edit-trigger" onclick="enableEditMode()">✎ Ativar Modo EDIT (Textos e Preços)</button>
+        <div class="admin-stats-grid" id="adminStatsGrid"></div>
 
         <div id="adminTabUsers">
-          <strong style="color:#00e699; font-size:13px;">Histórico de cadastros</strong>
+          <strong style="color:#ff4da6; font-size:13px;">Histórico de cadastros</strong>
           <table class="admin-table">
             <thead>
               <tr>
                 <th>Nome / E-mail</th>
-                <th>Data</th>
+                <th>Data / Ação</th>
               </tr>
             </thead>
             <tbody id="adminUsersBody"></tbody>
@@ -1840,7 +2014,22 @@
         </div>
 
         <div id="adminTabMessages" style="display: none;">
-          <strong style="color:#00e699; font-size:13px;">Pedidos, pagamento e status</strong>
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px;">
+            <strong style="color:#ff4da6; font-size:13px;">Pedidos, pagamento e status</strong>
+            <button type="button" class="btn-mini-pink" onclick="markAllOrdersReviewed()">Marcar tudo revisado</button>
+          </div>
+
+          <div class="admin-filter-bar">
+            <input type="text" id="adminSearchInput" placeholder="Buscar cliente, e-mail ou nota..." oninput="renderAdminTables()" />
+            <select id="adminStatusFilter" onchange="renderAdminTables()">
+              <option value="ALL">Todos</option>
+              <option value="Em análise">Em análise</option>
+              <option value="Em criação">Em criação</option>
+              <option value="Pronto">Pronto</option>
+            </select>
+            <button type="button" class="btn-mini-light" onclick="resetAdminFilters()">Limpar</button>
+          </div>
+
           <table class="admin-table">
             <thead>
               <tr>
@@ -1854,7 +2043,7 @@
 
         <div class="admin-actions">
           <button type="button" class="btn-secondary" style="padding:11px; font-size:13px;" onclick="toggleAdminTab()">Alternar aba</button>
-          <button type="button" class="btn-danger" onclick="clearAdminData()">Apagar registros</button>
+          <button type="button" class="btn-danger" onclick="clearAdminData()">Apagar tudo</button>
         </div>
       </div>
     </div>
@@ -1862,12 +2051,104 @@
 
   <script>
     const OFFICIAL_EMAIL = 'NEXBYEL.OFICIAL@GMAIL.COM';
-    const EDITABLE_SELECTORS = '.hero h1, .hero p, .section-title, .section-sub, .card h3, .card p, .plan-name, .plan-price';
-    const CUSTOM_CONTENT_KEY = 'nexbyel_custom_content_v1';
+    const PIX_KEY_NUBANK = 'NEXBYEL.OFICIAL@GMAIL.COM';
+    const ADMIN_CRED_KEY = 'nexbyel_admin_hash_v1';
+    const ADMIN_LOCK_KEY = 'nexbyel_admin_lock_v1';
+    const MAX_ADMIN_FAILS = 4;
+    const ADMIN_LOCK_MS = 60000;
+
     let currentTopic = 'Pedir orçamento';
     let currentAdminTab = 'cadastros';
     let pendingUser = null;
     let currentSampleLabel = 'Site Pronto';
+
+    function sanitizeText(input, maxLen = 400) {
+      return String(input || '')
+        .replace(/<[^>]*>?/gm, '')
+        .replace(/[<>"'`]/g, '')
+        .replace(/javascript:|data:|vbscript:/gi, '')
+        .trim()
+        .slice(0, maxLen);
+    }
+
+    function bytesToB64(bytes) {
+      return btoa(String.fromCharCode(...new Uint8Array(bytes)));
+    }
+
+    function b64ToBytes(b64) {
+      return Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    }
+
+    function constantTimeEqual(a, b) {
+      if (typeof a !== 'string' || typeof b !== 'string' || a.length !== b.length) return false;
+      let diff = 0;
+      for (let i = 0; i < a.length; i++) {
+        diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+      }
+      return diff === 0;
+    }
+
+    async function deriveAdminHash(password, saltB64) {
+      const salt = saltB64 ? b64ToBytes(saltB64) : crypto.getRandomValues(new Uint8Array(16));
+      const keyMaterial = await crypto.subtle.importKey(
+        'raw',
+        new TextEncoder().encode(password),
+        'PBKDF2',
+        false,
+        ['deriveBits']
+      );
+      const derivedBits = await crypto.subtle.deriveBits(
+        {
+          name: 'PBKDF2',
+          salt,
+          iterations: 150000,
+          hash: 'SHA-256'
+        },
+        keyMaterial,
+        256
+      );
+      return {
+        salt: bytesToB64(salt),
+        hash: bytesToB64(derivedBits)
+      };
+    }
+
+    async function ensureAdminCredential() {
+      if (!localStorage.getItem(ADMIN_CRED_KEY)) {
+        const cred = await deriveAdminHash('nexbyel2026');
+        localStorage.setItem(ADMIN_CRED_KEY, JSON.stringify(cred));
+      }
+    }
+
+    function getAdminLockSeconds() {
+      const lock = JSON.parse(localStorage.getItem(ADMIN_LOCK_KEY) || '{"fails":0,"until":0}');
+      const now = Date.now();
+      if (lock.until && now < lock.until) {
+        return Math.ceil((lock.until - now) / 1000);
+      }
+      if (lock.until && now >= lock.until) {
+        localStorage.setItem(ADMIN_LOCK_KEY, JSON.stringify({ fails: 0, until: 0 }));
+      }
+      return 0;
+    }
+
+    function recordAdminFail() {
+      const lock = JSON.parse(localStorage.getItem(ADMIN_LOCK_KEY) || '{"fails":0,"until":0}');
+      lock.fails += 1;
+      if (lock.fails >= MAX_ADMIN_FAILS) {
+        lock.until = Date.now() + ADMIN_LOCK_MS;
+        lock.fails = 0;
+      }
+      localStorage.setItem(ADMIN_LOCK_KEY, JSON.stringify(lock));
+    }
+
+    function clearAdminLock() {
+      localStorage.removeItem(ADMIN_LOCK_KEY);
+    }
+
+    function clearFieldError(el) {
+      if (el) el.classList.remove('field-error');
+    }
 
     function switchTab(tabId) {
       document.querySelectorAll('section.tab-section').forEach(sec => {
@@ -1879,6 +2160,7 @@
       document.querySelectorAll('.drawer-links button[data-nav]').forEach(btn => {
         btn.classList.toggle('active-tab', btn.dataset.nav === tabId);
       });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function showToast(text) {
@@ -1888,6 +2170,18 @@
 
     function hideToast() {
       document.getElementById('toastBanner').classList.remove('show');
+    }
+
+    function copyTextToClipboard(text, okMsg) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => showToast(okMsg)).catch(() => showToast(okMsg));
+      } else {
+        showToast(okMsg);
+      }
+    }
+
+    function copyPixKey() {
+      copyTextToClipboard(PIX_KEY_NUBANK, 'Chave Pix / contato Nubank copiada!');
     }
 
     function updateSamplePaymentPreview() {
@@ -1910,7 +2204,6 @@
       openContactModal(`Pedido: ${currentSampleLabel}`, summary, chosenMethod);
     }
 
-    /* Sites Prontos de Amostra para Mostrar ao Cliente */
     function openReadySite(type) {
       closeAllModals();
       closeDrawer();
@@ -1925,7 +2218,7 @@
         currentSampleLabel = 'Site Pronto Barbearia (Navalha de Ouro)';
         badge.textContent = 'Site Pronto • Barbearia';
         heroHtml = `
-          <div class="sample-hero" style="background:linear-gradient(135deg,#221911,#382718);">
+          <div class="sample-hero">
             <span class="preview-tag">Barbearia • Atendimento Seg a Sáb</span>
             <h2>Navalha de Ouro Barbearia</h2>
             <p>Corte americano, degradê, barba e atendimento rápido no celular.</p>
@@ -1942,17 +2235,13 @@
               <div><h3>Barba Completa</h3><p>Alinhamento na navalha e hidratação.</p></div>
               <div class="sample-price">R$ 25</div>
             </div>
-            <div class="sample-box">
-              <div><h3>Combo Corte + Barba</h3><p>Pacote completo com desconto.</p></div>
-              <div class="sample-price">R$ 50</div>
-            </div>
           </div>
         `;
       } else if (type === 'Loja Gamer') {
         currentSampleLabel = 'Site Pronto Loja Gamer (NexStore)';
         badge.textContent = 'Site Pronto • Loja Gamer';
         heroHtml = `
-          <div class="sample-hero" style="background:linear-gradient(135deg,#171130,#281959);">
+          <div class="sample-hero">
             <span class="preview-tag">Loja Virtual • Setup &amp; Games</span>
             <h2>NexStore Gamer Gear</h2>
             <p>Vitrine de periféricos, destaque de ofertas e pedido direto.</p>
@@ -1969,9 +2258,51 @@
               <div><h3>Mouse Gamer 12000 DPI</h3><p>Leve, ergonômico e botões programáveis.</p></div>
               <div class="sample-price">R$ 129</div>
             </div>
+          </div>
+        `;
+      } else if (type === 'Portfolio') {
+        currentSampleLabel = 'Site Pronto Portfólio (Studio Criativo Byel)';
+        badge.textContent = 'Site Pronto • Portfólio / Criador';
+        heroHtml = `
+          <div class="sample-hero">
+            <span class="preview-tag">Criador &amp; Portfólio</span>
+            <h2>Studio Criativo Byel</h2>
+            <p>Apresentação de projetos, identidade visual e contato direto.</p>
+            <button type="button" class="btn-primary" onclick="sendSampleOrder()">Pedir um portfólio assim →</button>
+          </div>
+        `;
+        itemsHtml = `
+          <div class="sample-grid">
             <div class="sample-box">
-              <div><h3>Headset Surround 7.1</h3><p>Áudio nítido para partidas.</p></div>
-              <div class="sample-price">R$ 159</div>
+              <div><h3>Identidade &amp; Capa</h3><p>Pacote visual para redes e lançamentos.</p></div>
+              <div class="sample-price">R$ 140</div>
+            </div>
+            <div class="sample-box">
+              <div><h3>Portfólio Completo</h3><p>Galeria de trabalhos e bio profissional.</p></div>
+              <div class="sample-price">R$ 220</div>
+            </div>
+          </div>
+        `;
+      } else if (type === 'Delivery') {
+        currentSampleLabel = 'Site Pronto Delivery (Sabor Express)';
+        badge.textContent = 'Site Pronto • Delivery / Restaurante';
+        heroHtml = `
+          <div class="sample-hero">
+            <span class="preview-tag">Delivery • Cardápio Rápido</span>
+            <h2>Sabor Express Delivery</h2>
+            <p>Mostre seus pratos, combos do dia e receba pedidos direto.</p>
+            <button type="button" class="btn-primary" onclick="sendSampleOrder()">Pedir um site de delivery assim →</button>
+          </div>
+        `;
+        itemsHtml = `
+          <div class="sample-grid">
+            <div class="sample-box">
+              <div><h3>Combo Especial da Casa</h3><p>Prato principal + bebida + acompanhamento.</p></div>
+              <div class="sample-price">R$ 42</div>
+            </div>
+            <div class="sample-box">
+              <div><h3>Lanche Artesanal</h3><p>Pão macio, blend especial e molho da casa.</p></div>
+              <div class="sample-price">R$ 29</div>
             </div>
           </div>
         `;
@@ -1979,7 +2310,7 @@
         currentSampleLabel = 'Site Pronto Corporativo (Apex Soluções)';
         badge.textContent = 'Site Pronto • Corporativo';
         heroHtml = `
-          <div class="sample-hero" style="background:linear-gradient(135deg,#0f222e,#17394d);">
+          <div class="sample-hero">
             <span class="preview-tag">Institucional • Empresas</span>
             <h2>Apex Soluções Empresariais</h2>
             <p>Apresentação profissional da empresa, serviços e contato.</p>
@@ -2031,54 +2362,6 @@
       window.scrollTo(0, 0);
     }
 
-    /* Modo EDIT exclusivo do dono */
-    function enableEditMode() {
-      closeAllModals();
-      document.getElementById('editTopbar').classList.add('active');
-      document.querySelectorAll(EDITABLE_SELECTORS).forEach(el => {
-        el.setAttribute('contenteditable', 'true');
-        el.classList.add('editable-active');
-      });
-      showToast('Modo EDIT ativado: toque em qualquer texto ou preço para editar.');
-    }
-
-    function disableEditMode() {
-      document.getElementById('editTopbar').classList.remove('active');
-      document.querySelectorAll(EDITABLE_SELECTORS).forEach(el => {
-        el.removeAttribute('contenteditable');
-        el.classList.remove('editable-active');
-      });
-    }
-
-    function saveSiteEdits() {
-      const items = [];
-      document.querySelectorAll(EDITABLE_SELECTORS).forEach((el, idx) => {
-        items.push({ idx, html: el.innerHTML });
-      });
-      localStorage.setItem(CUSTOM_CONTENT_KEY, JSON.stringify(items));
-      disableEditMode();
-      showToast('Alterações salvas neste navegador!');
-    }
-
-    function applySavedEdits() {
-      const raw = localStorage.getItem(CUSTOM_CONTENT_KEY);
-      if (!raw) return;
-      try {
-        const items = JSON.parse(raw);
-        const nodes = document.querySelectorAll(EDITABLE_SELECTORS);
-        items.forEach(item => {
-          if (nodes[item.idx]) {
-            nodes[item.idx].innerHTML = item.html;
-          }
-        });
-      } catch (e) {}
-    }
-
-    function resetSiteEdits() {
-      localStorage.removeItem(CUSTOM_CONTENT_KEY);
-      window.location.reload();
-    }
-
     function openDrawer() {
       document.getElementById('drawerBackdrop').classList.add('open');
     }
@@ -2091,7 +2374,26 @@
       if (event.target.id === 'drawerBackdrop') closeDrawer();
     }
 
+    function hasUnsavedContactDraft() {
+      const modalOpen = document.getElementById('contactModalBackdrop').classList.contains('open');
+      if (!modalOpen) return false;
+      const nameVal = document.getElementById('clientName').value.trim();
+      const emailVal = document.getElementById('clientEmail').value.trim();
+      const msgVal = document.getElementById('clientMessage').value.trim();
+      return Boolean(nameVal || emailVal || msgVal);
+    }
+
+    function closeContactModalWithDraftCheck() {
+      if (hasUnsavedContactDraft()) {
+        if (!confirm('Você começou a preencher o pedido. Deseja fechar e descartar o rascunho?')) return;
+      }
+      document.getElementById('contactModalBackdrop').classList.remove('open');
+    }
+
     function closeAllModals() {
+      if (hasUnsavedContactDraft()) {
+        if (!confirm('Você começou a preencher o pedido. Deseja fechar e descartar o rascunho?')) return;
+      }
       document.getElementById('contactModalBackdrop').classList.remove('open');
       document.getElementById('authModalBackdrop').classList.remove('open');
       document.getElementById('adminModalBackdrop').classList.remove('open');
@@ -2099,45 +2401,79 @@
     }
 
     function handleBackdrop(event, id) {
-      if (event.target.id === id) closeAllModals();
+      if (event.target.id === id) {
+        if (id === 'contactModalBackdrop') closeContactModalWithDraftCheck();
+        else closeAllModals();
+      }
     }
 
     function toggleFaq(btn) {
       btn.parentElement.classList.toggle('open');
     }
 
-    /* Simulador de Orçamento */
     function calculateEstimate() {
       const base = Number(document.getElementById('simPages').value);
-      const admin = document.getElementById('simAdmin').checked ? Number(document.getElementById('simAdmin').value) : 0;
-      const catalog = document.getElementById('simCatalog').checked ? Number(document.getElementById('simCatalog').value) : 0;
-      const urgent = document.getElementById('simUrgent').checked ? Number(document.getElementById('simUrgent').value) : 0;
+      const adminChecked = document.getElementById('simAdmin').checked;
+      const catalogChecked = document.getElementById('simCatalog').checked;
+      const urgentChecked = document.getElementById('simUrgent').checked;
+
+      const admin = adminChecked ? Number(document.getElementById('simAdmin').value) : 0;
+      const catalog = catalogChecked ? Number(document.getElementById('simCatalog').value) : 0;
+      const urgent = urgentChecked ? Number(document.getElementById('simUrgent').value) : 0;
 
       const total = base + admin + catalog + urgent;
       document.getElementById('simTotalValue').textContent = 'R$ ' + total;
-      return total;
+
+      let minDays = base === 150 ? 2 : base === 260 ? 4 : 6;
+      let maxDays = base === 150 ? 4 : base === 260 ? 7 : 10;
+      if (adminChecked) { minDays += 2; maxDays += 3; }
+      if (catalogChecked) { minDays += 1; maxDays += 2; }
+      if (urgentChecked) {
+        minDays = Math.max(1, minDays - 1);
+        maxDays = Math.max(2, maxDays - 2);
+      }
+
+      document.getElementById('simDeadlineBadge').textContent = `Prazo estimado: ${minDays} a ${maxDays} dias`;
+      return { total, deadline: `${minDays} a ${maxDays} dias` };
     }
 
-    function sendSimulatedQuote() {
-      const total = calculateEstimate();
+    function buildSimulatedSummaryText() {
+      const est = calculateEstimate();
       const pagesText = document.getElementById('simPages').selectedOptions[0].text;
       const extras = [];
       if (document.getElementById('simAdmin').checked) extras.push('Painel Admin + Cadastros');
       if (document.getElementById('simCatalog').checked) extras.push('Catálogo / Amostras Detalhadas');
       if (document.getElementById('simUrgent').checked) extras.push('Prioridade de Entrega');
 
-      const summary =
-        `Simulação de Orçamento NexByel (Estimativa: R$ ${total})\n` +
-        `• Estrutura: ${pagesText}\n` +
-        `• Extras: ${extras.length ? extras.join(', ') : 'Nenhum'}`;
-
-      openContactModal('Orçamento Simulado NexByel (R$ ' + total + ')', summary);
+      return {
+        total: est.total,
+        deadline: est.deadline,
+        text:
+          `Simulação NexByel — Estimativa: R$ ${est.total}\n` +
+          `• Prazo estimado: ${est.deadline}\n` +
+          `• Estrutura: ${pagesText}\n` +
+          `• Extras: ${extras.length ? extras.join(', ') : 'Nenhum'}`
+      };
     }
 
-    /* Contato */
+    function sendSimulatedQuote() {
+      const sim = buildSimulatedSummaryText();
+      openContactModal('Orçamento Simulado NexByel (R$ ' + sim.total + ')', sim.text);
+    }
+
+    function copySimulatedSummary() {
+      const sim = buildSimulatedSummaryText();
+      copyTextToClipboard(sim.text, 'Resumo do simulador copiado!');
+    }
+
     function openContactModal(topic, prefillMessage = '', presetMethod = null) {
       currentTopic = topic;
-      closeAllModals();
+      document.getElementById('contactModalBackdrop').classList.remove('open');
+      document.getElementById('authModalBackdrop').classList.remove('open');
+      document.getElementById('adminModalBackdrop').classList.remove('open');
+      document.getElementById('clientAreaBackdrop').classList.remove('open');
+
+      ['clientName', 'clientEmail', 'clientMessage'].forEach(id => clearFieldError(document.getElementById(id)));
       document.getElementById('contactModalTitle').textContent = topic;
       document.getElementById('contactStatusMsg').textContent = '';
 
@@ -2156,7 +2492,6 @@
       document.getElementById('contactModalBackdrop').classList.add('open');
     }
 
-    /* Autenticação */
     function openAuthModal(mode) {
       closeDrawer();
       closeAllModals();
@@ -2201,26 +2536,35 @@
     }
 
     function startRegistration() {
-      const name = document.getElementById('regName').value.trim();
-      const email = document.getElementById('regEmail').value.trim().toLowerCase();
-      const pass = document.getElementById('regPassword').value;
-      const confirm = document.getElementById('regConfirm').value;
+      const nameEl = document.getElementById('regName');
+      const emailEl = document.getElementById('regEmail');
+      const passEl = document.getElementById('regPassword');
+      const confirmEl = document.getElementById('regConfirm');
+
+      const name = sanitizeText(nameEl.value, 80);
+      const email = sanitizeText(emailEl.value, 120).toLowerCase();
+      const pass = passEl.value;
+      const confirm = confirmEl.value;
       const statusEl = document.getElementById('authStatusMsg');
       const btn = document.getElementById('sendCodeBtn');
 
       if (!name || name.length < 2) {
+        nameEl.classList.add('field-error');
         statusEl.textContent = 'Digite seu nome.';
         return;
       }
       if (!isRealLookingEmail(email)) {
+        emailEl.classList.add('field-error');
         statusEl.textContent = 'Use um e-mail real (Gmail, Hotmail, Outlook, etc.).';
         return;
       }
       if (pass.length < 6) {
+        passEl.classList.add('field-error');
         statusEl.textContent = 'A senha deve ter pelo menos 6 caracteres.';
         return;
       }
       if (pass !== confirm) {
+        confirmEl.classList.add('field-error');
         statusEl.textContent = 'As senhas não conferem.';
         return;
       }
@@ -2311,6 +2655,7 @@
     }
 
     function logoutUser() {
+      if (!confirm('Deseja realmente sair da sua conta NexByel?')) return;
       localStorage.removeItem('nexbyel_active_session');
       renderSessionUI();
       closeDrawer();
@@ -2322,12 +2667,30 @@
       const idx = messages.findIndex(m => m.id === orderId);
       if (idx === -1) return;
       messages[idx].paymentMethod = newMethod;
+      messages[idx].updatedAt = new Date().toLocaleString('pt-BR');
       localStorage.setItem('nexbyel_messages', JSON.stringify(messages));
       openClientArea();
       showToast('Forma de pagamento atualizada na NexByel!');
     }
 
-    /* Área do Cliente Logado */
+    function copyClientOrderDetails(order) {
+      const txt = `Pedido NexByel: ${order.topic || 'Pedido'}\nStatus: ${order.status || 'Em análise'}\nPagamento: ${order.paymentMethod || 'QR Code Pix (Conta Nubank)'}\nDetalhes: ${order.message || ''}`;
+      copyTextToClipboard(txt, 'Detalhes do seu pedido copiados!');
+    }
+
+    function buildStageTrack(status) {
+      const s1Done = true;
+      const s2Done = status === 'Em criação' || status === 'Pronto';
+      const s3Done = status === 'Pronto';
+      return `
+        <div class="stage-track">
+          <div class="stage-step ${s1Done ? 'done' : ''}">1. Análise</div>
+          <div class="stage-step ${s2Done ? 'done' : ''}">2. Criação</div>
+          <div class="stage-step ${s3Done ? 'done' : ''}">3. Pronto</div>
+        </div>
+      `;
+    }
+
     function openClientArea() {
       closeDrawer();
       closeAllModals();
@@ -2343,22 +2706,28 @@
       document.getElementById('clientAreaSubtitle').textContent = `Conta NexByel: ${session.email}`;
 
       if (!myOrders.length) {
-        listEl.innerHTML = `<div class="order-item" style="text-align:center; color:#9b9bae;">Você ainda não enviou nenhum pedido com este e-mail.</div>`;
+        listEl.innerHTML = `<div class="order-item" style="text-align:center;">Você ainda não enviou nenhum pedido com este e-mail.</div>`;
       } else {
         listEl.innerHTML = myOrders.map(order => {
           const status = order.status || 'Em análise';
           const method = order.paymentMethod || 'QR Code Pix (Conta Nubank)';
-          let pillClass = 'status-analise';
-          if (status === 'Em criação') pillClass = 'status-criacao';
-          if (status === 'Pronto') pillClass = 'status-pronto';
+          const paidTag = order.paid ? `<span class="paid-pill">PAGO</span>` : '';
+          const updatedText = order.updatedAt ? ` • Atualizado em: ${order.updatedAt}` : '';
+          const safeOrderJson = encodeURIComponent(JSON.stringify({
+            topic: order.topic,
+            status,
+            paymentMethod: method,
+            message: order.message || order.info || ''
+          }));
 
           return `
             <div class="order-item">
               <div class="order-item-top">
-                <strong style="font-size:14px; color:#ffffff;">${order.topic || 'Pedido'}</strong>
-                <span class="status-pill ${pillClass}">${status}</span>
+                <strong style="font-size:14px;">${order.topic || 'Pedido'}${paidTag}</strong>
+                <span class="status-pill">${status}</span>
               </div>
-              <div style="font-size:12px; color:#a1a1b5;">${order.message || order.info}</div>
+              ${buildStageTrack(status)}
+              <div style="font-size:12px; color:#f2f2f7; white-space:pre-line;">${order.message || order.info}</div>
               <div class="order-pay-row">
                 <div><strong>Pagamento escolhido:</strong> ${method}</div>
                 <select class="order-pay-select" onchange="updateClientPayment(${order.id}, this.value)">
@@ -2367,7 +2736,10 @@
                   <option value="A combinar com a NexByel" ${method === 'A combinar com a NexByel' ? 'selected' : ''}>A combinar com a NexByel</option>
                 </select>
               </div>
-              <div style="font-size:11px; color:#6f6f85; margin-top:8px;">Enviado em: ${order.date || ''}</div>
+              <div class="order-tools-row">
+                <button type="button" class="btn-mini-dark" onclick="copyClientOrderDetails(JSON.parse(decodeURIComponent('${safeOrderJson}')))">Copiar mensagem do pedido</button>
+              </div>
+              <div style="font-size:11px; color:#b8b8ce; margin-top:8px;">Enviado em: ${order.date || ''}${updatedText}</div>
             </div>
           `;
         }).join('');
@@ -2397,7 +2769,7 @@
           <button type="button" class="btn-secondary" onclick="switchTab('portfolio')">Ver amostras prontas</button>
         `;
         drawerClientBox.innerHTML = `
-          <button type="button" class="drawer-cta" style="margin-top:0; margin-bottom:10px; background:#142f26; border:1px solid #00e699; color:#00e699;" onclick="openClientArea()">Área do Cliente (Meus Pedidos)</button>
+          <button type="button" class="drawer-cta" style="margin-top:0; margin-bottom:10px;" onclick="openClientArea()">Área do Cliente (Meus Pedidos)</button>
         `;
         logoutBox.innerHTML = `<button type="button" class="drawer-logout" onclick="logoutUser()">Sair da conta</button>`;
       } else {
@@ -2411,26 +2783,55 @@
       }
     }
 
-    /* Envio de Formulário para E-mail Oficial */
+    function extractEstimateFromText(text) {
+      const match = String(text || '').match(/R\$\s*(\d+)/);
+      return match ? Number(match[1]) : 0;
+    }
+
     function submitContactForm(event) {
       event.preventDefault();
-      const name = document.getElementById('clientName').value.trim();
-      const email = document.getElementById('clientEmail').value.trim().toLowerCase();
-      const paymentMethod = document.getElementById('paymentMethod').value;
-      const message = document.getElementById('clientMessage').value.trim();
+      const nameEl = document.getElementById('clientName');
+      const emailEl = document.getElementById('clientEmail');
+      const msgEl = document.getElementById('clientMessage');
+
+      const name = sanitizeText(nameEl.value, 80);
+      const email = sanitizeText(emailEl.value, 120).toLowerCase();
+      const paymentMethod = sanitizeText(document.getElementById('paymentMethod').value, 80);
+      const message = sanitizeText(msgEl.value, 800);
       const statusEl = document.getElementById('contactStatusMsg');
       const btn = document.getElementById('submitContactBtn');
 
+      if (!name || name.length < 2) {
+        nameEl.classList.add('field-error');
+        statusEl.textContent = 'Digite seu nome.';
+        return;
+      }
+      if (!isRealLookingEmail(email)) {
+        emailEl.classList.add('field-error');
+        statusEl.textContent = 'Digite um e-mail válido.';
+        return;
+      }
+      if (!message || message.length < 3) {
+        msgEl.classList.add('field-error');
+        statusEl.textContent = 'Escreva os detalhes do pedido.';
+        return;
+      }
+
+      const nowStr = new Date().toLocaleString('pt-BR');
       const messages = getMessages();
       messages.push({
-        id: Date.now(),
+        id: Date.now() + Math.floor(Math.random() * 1000),
         client: name,
         email: email,
         topic: currentTopic,
         paymentMethod: paymentMethod,
         message: message,
-        date: new Date().toLocaleString('pt-BR'),
-        status: 'Em análise'
+        date: nowStr,
+        updatedAt: nowStr,
+        status: 'Em análise',
+        paid: false,
+        reviewed: false,
+        ownerNote: ''
       });
       localStorage.setItem('nexbyel_messages', JSON.stringify(messages));
 
@@ -2467,7 +2868,6 @@
       });
     }
 
-    /* Painel do Dono */
     function openAdmin(tab) {
       currentAdminTab = tab;
       closeDrawer();
@@ -2479,56 +2879,231 @@
       document.getElementById('adminModalBackdrop').classList.add('open');
     }
 
-    function unlockAdmin() {
-      const pass = document.getElementById('adminPassInput').value;
-      if (pass !== 'nexbyel2026') {
-        document.getElementById('adminStatusMsg').textContent = 'Senha incorreta.';
+    async function unlockAdmin() {
+      const statusEl = document.getElementById('adminStatusMsg');
+      const lockSec = getAdminLockSeconds();
+      if (lockSec > 0) {
+        statusEl.textContent = `Muitas tentativas. Aguarde ${lockSec}s para tentar de novo.`;
         return;
       }
+
+      const pass = document.getElementById('adminPassInput').value;
+      const stored = JSON.parse(localStorage.getItem(ADMIN_CRED_KEY) || '{}');
+      if (!stored.salt || !stored.hash) {
+        statusEl.textContent = 'Erro na credencial do admin.';
+        return;
+      }
+
+      const candidate = await deriveAdminHash(pass, stored.salt);
+      if (!constantTimeEqual(candidate.hash, stored.hash)) {
+        recordAdminFail();
+        statusEl.textContent = 'Senha incorreta.';
+        return;
+      }
+
+      clearAdminLock();
       document.getElementById('adminAuthBox').style.display = 'none';
       document.getElementById('adminContentBox').style.display = 'block';
       renderAdminTables();
     }
 
-    function updateOrderStatus(index, newStatus) {
+    function updateOrderStatus(orderId, newStatus) {
       const messages = getMessages();
-      if (messages[index]) {
-        messages[index].status = newStatus;
+      const idx = messages.findIndex(m => m.id === orderId);
+      if (idx !== -1) {
+        messages[idx].status = newStatus;
+        messages[idx].updatedAt = new Date().toLocaleString('pt-BR');
         localStorage.setItem('nexbyel_messages', JSON.stringify(messages));
+        renderAdminTables();
       }
+    }
+
+    function toggleOrderPaid(orderId) {
+      const messages = getMessages();
+      const idx = messages.findIndex(m => m.id === orderId);
+      if (idx === -1) return;
+      messages[idx].paid = !messages[idx].paid;
+      messages[idx].updatedAt = new Date().toLocaleString('pt-BR');
+      localStorage.setItem('nexbyel_messages', JSON.stringify(messages));
+      renderAdminTables();
+    }
+
+    function toggleOrderReviewed(orderId) {
+      const messages = getMessages();
+      const idx = messages.findIndex(m => m.id === orderId);
+      if (idx === -1) return;
+      messages[idx].reviewed = !messages[idx].reviewed;
+      localStorage.setItem('nexbyel_messages', JSON.stringify(messages));
+      renderAdminTables();
+    }
+
+    function markAllOrdersReviewed() {
+      const messages = getMessages().map(m => ({ ...m, reviewed: true }));
+      localStorage.setItem('nexbyel_messages', JSON.stringify(messages));
+      renderAdminTables();
+      showToast('Todos os pedidos marcados como revisados!');
+    }
+
+    function updateOwnerNote(orderId, noteText) {
+      const messages = getMessages();
+      const idx = messages.findIndex(m => m.id === orderId);
+      if (idx === -1) return;
+      messages[idx].ownerNote = sanitizeText(noteText, 240);
+      messages[idx].updatedAt = new Date().toLocaleString('pt-BR');
+      localStorage.setItem('nexbyel_messages', JSON.stringify(messages));
+    }
+
+    function copyAdminOrder(order) {
+      const txt =
+        `Cliente: ${order.client}\n` +
+        `E-mail: ${order.email || ''}\n` +
+        `Assunto: ${order.topic || 'Contato'}\n` +
+        `Status: ${order.status || 'Em análise'}${order.paid ? ' (PAGO)' : ''}\n` +
+        `Pagamento: ${order.paymentMethod || 'QR Code Pix (Conta Nubank)'}\n` +
+        `Detalhes: ${order.message || ''}` +
+        (order.ownerNote ? `\nNota interna: ${order.ownerNote}` : '');
+      copyTextToClipboard(txt, 'Resumo do pedido copiado!');
+    }
+
+    function duplicateOrder(orderId) {
+      const messages = getMessages();
+      const orig = messages.find(m => m.id === orderId);
+      if (!orig) return;
+      const nowStr = new Date().toLocaleString('pt-BR');
+      messages.push({
+        ...orig,
+        id: Date.now() + Math.floor(Math.random() * 1000),
+        topic: (orig.topic || 'Pedido') + ' (Cópia)',
+        date: nowStr,
+        updatedAt: nowStr,
+        reviewed: false
+      });
+      localStorage.setItem('nexbyel_messages', JSON.stringify(messages));
+      renderAdminTables();
+      showToast('Pedido duplicado no painel ADM!');
+    }
+
+    function deleteSingleOrder(orderId) {
+      if (!confirm('Excluir este pedido?')) return;
+      const messages = getMessages().filter(m => m.id !== orderId);
+      localStorage.setItem('nexbyel_messages', JSON.stringify(messages));
+      renderAdminTables();
+      showToast('Pedido excluído.');
+    }
+
+    function deleteSingleUser(userIndex) {
+      if (!confirm('Excluir este cadastro?')) return;
+      const users = getUsers();
+      users.splice(userIndex, 1);
+      localStorage.setItem('nexbyel_users', JSON.stringify(users));
+      renderAdminTables();
+      showToast('Cadastro excluído.');
+    }
+
+    function resetAdminFilters() {
+      document.getElementById('adminSearchInput').value = '';
+      document.getElementById('adminStatusFilter').value = 'ALL';
+      renderAdminTables();
+    }
+
+    function renderAdminStats(users, messages) {
+      const openCount = messages.filter(m => (m.status || 'Em análise') !== 'Pronto').length;
+      const totalEstimated = messages.reduce((acc, m) => {
+        const val = extractEstimateFromText(m.topic) || extractEstimateFromText(m.message);
+        return acc + val;
+      }, 0);
+
+      document.getElementById('adminStatsGrid').innerHTML = `
+        <div class="admin-stat-box">
+          <div class="admin-stat-num">${users.length}</div>
+          <div class="admin-stat-lbl">Cadastros</div>
+        </div>
+        <div class="admin-stat-box">
+          <div class="admin-stat-num">${openCount}</div>
+          <div class="admin-stat-lbl">Pedidos abertos</div>
+        </div>
+        <div class="admin-stat-box">
+          <div class="admin-stat-num">R$ ${totalEstimated}</div>
+          <div class="admin-stat-lbl">Soma estimada</div>
+        </div>
+      `;
     }
 
     function renderAdminTables() {
       const users = getUsers();
       const messages = getMessages();
+      renderAdminStats(users, messages);
+
       const usersBody = document.getElementById('adminUsersBody');
       const messagesBody = document.getElementById('adminMessagesBody');
 
       usersBody.innerHTML = users.length
-        ? users.map(u => `<tr><td><strong>${u.name}</strong><br>${u.email}</td><td>${u.date}</td></tr>`).join('')
+        ? users.map((u, idx) => `
+            <tr>
+              <td><strong>${u.name}</strong><br><span style="font-size:11px; color:#f2f2f7;">${u.email}</span></td>
+              <td>
+                <div style="font-size:11px; margin-bottom:6px;">${u.date}</div>
+                <button type="button" class="btn-mini-del" onclick="deleteSingleUser(${idx})">Excluir</button>
+              </td>
+            </tr>
+          `).join('')
         : `<tr><td colspan="2" style="text-align:center;">Nenhum cadastro ainda.</td></tr>`;
 
-      messagesBody.innerHTML = messages.length
-        ? messages.map((m, idx) => {
+      const searchTerm = (document.getElementById('adminSearchInput')?.value || '').trim().toLowerCase();
+      const statusFilter = document.getElementById('adminStatusFilter')?.value || 'ALL';
+
+      const filteredMessages = messages.filter(m => {
+        const st = m.status || 'Em análise';
+        const matchStatus = statusFilter === 'ALL' || st === statusFilter;
+        const hay = `${m.client || ''} ${m.email || ''} ${m.topic || ''} ${m.message || ''} ${m.ownerNote || ''}`.toLowerCase();
+        const matchSearch = !searchTerm || hay.includes(searchTerm);
+        return matchStatus && matchSearch;
+      });
+
+      messagesBody.innerHTML = filteredMessages.length
+        ? filteredMessages.map(m => {
             const currentStatus = m.status || 'Em análise';
             const payInfo = m.paymentMethod || 'QR Code Pix (Conta Nubank)';
+            const paidBadge = m.paid ? `<span class="paid-pill">PAGO</span>` : '';
+            const newBadge = !m.reviewed ? `<span class="unread-pill">NOVO</span>` : '';
+            const updInfo = m.updatedAt ? `<div style="font-size:10px; color:#b8b8ce; margin-top:4px;">Atualizado: ${m.updatedAt}</div>` : '';
+            const safeOrderJson = encodeURIComponent(JSON.stringify({
+              client: m.client,
+              email: m.email,
+              topic: m.topic,
+              status: currentStatus,
+              paid: Boolean(m.paid),
+              paymentMethod: payInfo,
+              message: m.message || m.info || '',
+              ownerNote: m.ownerNote || ''
+            }));
+
             return `
               <tr>
-                <td><strong>${m.client}</strong><br><span style="font-size:11px; color:#9b9bae;">${m.email || ''}</span></td>
+                <td><strong>${m.client}</strong><br><span style="font-size:11px; color:#f2f2f7;">${m.email || ''}</span></td>
                 <td>
-                  <strong>${m.topic || 'Contato'}</strong><br>
-                  <span style="font-size:11px; color:#00e699;">Pagamento: ${payInfo}</span><br>
-                  <span>${m.message || m.info}</span><br>
-                  <select class="admin-status-select" onchange="updateOrderStatus(${idx}, this.value)">
+                  <strong>${m.topic || 'Contato'}</strong>${paidBadge}${newBadge}<br>
+                  <span style="font-size:11px; color:#ff4da6;">Pagamento: ${payInfo}</span><br>
+                  <span style="white-space:pre-line;">${m.message || m.info}</span><br>
+                  <select class="admin-status-select" onchange="updateOrderStatus(${m.id}, this.value)">
                     <option value="Em análise" ${currentStatus === 'Em análise' ? 'selected' : ''}>Status: Em análise</option>
                     <option value="Em criação" ${currentStatus === 'Em criação' ? 'selected' : ''}>Status: Em criação</option>
                     <option value="Pronto" ${currentStatus === 'Pronto' ? 'selected' : ''}>Status: Pronto</option>
                   </select>
+                  <input type="text" class="admin-note-input" placeholder="Observação interna do dono..." value="${(m.ownerNote || '').replace(/"/g, '&quot;')}" onchange="updateOwnerNote(${m.id}, this.value)" />
+                  <div class="order-tools-row">
+                    <button type="button" class="btn-mini-light" onclick="toggleOrderPaid(${m.id})">${m.paid ? 'Desmarcar Pago' : 'Marcar Pago'}</button>
+                    <button type="button" class="btn-mini-dark" onclick="toggleOrderReviewed(${m.id})">${m.reviewed ? 'Marcar Novo' : 'Marcar Lido'}</button>
+                    <button type="button" class="btn-mini-dark" onclick="copyAdminOrder(JSON.parse(decodeURIComponent('${safeOrderJson}')))">Copiar</button>
+                    <button type="button" class="btn-mini-dark" onclick="duplicateOrder(${m.id})">Duplicar</button>
+                    <button type="button" class="btn-mini-del" onclick="deleteSingleOrder(${m.id})">Excluir</button>
+                  </div>
+                  ${updInfo}
                 </td>
               </tr>
             `;
           }).join('')
-        : `<tr><td colspan="2" style="text-align:center;">Nenhuma mensagem recebida.</td></tr>`;
+        : `<tr><td colspan="2" style="text-align:center;">Nenhum pedido encontrado com esse filtro.</td></tr>`;
 
       document.getElementById('adminTabUsers').style.display = currentAdminTab === 'cadastros' ? 'block' : 'none';
       document.getElementById('adminTabMessages').style.display = currentAdminTab === 'mensagens' ? 'block' : 'none';
@@ -2549,8 +3124,8 @@
       hideToast();
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      applySavedEdits();
+    window.addEventListener('DOMContentLoaded', async () => {
+      await ensureAdminCredential();
       renderSessionUI();
       calculateEstimate();
       switchTab('portfolio');
