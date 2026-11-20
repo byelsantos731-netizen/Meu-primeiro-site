@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,18 +23,54 @@
       overflow-x: hidden;
     }
 
+    /* Banner de Confirmação no Topo */
+    .toast-banner {
+      display: none;
+      position: sticky;
+      top: 62px;
+      z-index: 150;
+      background-color: #163829;
+      border-bottom: 1px solid #00e699;
+      color: #d7ffec;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .toast-banner.show {
+      display: flex;
+    }
+
+    .toast-close {
+      background: transparent;
+      border: none;
+      color: #d7ffec;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0 4px;
+    }
+
     /* Cabeçalho */
     header {
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 200;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 20px;
-      background-color: rgba(7, 7, 12, 0.92);
+      padding: 14px 18px;
+      background-color: rgba(7, 7, 12, 0.94);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid #1b1b29;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
     .brand {
@@ -51,13 +87,61 @@
       color: #00e699;
     }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #12121d;
+      border: 1px solid #2e2e46;
+      padding: 4px 10px 4px 4px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #e4e4ee;
+      max-width: 170px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .avatar-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #7c6cf0, #00e699);
+      color: #07070c;
+      font-weight: 800;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .btn-auth-top {
+      background: #7c6cf0;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
     .menu-btn {
       background: transparent;
       border: none;
       color: #ffffff;
       font-size: 24px;
       cursor: pointer;
-      padding: 4px 8px;
+      padding: 4px 6px;
     }
 
     /* Menu Lateral */
@@ -65,7 +149,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(0, 0, 0, 0.78);
       z-index: 900;
       justify-content: flex-end;
     }
@@ -104,25 +188,40 @@
       cursor: pointer;
     }
 
+    .drawer-section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: #797990;
+      margin: 14px 0 6px;
+      font-weight: 700;
+    }
+
     .drawer-links {
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
 
-    .drawer-links a {
+    .drawer-links a,
+    .drawer-action-btn {
       color: #e4e4ee;
+      background: transparent;
+      border: none;
+      text-align: left;
       text-decoration: none;
-      padding: 12px 6px;
-      font-size: 16px;
+      padding: 11px 6px;
+      font-size: 15px;
       font-weight: 500;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      width: 100%;
     }
 
     .drawer-cta {
-      margin-top: 20px;
+      margin-top: 16px;
       width: 100%;
-      padding: 15px;
+      padding: 14px;
       border: none;
       border-radius: 12px;
       background: #7c6cf0;
@@ -132,9 +231,22 @@
       cursor: pointer;
     }
 
+    .drawer-logout {
+      margin-top: 10px;
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(239, 68, 68, 0.14);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #ff8a8a;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
     .drawer-footer {
       text-align: center;
-      padding-top: 24px;
+      padding-top: 20px;
       color: #8f8fa3;
       font-size: 13px;
     }
@@ -199,6 +311,8 @@
       font-size: 15px;
       font-weight: 700;
       cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .btn-secondary {
@@ -221,12 +335,6 @@
       gap: 14px 22px;
       font-size: 13px;
       color: #a6a6ba;
-    }
-
-    .highlights span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .hl-green { color: #00e699; }
@@ -383,7 +491,7 @@
       cursor: pointer;
     }
 
-    /* Modal */
+    /* Modais */
     .modal-backdrop {
       display: none;
       position: fixed;
@@ -402,12 +510,14 @@
 
     .modal {
       width: 100%;
-      max-width: 420px;
+      max-width: 440px;
       background: #12121b;
       border: 1px solid #26263a;
       border-radius: 18px;
       padding: 24px;
       position: relative;
+      max-height: 85vh;
+      overflow-y: auto;
     }
 
     .modal-close {
@@ -460,11 +570,63 @@
       resize: vertical;
     }
 
+    .switch-link {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 13px;
+      color: #9b9bae;
+    }
+
+    .switch-link button {
+      background: transparent;
+      border: none;
+      color: #00e699;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
     .status-msg {
       margin-top: 10px;
       font-size: 13px;
       color: #00e699;
       min-height: 18px;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .admin-table th,
+    .admin-table td {
+      border-bottom: 1px solid #232336;
+      padding: 8px 6px;
+      text-align: left;
+      color: #dcdce8;
+    }
+
+    .admin-table th {
+      color: #00e699;
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .btn-danger {
+      background: #c93b4b;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      flex: 1;
     }
   </style>
 </head>
@@ -482,17 +644,29 @@
 
   <!-- Cabeçalho -->
   <header>
-    <a href="#" class="brand">
-      <svg width="28" height="28" viewBox="0 0 120 120" fill="none">
-        <path d="M32 38L12 60L32 82" stroke="#8b7cf6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M88 38L108 60L88 82" stroke="#00e699" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M44 25H68C76 25 81 30 81 38C81 45 77 50 71 52C78 54 83 60 83 68C83 78 76 85 66 85H44V25Z" stroke="url(#nexGrad)" stroke-width="7" stroke-linejoin="round"/>
-        <path d="M44 62L75 33" stroke="url(#nexGrad)" stroke-width="6"/>
-      </svg>
-      <div>Nex<span>Byel</span></div>
-    </a>
-    <button class="menu-btn" onclick="openDrawer()" aria-label="Abrir menu">☰</button>
+    <div class="header-left">
+      <a href="#" class="brand">
+        <svg width="28" height="28" viewBox="0 0 120 120" fill="none">
+          <path d="M32 38L12 60L32 82" stroke="#8b7cf6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M88 38L108 60L88 82" stroke="#00e699" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M44 25H68C76 25 81 30 81 38C81 45 77 50 71 52C78 54 83 60 83 68C83 78 76 85 66 85H44V25Z" stroke="url(#nexGrad)" stroke-width="7" stroke-linejoin="round"/>
+          <path d="M44 62L75 33" stroke="url(#nexGrad)" stroke-width="6"/>
+        </svg>
+        <div>Nex<span>Byel</span></div>
+      </a>
+    </div>
+
+    <div class="header-right">
+      <div id="topAccountBox"></div>
+      <button class="menu-btn" onclick="openDrawer()" aria-label="Abrir menu">☰</button>
+    </div>
   </header>
+
+  <!-- Banner de Sucesso ao Entrar na Conta -->
+  <div class="toast-banner" id="toastBanner">
+    <span id="toastText">Sucesso! Você entrou na sua conta.</span>
+    <button class="toast-close" onclick="hideToast()" aria-label="Fechar aviso">✕</button>
+  </div>
 
   <!-- Menu Lateral -->
   <div class="drawer-backdrop" id="drawerBackdrop" onclick="handleDrawerBackdrop(event)">
@@ -511,6 +685,7 @@
           <button class="drawer-close" onclick="closeDrawer()" aria-label="Fechar menu">✕</button>
         </div>
 
+        <div class="drawer-section-label">Navegação</div>
         <nav class="drawer-links">
           <a href="#servicos" onclick="closeDrawer()">Serviços</a>
           <a href="#como-funciona" onclick="closeDrawer()">Como funciona</a>
@@ -518,11 +693,18 @@
           <a href="#contato" onclick="closeDrawer()">Contato</a>
         </nav>
 
-        <button class="drawer-cta" onclick="closeDrawer(); openModal('Pedir orçamento')">Pedir orçamento</button>
+        <div class="drawer-section-label">Administração (Dono)</div>
+        <div class="drawer-links">
+          <button class="drawer-action-btn" onclick="openAdmin('cadastros')">Registros de cadastros</button>
+          <button class="drawer-action-btn" onclick="openAdmin('mensagens')">Mensagens recebidas</button>
+        </div>
+
+        <button class="drawer-cta" onclick="closeDrawer(); openContactModal('Pedir orçamento')">Pedir orçamento</button>
+        <div id="drawerLogoutBox"></div>
       </div>
 
       <div class="drawer-footer">
-        <div>✉ Ou escreva para nexbyel.oficial@gmail.com</div>
+        <div>✉ Ou escreva para NEXBYEL.OFICIAL@GMAIL.COM</div>
       </div>
     </aside>
   </div>
@@ -533,10 +715,7 @@
     <h1>Construindo o futuro digital com a <span class="grad-text">NexByel</span>.</h1>
     <p>Desenvolvemos sites profissionais, plataformas modernas e soluções digitais sob medida para empresas e marcas.</p>
 
-    <div class="hero-actions">
-      <button class="btn-primary" onclick="openModal('Pedir orçamento')">Pedir orçamento →</button>
-      <a href="#servicos" class="btn-secondary">Ver serviços</a>
-    </div>
+    <div class="hero-actions" id="heroActionsBox"></div>
 
     <div class="highlights">
       <span><strong class="hl-green">◔</strong> Sites velozes</span>
@@ -654,33 +833,33 @@
         <div class="icon-box icon-mint">✦</div>
         <h3>Pedir orçamento</h3>
         <p>Saiba quanto custa o seu projeto.</p>
-        <button class="card-link" onclick="openModal('Pedir orçamento')">Abrir →</button>
+        <button class="card-link" onclick="openContactModal('Pedir orçamento')">Abrir →</button>
       </div>
 
       <div class="card">
         <div class="icon-box icon-mint">⊞</div>
         <h3>Pedir um site</h3>
         <p>Comece hoje o site da sua marca.</p>
-        <button class="card-link" onclick="openModal('Pedir um site')">Abrir →</button>
+        <button class="card-link" onclick="openContactModal('Pedir um site')">Abrir →</button>
       </div>
 
       <div class="card">
         <div class="icon-box icon-mint">🔧</div>
         <h3>Resolver um problema</h3>
         <p>Algo deu errado? A gente resolve.</p>
-        <button class="card-link" onclick="openModal('Resolver um problema')">Abrir →</button>
+        <button class="card-link" onclick="openContactModal('Resolver um problema')">Abrir →</button>
       </div>
 
       <div class="card">
         <div class="icon-box icon-mint">?</div>
         <h3>Tirar dúvidas</h3>
         <p>Pergunte o que quiser, sem compromisso.</p>
-        <button class="card-link" onclick="openModal('Tirar dúvidas')">Abrir →</button>
+        <button class="card-link" onclick="openContactModal('Tirar dúvidas')">Abrir →</button>
       </div>
     </div>
 
     <div class="contact-email-note">
-      ✉ Ou escreva para <strong>nexbyel.oficial@gmail.com</strong>
+      ✉ Ou escreva para <strong>NEXBYEL.OFICIAL@GMAIL.COM</strong>
     </div>
   </section>
 
@@ -696,17 +875,17 @@
       <div>Nex<span>Byel</span></div>
     </div>
     <div>© 2026 NexByel Tecnologia • Fundada por Byel Santos</div>
-    <button class="help-link" onclick="openModal('Tirar dúvidas')">? Precisa de ajuda?</button>
+    <button class="help-link" onclick="openContactModal('Tirar dúvidas')">? Precisa de ajuda?</button>
   </footer>
 
-  <!-- Janela Modal de Contacto -->
-  <div class="modal-backdrop" id="modalBackdrop" onclick="handleModalBackdrop(event)">
+  <!-- Modal de Contato -->
+  <div class="modal-backdrop" id="contactModalBackdrop" onclick="handleBackdrop(event, 'contactModalBackdrop')">
     <div class="modal">
-      <button class="modal-close" onclick="closeModal()" aria-label="Fechar janela">✕</button>
-      <h3 id="modalTitle">Pedir orçamento</h3>
-      <p>Preencha os campos abaixo para enviar diretamente para nexbyel.oficial@gmail.com.</p>
+      <button class="modal-close" onclick="closeAllModals()" aria-label="Fechar janela">✕</button>
+      <h3 id="contactModalTitle">Pedir orçamento</h3>
+      <p>Envie sua mensagem diretamente para NEXBYEL.OFICIAL@GMAIL.COM e para o painel do dono.</p>
 
-      <form id="contactForm" onsubmit="submitForm(event)">
+      <form id="contactForm" onsubmit="submitContactForm(event)">
         <div class="field">
           <label for="clientName">Seu nome</label>
           <input type="text" id="clientName" required placeholder="Digite o seu nome" />
@@ -719,14 +898,139 @@
           <label for="clientMessage">Detalhes</label>
           <textarea id="clientMessage" required placeholder="Conte o que precisa..."></textarea>
         </div>
-        <button type="submit" class="btn-primary" id="submitBtn">Enviar mensagem</button>
-        <div class="status-msg" id="statusMsg"></div>
+        <button type="submit" class="btn-primary" id="submitContactBtn">Enviar mensagem</button>
+        <div class="status-msg" id="contactStatusMsg"></div>
       </form>
     </div>
   </div>
 
+  <!-- Modal de Conta (Cadastro, Código de Verificação e Login) -->
+  <div class="modal-backdrop" id="authModalBackdrop" onclick="handleBackdrop(event, 'authModalBackdrop')">
+    <div class="modal">
+      <button class="modal-close" onclick="closeAllModals()" aria-label="Fechar janela">✕</button>
+
+      <!-- Cadastro -->
+      <div id="stepRegister">
+        <h3>Criar conta na NexByel</h3>
+        <p>Exigimos um e-mail real com confirmação por código.</p>
+        <div class="field">
+          <label for="regName">Seu nome</label>
+          <input type="text" id="regName" placeholder="Ex: Byel Santos" />
+        </div>
+        <div class="field">
+          <label for="regEmail">Seu e-mail real</label>
+          <input type="email" id="regEmail" placeholder="exemplo@gmail.com" />
+        </div>
+        <div class="field">
+          <label for="regPassword">Criar senha (mín. 6 caracteres)</label>
+          <input type="password" id="regPassword" placeholder="Digite sua senha" />
+        </div>
+        <div class="field">
+          <label for="regConfirm">Confirmar senha</label>
+          <input type="password" id="regConfirm" placeholder="Repita sua senha" />
+        </div>
+        <button type="button" class="btn-primary" id="sendCodeBtn" onclick="startRegistration()">Enviar código de verificação</button>
+        <div class="switch-link">Já tem conta? <button type="button" onclick="showLoginStep()">Fazer login</button></div>
+        <div class="status-msg" id="authStatusMsg"></div>
+      </div>
+
+      <!-- Código de Verificação -->
+      <div id="stepVerify" style="display: none;">
+        <h3>Confirmar e-mail</h3>
+        <p id="verifyInfoText">Digite o código de 6 dígitos enviado para o seu e-mail.</p>
+        <div class="field">
+          <label for="verifyCodeInput">Código de 6 dígitos</label>
+          <input type="text" id="verifyCodeInput" maxlength="6" placeholder="000000" style="text-align:center; font-size:20px; letter-spacing:4px; font-weight:700;" />
+        </div>
+        <button type="button" class="btn-primary" onclick="confirmRegistrationCode()">Confirmar e entrar</button>
+        <div class="switch-link"><button type="button" onclick="showRegisterStep()">Voltar ao cadastro</button></div>
+        <div class="status-msg" id="verifyStatusMsg"></div>
+      </div>
+
+      <!-- Login -->
+      <div id="stepLogin" style="display: none;">
+        <h3>Fazer login</h3>
+        <p>Apenas contas previamente cadastradas podem entrar.</p>
+        <div class="field">
+          <label for="loginEmail">E-mail cadastrado</label>
+          <input type="email" id="loginEmail" placeholder="exemplo@gmail.com" />
+        </div>
+        <div class="field">
+          <label for="loginPassword">Senha</label>
+          <input type="password" id="loginPassword" placeholder="Digite sua senha" />
+        </div>
+        <button type="button" class="btn-primary" onclick="performLogin()">Entrar na conta</button>
+        <div class="switch-link">Ainda não tem conta? <button type="button" onclick="showRegisterStep()">Criar conta</button></div>
+        <div class="status-msg" id="loginStatusMsg"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal do Dono -->
+  <div class="modal-backdrop" id="adminModalBackdrop" onclick="handleBackdrop(event, 'adminModalBackdrop')">
+    <div class="modal">
+      <button class="modal-close" onclick="closeAllModals()" aria-label="Fechar janela">✕</button>
+      <h3>Painel do Administrador</h3>
+      <p>Acesso exclusivo • Byel Santos</p>
+
+      <div id="adminAuthBox">
+        <div class="field">
+          <label for="adminPassInput">Senha do dono</label>
+          <input type="password" id="adminPassInput" placeholder="Digite a senha secreta" />
+        </div>
+        <button type="button" class="btn-primary" onclick="unlockAdmin()">Entrar no painel</button>
+        <div class="status-msg" id="adminStatusMsg"></div>
+      </div>
+
+      <div id="adminContentBox" style="display: none;">
+        <div id="adminTabUsers">
+          <strong style="color:#00e699; font-size:13px;">Histórico de cadastros</strong>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Nome / E-mail</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody id="adminUsersBody"></tbody>
+          </table>
+        </div>
+
+        <div id="adminTabMessages" style="display: none;">
+          <strong style="color:#00e699; font-size:13px;">Mensagens recebidas no site</strong>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Detalhes</th>
+              </tr>
+            </thead>
+            <tbody id="adminMessagesBody"></tbody>
+          </table>
+        </div>
+
+        <div class="admin-actions">
+          <button type="button" class="btn-secondary" style="padding:11px; font-size:13px;" onclick="toggleAdminTab()">Alternar aba</button>
+          <button type="button" class="btn-danger" onclick="clearAdminData()">Apagar registros</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    let selectedTopic = 'Pedir orçamento';
+    const OFFICIAL_EMAIL = 'NEXBYEL.OFICIAL@GMAIL.COM';
+    let currentTopic = 'Pedir orçamento';
+    let currentAdminTab = 'cadastros';
+    let pendingUser = null;
+
+    function showToast(text) {
+      document.getElementById('toastText').textContent = text;
+      document.getElementById('toastBanner').classList.add('show');
+    }
+
+    function hideToast() {
+      document.getElementById('toastBanner').classList.remove('show');
+    }
 
     function openDrawer() {
       document.getElementById('drawerBackdrop').classList.add('open');
@@ -737,66 +1041,317 @@
     }
 
     function handleDrawerBackdrop(event) {
-      if (event.target.id === 'drawerBackdrop') {
-        closeDrawer();
+      if (event.target.id === 'drawerBackdrop') closeDrawer();
+    }
+
+    function closeAllModals() {
+      document.getElementById('contactModalBackdrop').classList.remove('open');
+      document.getElementById('authModalBackdrop').classList.remove('open');
+      document.getElementById('adminModalBackdrop').classList.remove('open');
+    }
+
+    function handleBackdrop(event, id) {
+      if (event.target.id === id) closeAllModals();
+    }
+
+    function openContactModal(topic) {
+      currentTopic = topic;
+      closeAllModals();
+      document.getElementById('contactModalTitle').textContent = topic;
+      document.getElementById('contactStatusMsg').textContent = '';
+      document.getElementById('contactModalBackdrop').classList.add('open');
+    }
+
+    function openAuthModal(mode) {
+      closeDrawer();
+      closeAllModals();
+      if (mode === 'login') showLoginStep();
+      else showRegisterStep();
+      document.getElementById('authModalBackdrop').classList.add('open');
+    }
+
+    function showRegisterStep() {
+      document.getElementById('stepRegister').style.display = 'block';
+      document.getElementById('stepVerify').style.display = 'none';
+      document.getElementById('stepLogin').style.display = 'none';
+      document.getElementById('authStatusMsg').textContent = '';
+    }
+
+    function showLoginStep() {
+      document.getElementById('stepRegister').style.display = 'none';
+      document.getElementById('stepVerify').style.display = 'none';
+      document.getElementById('stepLogin').style.display = 'block';
+      document.getElementById('loginStatusMsg').textContent = '';
+    }
+
+    function isRealLookingEmail(email) {
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!regex.test(email)) return false;
+
+      const [userPart, domainPart] = email.toLowerCase().split('@');
+      const blockedWords = ['teste', 'test', 'kakaka', 'kkkk', 'haha', 'asdf', 'qwer', 'fake', 'lixo', 'nada'];
+      if (blockedWords.some(word => userPart.includes(word))) return false;
+      if (/(.)\1{3,}/.test(userPart)) return false;
+
+      const allowedDomains = ['gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 'yahoo.com.br', 'icloud.com', 'live.com'];
+      return allowedDomains.includes(domainPart);
+    }
+
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('nexbyel_users')) || [];
+    }
+
+    function getMessages() {
+      return JSON.parse(localStorage.getItem('nexbyel_messages')) || [];
+    }
+
+    function startRegistration() {
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim().toLowerCase();
+      const pass = document.getElementById('regPassword').value;
+      const confirm = document.getElementById('regConfirm').value;
+      const statusEl = document.getElementById('authStatusMsg');
+      const btn = document.getElementById('sendCodeBtn');
+
+      if (!name || name.length < 2) {
+        statusEl.textContent = 'Digite seu nome.';
+        return;
       }
-    }
-
-    function openModal(topic) {
-      selectedTopic = topic;
-      document.getElementById('modalTitle').textContent = topic;
-      document.getElementById('statusMsg').textContent = '';
-      document.getElementById('modalBackdrop').classList.add('open');
-    }
-
-    function closeModal() {
-      document.getElementById('modalBackdrop').classList.remove('open');
-    }
-
-    function handleModalBackdrop(event) {
-      if (event.target.id === 'modalBackdrop') {
-        closeModal();
+      if (!isRealLookingEmail(email)) {
+        statusEl.textContent = 'Use um e-mail real (Gmail, Hotmail, Outlook, etc.). E-mails aleatórios são bloqueados.';
+        return;
       }
-    }
+      if (pass.length < 6) {
+        statusEl.textContent = 'A senha deve ter pelo menos 6 caracteres.';
+        return;
+      }
+      if (pass !== confirm) {
+        statusEl.textContent = 'As senhas não conferem.';
+        return;
+      }
 
-    function submitForm(event) {
-      event.preventDefault();
-      const name = document.getElementById('clientName').value.trim();
-      const contact = document.getElementById('clientContact').value.trim();
-      const message = document.getElementById('clientMessage').value.trim();
-      const statusEl = document.getElementById('statusMsg');
-      const btn = document.getElementById('submitBtn');
+      const users = getUsers();
+      if (users.some(u => u.email === email)) {
+        statusEl.textContent = 'Esse e-mail já está cadastrado. Faça login.';
+        return;
+      }
+
+      const code = Math.floor(100000 + Math.random() * 900000).toString();
+      pendingUser = { name, email, pass, code };
 
       btn.disabled = true;
-      btn.textContent = 'A enviar...';
+      btn.textContent = 'Enviando código...';
       statusEl.textContent = '';
 
-      fetch('https://formsubmit.co/ajax/nexbyel.oficial@gmail.com', {
+      fetch('https://formsubmit.co/ajax/' + encodeURIComponent(email), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          _subject: 'NexByel - ' + selectedTopic,
-          Assunto: selectedTopic,
+          _subject: 'Código de confirmação - NexByel',
+          Mensagem: 'Use este código de 6 dígitos para ativar sua conta na NexByel:',
+          Codigo: code
+        })
+      })
+      .then(() => {
+        document.getElementById('stepRegister').style.display = 'none';
+        document.getElementById('stepVerify').style.display = 'block';
+        document.getElementById('verifyInfoText').textContent = 'Enviamos um código de 6 dígitos para ' + email + '. Confira caixa de entrada ou spam.';
+      })
+      .catch(() => {
+        statusEl.textContent = 'Falha ao enviar código. Teste pelo link online do site.';
+      })
+      .finally(() => {
+        btn.disabled = false;
+        btn.textContent = 'Enviar código de verificação';
+      });
+    }
+
+    function confirmRegistrationCode() {
+      const codeInput = document.getElementById('verifyCodeInput').value.trim();
+      const statusEl = document.getElementById('verifyStatusMsg');
+
+      if (!pendingUser || codeInput !== pendingUser.code) {
+        statusEl.textContent = 'Código incorreto. Confira o número enviado ao seu e-mail.';
+        return;
+      }
+
+      const users = getUsers();
+      users.push({
+        name: pendingUser.name,
+        email: pendingUser.email,
+        pass: pendingUser.pass,
+        date: new Date().toLocaleString('pt-BR')
+      });
+      localStorage.setItem('nexbyel_users', JSON.stringify(users));
+      localStorage.setItem('nexbyel_active_session', JSON.stringify({ name: pendingUser.name, email: pendingUser.email }));
+
+      pendingUser = null;
+      document.getElementById('verifyCodeInput').value = '';
+      renderSessionUI();
+      closeAllModals();
+      showToast('Sucesso! Você entrou na sua conta NexByel.');
+    }
+
+    function performLogin() {
+      const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+      const pass = document.getElementById('loginPassword').value;
+      const statusEl = document.getElementById('loginStatusMsg');
+
+      const users = getUsers();
+      const found = users.find(u => u.email === email && u.pass === pass);
+
+      if (!found) {
+        statusEl.textContent = 'Acesso negado: cadastre sua conta primeiro ou confira e-mail e senha.';
+        return;
+      }
+
+      localStorage.setItem('nexbyel_active_session', JSON.stringify({ name: found.name, email: found.email }));
+      renderSessionUI();
+      closeAllModals();
+      showToast('Sucesso! Você entrou na sua conta. Boa programação!');
+    }
+
+    function logoutUser() {
+      localStorage.removeItem('nexbyel_active_session');
+      renderSessionUI();
+      closeDrawer();
+      hideToast();
+    }
+
+    function renderSessionUI() {
+      const session = JSON.parse(localStorage.getItem('nexbyel_active_session'));
+      const topBox = document.getElementById('topAccountBox');
+      const heroBox = document.getElementById('heroActionsBox');
+      const logoutBox = document.getElementById('drawerLogoutBox');
+
+      if (session) {
+        const initial = (session.name || session.email || 'N').charAt(0).toUpperCase();
+        topBox.innerHTML = `
+          <div class="avatar-badge" title="${session.email}">
+            <div class="avatar-circle">${initial}</div>
+            <span>${session.name}</span>
+          </div>
+        `;
+        heroBox.innerHTML = `
+          <button class="btn-primary" onclick="openContactModal('Pedir orçamento')">Pedir orçamento →</button>
+          <a href="#servicos" class="btn-secondary">Ver serviços</a>
+        `;
+        logoutBox.innerHTML = `<button class="drawer-logout" onclick="logoutUser()">Sair da conta</button>`;
+      } else {
+        topBox.innerHTML = `<button class="btn-auth-top" onclick="openAuthModal('login')">Entrar</button>`;
+        heroBox.innerHTML = `
+          <button class="btn-primary" onclick="openAuthModal('register')">Criar conta obrigatória →</button>
+          <a href="#servicos" class="btn-secondary">Ver serviços</a>
+        `;
+        logoutBox.innerHTML = '';
+      }
+    }
+
+    function submitContactForm(event) {
+      event.preventDefault();
+      const name = document.getElementById('clientName').value.trim();
+      const contact = document.getElementById('clientContact').value.trim();
+      const message = document.getElementById('clientMessage').value.trim();
+      const statusEl = document.getElementById('contactStatusMsg');
+      const btn = document.getElementById('submitContactBtn');
+
+      const messages = getMessages();
+      messages.push({
+        client: name,
+        info: `${currentTopic} • ${contact} • ${message} (${new Date().toLocaleString('pt-BR')})`
+      });
+      localStorage.setItem('nexbyel_messages', JSON.stringify(messages));
+
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+      statusEl.textContent = '';
+
+      fetch('https://formsubmit.co/ajax/' + OFFICIAL_EMAIL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: 'NexByel - ' + currentTopic,
+          Assunto: currentTopic,
           Nome: name,
-          Contacto: contact,
+          Contato: contact,
           Mensagem: message
         })
       })
       .then(() => {
         document.getElementById('contactForm').reset();
-        statusEl.textContent = 'Mensagem enviada com sucesso para nexbyel.oficial@gmail.com!';
+        statusEl.textContent = 'Enviado para o painel e para ' + OFFICIAL_EMAIL + '!';
       })
       .catch(() => {
-        statusEl.textContent = 'Não foi possível enviar agora. Tenta novamente.';
+        statusEl.textContent = 'Salvo no painel! Para envio por e-mail, teste pelo link online do site.';
       })
       .finally(() => {
         btn.disabled = false;
         btn.textContent = 'Enviar mensagem';
       });
     }
+
+    function openAdmin(tab) {
+      currentAdminTab = tab;
+      closeDrawer();
+      closeAllModals();
+      document.getElementById('adminAuthBox').style.display = 'block';
+      document.getElementById('adminContentBox').style.display = 'none';
+      document.getElementById('adminPassInput').value = '';
+      document.getElementById('adminStatusMsg').textContent = '';
+      document.getElementById('adminModalBackdrop').classList.add('open');
+    }
+
+    function unlockAdmin() {
+      const pass = document.getElementById('adminPassInput').value;
+      if (pass !== 'nexbyel2026') {
+        document.getElementById('adminStatusMsg').textContent = 'Senha incorreta.';
+        return;
+      }
+      document.getElementById('adminAuthBox').style.display = 'none';
+      document.getElementById('adminContentBox').style.display = 'block';
+      renderAdminTables();
+    }
+
+    function renderAdminTables() {
+      const users = getUsers();
+      const messages = getMessages();
+      const usersBody = document.getElementById('adminUsersBody');
+      const messagesBody = document.getElementById('adminMessagesBody');
+
+      usersBody.innerHTML = users.length
+        ? users.map(u => `<tr><td><strong>${u.name}</strong><br>${u.email}</td><td>${u.date}</td></tr>`).join('')
+        : `<tr><td colspan="2" style="text-align:center;">Nenhum cadastro ainda.</td></tr>`;
+
+      messagesBody.innerHTML = messages.length
+        ? messages.map(m => `<tr><td><strong>${m.client}</strong></td><td>${m.info}</td></tr>`).join('')
+        : `<tr><td colspan="2" style="text-align:center;">Nenhuma mensagem recebida.</td></tr>`;
+
+      document.getElementById('adminTabUsers').style.display = currentAdminTab === 'cadastros' ? 'block' : 'none';
+      document.getElementById('adminTabMessages').style.display = currentAdminTab === 'mensagens' ? 'block' : 'none';
+    }
+
+    function toggleAdminTab() {
+      currentAdminTab = currentAdminTab === 'cadastros' ? 'mensagens' : 'cadastros';
+      renderAdminTables();
+    }
+
+    function clearAdminData() {
+      if (!confirm('Apagar permanentemente todos os cadastros e mensagens?')) return;
+      localStorage.removeItem('nexbyel_users');
+      localStorage.removeItem('nexbyel_messages');
+      localStorage.removeItem('nexbyel_active_session');
+      renderSessionUI();
+      renderAdminTables();
+      hideToast();
+    }
+
+    window.addEventListener('DOMContentLoaded', renderSessionUI);
   </script>
 </body>
 </html>
