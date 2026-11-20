@@ -231,6 +231,21 @@
       cursor: pointer;
     }
 
+    .drawer-ig {
+      margin-top: 10px;
+      width: 100%;
+      padding: 13px;
+      border-radius: 12px;
+      background: rgba(0, 230, 153, 0.14);
+      border: 1px solid rgba(0, 230, 153, 0.35);
+      color: #00e699;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+    }
+
     .drawer-logout {
       margin-top: 10px;
       width: 100%;
@@ -335,6 +350,12 @@
       gap: 14px 22px;
       font-size: 13px;
       color: #a6a6ba;
+    }
+
+    .highlights span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .hl-green { color: #00e699; }
@@ -454,6 +475,12 @@
     .contact-email-note strong {
       color: #e4e4ee;
       font-weight: 600;
+    }
+
+    .contact-email-note a {
+      color: #00e699;
+      text-decoration: none;
+      font-weight: 700;
     }
 
     footer {
@@ -700,11 +727,13 @@
         </div>
 
         <button class="drawer-cta" onclick="closeDrawer(); openContactModal('Pedir orçamento')">Pedir orçamento</button>
+        <a class="drawer-ig" href="https://ig.me/m/byel_santos.13" target="_blank" rel="noopener">Direct no @byel_santos.13</a>
         <div id="drawerLogoutBox"></div>
       </div>
 
       <div class="drawer-footer">
-        <div>✉ Ou escreva para NEXBYEL.OFICIAL@GMAIL.COM</div>
+        <div>Instagram: <strong>@byel_santos.13</strong></div>
+        <div style="margin-top:4px;">E-mail: NEXBYEL.OFICIAL@GMAIL.COM</div>
       </div>
     </aside>
   </div>
@@ -779,7 +808,7 @@
       <div class="card">
         <div class="step-num">01</div>
         <h3>Conversa</h3>
-        <p>Você conta a sua ideia ou problema pelo formulário.</p>
+        <p>Você conta a sua ideia ou problema pelo formulário ou direct.</p>
       </div>
 
       <div class="card">
@@ -826,7 +855,7 @@
   <section id="contato">
     <div class="section-tag">Contato</div>
     <h2 class="section-title">Fale com a NexByel</h2>
-    <p class="section-sub">Escolha o que você precisa — abrimos uma janela rápida para você enviar a sua mensagem.</p>
+    <p class="section-sub">Escolha o que você precisa — abrimos uma janela rápida para você enviar sua mensagem para o Instagram @byel_santos.13.</p>
 
     <div class="cards-stack">
       <div class="card">
@@ -859,7 +888,7 @@
     </div>
 
     <div class="contact-email-note">
-      ✉ Ou escreva para <strong>NEXBYEL.OFICIAL@GMAIL.COM</strong>
+      Instagram oficial: <a href="https://www.instagram.com/byel_santos.13/" target="_blank" rel="noopener">@byel_santos.13</a> • E-mail: <strong>NEXBYEL.OFICIAL@GMAIL.COM</strong>
     </div>
   </section>
 
@@ -883,7 +912,7 @@
     <div class="modal">
       <button class="modal-close" onclick="closeAllModals()" aria-label="Fechar janela">✕</button>
       <h3 id="contactModalTitle">Pedir orçamento</h3>
-      <p>Envie sua mensagem diretamente para NEXBYEL.OFICIAL@GMAIL.COM e para o painel do dono.</p>
+      <p>Salva no painel do site, copia a mensagem e abre o direct de <strong>@byel_santos.13</strong>.</p>
 
       <form id="contactForm" onsubmit="submitContactForm(event)">
         <div class="field">
@@ -891,14 +920,14 @@
           <input type="text" id="clientName" required placeholder="Digite o seu nome" />
         </div>
         <div class="field">
-          <label for="clientContact">E-mail ou telefone</label>
-          <input type="text" id="clientContact" required placeholder="seu@email.com ou (71) 99999-9999" />
+          <label for="clientContact">Seu @ do Instagram ou telefone</label>
+          <input type="text" id="clientContact" required placeholder="@seu_instagram ou (71) 99999-9999" />
         </div>
         <div class="field">
           <label for="clientMessage">Detalhes</label>
           <textarea id="clientMessage" required placeholder="Conte o que precisa..."></textarea>
         </div>
-        <button type="submit" class="btn-primary" id="submitContactBtn">Enviar mensagem</button>
+        <button type="submit" class="btn-primary" id="submitContactBtn">Enviar para @byel_santos.13</button>
         <div class="status-msg" id="contactStatusMsg"></div>
       </form>
     </div>
@@ -1018,6 +1047,8 @@
   </div>
 
   <script>
+    const INSTAGRAM_HANDLE = 'byel_santos.13';
+    const INSTAGRAM_DM_URL = `https://ig.me/m/${INSTAGRAM_HANDLE}`;
     const OFFICIAL_EMAIL = 'NEXBYEL.OFICIAL@GMAIL.COM';
     let currentTopic = 'Pedir orçamento';
     let currentAdminTab = 'cadastros';
@@ -1265,35 +1296,28 @@
       });
       localStorage.setItem('nexbyel_messages', JSON.stringify(messages));
 
-      btn.disabled = true;
-      btn.textContent = 'Enviando...';
-      statusEl.textContent = '';
+      const formattedText =
+        `Olá @${INSTAGRAM_HANDLE}! Vim pelo site da NexByel.\n` +
+        `Assunto: ${currentTopic}\n` +
+        `Nome: ${name}\n` +
+        `Contato: ${contact}\n` +
+        `Detalhes: ${message}`;
 
-      fetch('https://formsubmit.co/ajax/' + OFFICIAL_EMAIL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          _subject: 'NexByel - ' + currentTopic,
-          Assunto: currentTopic,
-          Nome: name,
-          Contato: contact,
-          Mensagem: message
-        })
-      })
-      .then(() => {
-        document.getElementById('contactForm').reset();
-        statusEl.textContent = 'Enviado para o painel e para ' + OFFICIAL_EMAIL + '!';
-      })
-      .catch(() => {
-        statusEl.textContent = 'Salvo no painel! Para envio por e-mail, teste pelo link online do site.';
-      })
-      .finally(() => {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(formattedText).catch(() => {});
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Abrindo @byel_santos.13...';
+      statusEl.textContent = `Salvo no painel! Mensagem copiada e direct de @${INSTAGRAM_HANDLE} aberto.`;
+
+      document.getElementById('contactForm').reset();
+      window.open(INSTAGRAM_DM_URL, '_blank', 'noopener');
+
+      setTimeout(() => {
         btn.disabled = false;
-        btn.textContent = 'Enviar mensagem';
-      });
+        btn.textContent = `Enviar para @${INSTAGRAM_HANDLE}`;
+      }, 1200);
     }
 
     function openAdmin(tab) {
