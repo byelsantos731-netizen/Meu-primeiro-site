@@ -53,6 +53,61 @@
       padding: 0 4px;
     }
 
+    /* Barra Flutuante do Modo EDIT exclusivo do dono */
+    .edit-topbar {
+      display: none;
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2500;
+      background: #141422;
+      border: 1px solid #00e699;
+      border-radius: 14px;
+      padding: 10px 14px;
+      gap: 8px;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
+      width: calc(100% - 32px);
+      max-width: 440px;
+    }
+
+    .edit-topbar.active {
+      display: flex;
+    }
+
+    .edit-topbar span {
+      font-size: 12px;
+      font-weight: 700;
+      color: #00e699;
+      flex: 1;
+    }
+
+    .edit-topbar button {
+      border: none;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-save-edit {
+      background: #00e699;
+      color: #07070c;
+    }
+
+    .btn-reset-edit {
+      background: #252538;
+      color: #f4f4f8;
+    }
+
+    .editable-active {
+      outline: 1px dashed rgba(0, 230, 153, 0.65);
+      border-radius: 6px;
+      cursor: text;
+    }
+
     /* Cabeçalho */
     header {
       position: sticky;
@@ -954,6 +1009,19 @@
       margin-top: 6px;
     }
 
+    .btn-edit-trigger {
+      background: #00e699;
+      color: #07070c;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 12px;
+    }
+
     .admin-actions {
       display: flex;
       gap: 8px;
@@ -984,6 +1052,14 @@
       </linearGradient>
     </defs>
   </svg>
+
+  <!-- Barra Flutuante do Modo EDIT exclusivo do dono -->
+  <div class="edit-topbar" id="editTopbar">
+    <span>MODO EDIT ATIVO (Dono)</span>
+    <button type="button" class="btn-save-edit" onclick="saveSiteEdits()">Salvar</button>
+    <button type="button" class="btn-reset-edit" onclick="resetSiteEdits()">Restaurar</button>
+    <button type="button" class="btn-reset-edit" onclick="disableEditMode()">Sair</button>
+  </div>
 
   <!-- Cabeçalho -->
   <header>
@@ -1539,6 +1615,8 @@
       </div>
 
       <div id="adminContentBox" style="display: none;">
+        <button type="button" class="btn-edit-trigger" onclick="enableEditMode()">✎ Ativar Modo EDIT (Textos e Preços)</button>
+
         <div id="adminTabUsers">
           <strong style="color:#00e699; font-size:13px;">Histórico de cadastros</strong>
           <table class="admin-table">
@@ -1575,6 +1653,8 @@
 
   <script>
     const OFFICIAL_EMAIL = 'NEXBYEL.OFICIAL@GMAIL.COM';
+    const EDITABLE_SELECTORS = '.hero h1, .hero p, .section-title, .section-sub, .card h3, .card p, .plan-name, .plan-price';
+    const CUSTOM_CONTENT_KEY = 'nexbyel_custom_content_v1';
     let currentTopic = 'Pedir orçamento';
     let currentAdminTab = 'cadastros';
     let pendingUser = null;
@@ -1586,6 +1666,54 @@
 
     function hideToast() {
       document.getElementById('toastBanner').classList.remove('show');
+    }
+
+    /* Modo EDIT exclusivo do dono */
+    function enableEditMode() {
+      closeAllModals();
+      document.getElementById('editTopbar').classList.add('active');
+      document.querySelectorAll(EDITABLE_SELECTORS).forEach(el => {
+        el.setAttribute('contenteditable', 'true');
+        el.classList.add('editable-active');
+      });
+      showToast('Modo EDIT ativado: toque em qualquer texto ou preço para editar.');
+    }
+
+    function disableEditMode() {
+      document.getElementById('editTopbar').classList.remove('active');
+      document.querySelectorAll(EDITABLE_SELECTORS).forEach(el => {
+        el.removeAttribute('contenteditable');
+        el.classList.remove('editable-active');
+      });
+    }
+
+    function saveSiteEdits() {
+      const items = [];
+      document.querySelectorAll(EDITABLE_SELECTORS).forEach((el, idx) => {
+        items.push({ idx, html: el.innerHTML });
+      });
+      localStorage.setItem(CUSTOM_CONTENT_KEY, JSON.stringify(items));
+      disableEditMode();
+      showToast('Alterações salvas neste navegador!');
+    }
+
+    function applySavedEdits() {
+      const raw = localStorage.getItem(CUSTOM_CONTENT_KEY);
+      if (!raw) return;
+      try {
+        const items = JSON.parse(raw);
+        const nodes = document.querySelectorAll(EDITABLE_SELECTORS);
+        items.forEach(item => {
+          if (nodes[item.idx]) {
+            nodes[item.idx].innerHTML = item.html;
+          }
+        });
+      } catch (e) {}
+    }
+
+    function resetSiteEdits() {
+      localStorage.removeItem(CUSTOM_CONTENT_KEY);
+      window.location.reload();
     }
 
     function openDrawer() {
@@ -2078,6 +2206,7 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
+      applySavedEdits();
       renderSessionUI();
       calculateEstimate();
     });
